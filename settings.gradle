@@ -1,10 +1,10 @@
 include ':module_app', ':commonlib',
         ':module_home', ':module_bbs',
-    ':module_me',
-         ':baselib',
+        ':module_me',
+        ':baselib',
         ':resuilib',
         ':module_main',
-        'YCVideoPlayerLib'
+        'YCVideoPlayerLib', ':websocketlib'
 
 rootProject.name = 'MonitorApp'
 
