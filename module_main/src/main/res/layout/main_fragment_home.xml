@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp_12">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_32"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="@drawable/bg_radius_corner_search"
+            android:drawableLeft="@drawable/search"
+            android:drawablePadding="@dimen/dp_4"
+            android:gravity="center_vertical|left"
+            android:paddingLeft="@dimen/dp_12"
+            android:text="@string/eda365"
+            android:textColor="@color/text_color3_999999" />
+
+        <include layout="@layout/main_sign_score" />
+    </LinearLayout>
+
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tablayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tabBackground="@color/white"
+        app:tabGravity="center"
+        app:tabIndicatorHeight="@dimen/dp_0"
+        app:tabMode="scrollable"
+        app:tabSelectedTextColor="@color/text_color21_FFE50120"
+        app:tabTextAppearance="@style/home_tablayouttextstyle"
+        app:tabTextColor="@color/text_color20_1D2023" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+</LinearLayout>

@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <android.support.constraint.Guideline
+        android:id="@+id/main_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/dp_37" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/end_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/dp_37" />
+
+    <TextView
+        android:id="@+id/tv_regist_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_50"
+        android:text="@string/regist"
+        android:textColor="@color/text_color20_1D2023"
+        android:textSize="@dimen/dp_24"
+        app:layout_constraintStart_toStartOf="@+id/main_guideline"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/et_email"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_46"
+        android:layout_marginTop="@dimen/dp_24"
+        android:background="@null"
+        android:focusable="true"
+        android:gravity="center|left"
+        android:hint="@string/regist_hint_email"
+        android:inputType="textEmailAddress"
+        android:selectAllOnFocus="true"
+        android:textColorHint="@color/color_999999"
+        android:textCursorDrawable="@drawable/cursor_drawable"
+        app:layout_constraintEnd_toEndOf="@+id/end_guideline"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/main_guideline"
+        app:layout_constraintTop_toBottomOf="@+id/tv_regist_desc" />
+
+    <LinearLayout
+        android:id="@+id/ll_verification_code"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_46"
+        android:background="@drawable/bg_editext_bg"
+        android:backgroundTint="@color/white"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/dp_1"
+        app:layout_constraintEnd_toEndOf="@+id/end_guideline"
+        app:layout_constraintStart_toStartOf="@+id/main_guideline"
+        app:layout_constraintTop_toBottomOf="@+id/et_email">
+
+        <EditText
+            android:id="@+id/et_verification_code"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="@null"
+            android:gravity="left|center"
+            android:hint="@string/regist_hint_verification_code"
+            android:inputType="number"
+            android:maxLength="4"
+            android:selectAllOnFocus="true"
+            android:textColorHint="@color/color_999999"
+            android:textCursorDrawable="@drawable/cursor_drawable"
+            app:layout_constraintEnd_toEndOf="@+id/end_guideline"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/main_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/main_textview2" />
+
+        <com.dc.commonlib.weiget.CountDownButton
+            android:id="@+id/btn_verification_code"
+            android:layout_width="@dimen/dp_75"
+            android:layout_height="@dimen/dp_25"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/bg_verification_code_bg"
+            android:enabled="false"
+            android:gravity="center"
+            android:text="@string/regist_hint_verification_code"
+            android:textColor="@color/color_999999"
+            android:textSize="@dimen/dp_12" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/et_username"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_46"
+        android:background="@null"
+        android:gravity="left|center"
+        android:hint="@string/regist_hint_username"
+        android:inputType="text"
+        android:selectAllOnFocus="true"
+        android:textColorHint="@color/color_999999"
+        android:textCursorDrawable="@drawable/cursor_drawable"
+        app:layout_constraintEnd_toEndOf="@+id/end_guideline"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/main_guideline"
+        app:layout_constraintTop_toBottomOf="@+id/ll_verification_code" />
+
+
+    <LinearLayout
+        android:id="@+id/ll_password"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_46"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/dp_1"
+        app:layout_constraintEnd_toEndOf="@+id/end_guideline"
+        app:layout_constraintStart_toStartOf="@+id/main_guideline"
+        app:layout_constraintTop_toBottomOf="@+id/et_username">
+
+        <EditText
+            android:id="@+id/et_password"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:backgroundTint="@color/white"
+            android:gravity="center|left"
+            android:hint="@string/regist_hint_password"
+            android:inputType="textPassword"
+            android:selectAllOnFocus="true"
+            android:textColorHint="@color/color_999999"
+            android:textCursorDrawable="@drawable/cursor_drawable"
+            app:layout_constraintEnd_toEndOf="@+id/end_guideline"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/main_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/main_textview2" />
+
+        <ImageView
+            android:id="@+id/iv_password_hide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/password_hide" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_tip_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_5"
+        android:text="@string/regist_tip_password"
+        android:textColor="@color/color_999999"
+        android:textColorHint="@color/color_999999"
+        android:textSize="@dimen/dp_11"
+        app:layout_constraintEnd_toEndOf="@+id/end_guideline"
+        app:layout_constraintStart_toStartOf="@+id/main_guideline"
+
+        app:layout_constraintTop_toBottomOf="@+id/ll_password" />
+
+
+    <Button
+        android:id="@+id/btn_regist"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_39"
+        android:layout_gravity="start"
+        android:layout_marginTop="@dimen/dp_55"
+        android:background="@drawable/bg_login_bg"
+        android:enabled="false"
+        android:text="@string/regist"
+        android:textColor="@color/white"
+        android:textSize="@dimen/dp_18"
+        app:layout_constraintEnd_toEndOf="@+id/end_guideline"
+        app:layout_constraintStart_toStartOf="@+id/main_guideline"
+        app:layout_constraintTop_toBottomOf="@+id/tv_tip_password" />
+
+    <Switch
+        android:id="@+id/st_Switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_11"
+        android:checked="true"
+        app:layout_constraintStart_toStartOf="@+id/main_guideline"
+        app:layout_constraintTop_toBottomOf="@+id/btn_regist" />
+
+    <TextView
+        android:id="@+id/tv_agreement_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_5"
+        android:text="@string/regist_entern_user_agreement"
+        android:textColor="@color/color_999999"
+        app:layout_constraintBaseline_toBaselineOf="@+id/st_Switch"
+        app:layout_constraintLeft_toRightOf="@+id/st_Switch"
+        app:layout_constraintTop_toBottomOf="@+id/btn_regist" />
+
+</android.support.constraint.ConstraintLayout>

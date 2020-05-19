@@ -1,0 +1,11 @@
+include ':module_app', ':commonlib',
+        ':module_home', ':module_bbs',
+    ':module_me',
+         ':baselib',
+        ':resuilib',
+        ':module_main',
+        'YCVideoPlayerLib'
+
+rootProject.name = 'MonitorApp'
+
+
