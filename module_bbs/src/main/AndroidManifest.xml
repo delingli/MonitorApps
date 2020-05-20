@@ -7,7 +7,9 @@
             android:configChanges="layoutDirection|fontScale|locale"
             android:screenOrientation="portrait"/>
 
-
+        <activity android:name=".projsummary.ProjectSummaryActivity"
+            android:configChanges="layoutDirection|fontScale|locale"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
