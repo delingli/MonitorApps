@@ -14,6 +14,12 @@
     <string name="login_welcome">你好,</string>
     <string name="login_welcome_language">欢迎来到XXX</string>
     <string name="bind_account">绑定账号</string>
+    <string name="proj_desc">项目概括</string>
+    <string name="all_count">总数(个)</string>
+    <string name="investment_proportion">投资额比例</string>
+    <string name="already_investment">已投资额</string>
+    <string name="unalready_investment_proportion">未投资额</string>
+    <string name="image_progress">形象进度</string>
     <!--注册-->
     <string name="regist_hint_email">请输入邮箱</string>
     <string name="regist_hint_verification_code">验证码</string>
