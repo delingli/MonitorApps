@@ -11,7 +11,6 @@ import android.view.View;
 import com.dc.commonlib.weiget.courselist.DLCourseListView;
 import com.dc.commonlib.weiget.horizontalrecycle.DLHorizontalItem;
 import com.dc.commonlib.weiget.horizontalrecycle.DLHorizontalRecycleView;
-import com.umeng.commonsdk.debug.D;
 
 import java.util.ArrayList;
 import java.util.List;

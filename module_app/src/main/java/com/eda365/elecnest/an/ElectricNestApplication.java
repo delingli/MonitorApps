@@ -13,8 +13,6 @@ import com.scwang.smartrefresh.layout.api.RefreshHeader;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
-import com.umeng.commonsdk.UMConfigure;
-import com.umeng.socialize.PlatformConfig;
 
 public class ElectricNestApplication extends BaseApplication {
     //static 代码段可以防止内存泄露
@@ -42,12 +40,7 @@ public class ElectricNestApplication extends BaseApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        UMConfigure.init(this, "5c762686f1f556fb530001af"
-                , "umeng", UMConfigure.DEVICE_TYPE_PHONE, "");
-//        f6e2b1d7070802a9c7723bc145504348
-        PlatformConfig.setWeixin("wx8cc679d5716ba155", "f6e2b1d7070802a9c7723bc145504348");
-        PlatformConfig.setQQZone("1107794299", "5c762686f1f556fb530001af");
-        UMConfigure.setLogEnabled(true);
+
     }
 
 

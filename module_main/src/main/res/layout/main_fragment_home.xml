@@ -24,7 +24,6 @@
             android:drawablePadding="@dimen/dp_4"
             android:gravity="center_vertical|left"
             android:paddingLeft="@dimen/dp_12"
-            android:text="@string/eda365"
             android:textColor="@color/text_color3_999999" />
 
         <include layout="@layout/main_sign_score" />

@@ -19,6 +19,11 @@ android {
         packagingOptions {
             exclude "lib/arm64-v8a/librealm-jni.so"
         }
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
     }
     signingConfigs {
         release {
@@ -85,7 +90,7 @@ dependencies {
     if (!isModule.toBoolean()) {
         implementation project(path: ':module_main')
         implementation project(path: ':module_me')
-        implementation project(path: ':module_bbs')
+        implementation project(path: ':module_proj')
         implementation project(path: ':module_home')
     }
 

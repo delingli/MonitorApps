@@ -2,6 +2,13 @@
     <string name="res_name">resuilib</string>
     <string name="app_name">项目综合管理服务平台</string>
 
+<!--我的-->
+    <string name="name">姓名</string>
+    <string name="mobile_phone_desc">手机号</string>
+    <string name="me_title">我的</string>
+<!--项目-->
+    <string name="project">项目</string>
+
     <!--登录-->
     <string name="login_hint_email">请输入手机号</string>
     <string name="login_hint_password">请输入密码</string>

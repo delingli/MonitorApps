@@ -9,8 +9,6 @@ import com.dc.baselib.mvvm.BaseActivity;
 import com.dc.commonlib.common.ConfigUtils;
 import com.dc.commonlib.web.WebViewActivity;
 import com.dc.module_me.R;
-import com.dc.module_me.personinfo.PersonInfoActivity;
-import com.dc.module_me.setting.SettingActivity;
 
 public class PrivacyPolicyActivity extends BaseActivity implements View.OnClickListener {
     @Override

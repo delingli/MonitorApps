@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/navigation_bbs"
-        android:name="com.dc.module_main.ui.bbs.ProjectFragment"
+        android:name="com.dc.module_main.ui.project.ProjectFragment"
         android:label="@string/main_title_bbs"
         tools:layout="@layout/main_bbs_fragment" />
 

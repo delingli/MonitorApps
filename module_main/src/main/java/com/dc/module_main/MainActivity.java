@@ -22,7 +22,6 @@ import com.dc.commonlib.utils.UIUtils;
 
 import org.yczbj.ycvideoplayerlib.manager.VideoPlayerManager;
 
-@Route(path = ArounterManager.MAIN_MAINACTIVITY_URL)
 public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView mNavView;

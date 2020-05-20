@@ -1,5 +1,7 @@
 package com.dc.commonlib.utils;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+
 public class ArounterManager {
     //关注
     public static final String HOME_FOCUSONFRAGMENT_URL = "/homes/focusonfragment";
@@ -31,17 +33,10 @@ public class ArounterManager {
     //论坛关注
     public static final String BBS_BBSFOCEONFRAGMENT_URL = "/bbs/bbsfoceon/bbsfoceonfragment";
 
-    //设置
-    public static final String ME_SETTINGACTIVITY_URL = "/me/setting;/settingactivity";
-    public static final String MAIN_MAINACTIVITY_URL = "/main/mainactivity";
-    public static final String COURSEDETAILSACTIVITY_URL = "/coursedetails/CourseDetailsActivity";
-    public static final String LOGINACTIVITY_URL = "/login/loginactivity";
-    public static final String MYRECORDACTIVITY_URL = "/module_nest_course/myrecordactivity";
-    public static final String ALLLECTURER_URL = "/module_nest_course/alllecturer";
-    public static final String PUBLICCLASS_URL = "/module_nest_course/publicclass";
-    public static final String PERSONALHOME_URL = "/module_nest_course/personalhome";
-    public static final String COURSELISTACTIVITY_URL = "/module_nest_course/courselist";
-    public static final String RECOMMENDED_URL = "/module_nest_course/recommendedfragment";
     public static final String BBSDETAIL_URL = "/module_bbs/bbsdetail";
-    public static final String QUALITYCLASSDETAIL_URL = "/module_nest_course/qualityclassdetail";
+
+    public static final String ME_MEINFO_URL = "/module_me/mez/mefragment";
+    public static final String PROJ_PROJECTFRAGMENT_URL = "/module_proj/projectlist/projectfragment";
+
+
 }
