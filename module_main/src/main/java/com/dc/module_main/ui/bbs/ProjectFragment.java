@@ -10,7 +10,7 @@ import com.dc.commonlib.utils.UIUtils;
 import com.dc.module_main.R;
 import com.dc.module_main.ui.home.FtViewPagerAdapter;
 
-public class BBSFragment extends BaseFragment {
+public class ProjectFragment extends BaseFragment {
 
 
     private TabLayout mTablayout;

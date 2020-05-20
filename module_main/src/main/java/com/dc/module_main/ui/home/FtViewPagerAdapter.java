@@ -8,8 +8,6 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.dc.commonlib.common.ConfigUtils;
 import com.dc.commonlib.utils.ArounterManager;
-import com.dc.module_main.retrievepassword.emailretrieve.EmailRetrieveFragment;
-import com.dc.module_main.retrievepassword.mobileretrieve.MobileRetrieveFragment;
 
 public class FtViewPagerAdapter extends FragmentStatePagerAdapter {
     private String[] mTitles;
@@ -95,14 +93,7 @@ public class FtViewPagerAdapter extends FragmentStatePagerAdapter {
                     break;
             }
         } else if (this.type == TYPE_RETRIEVEPASSWORD) {
-            switch (pos) {
-                case 0:
-                    fragment = MobileRetrieveFragment.newInstance();
-                    break;
-                case 1:
-                    fragment = EmailRetrieveFragment.newInstance();
-                    break;
-            }
+
         }
         return fragment;
     }

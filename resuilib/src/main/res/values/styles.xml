@@ -145,7 +145,7 @@
     <style name="HorizontalStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/dp_0_5</item>
-        <item name="android:background">@color/bg_color_E1E4E7</item>
+        <item name="android:background">@color/bg_color_f5f5f6</item>
     </style>
 
     <style name="VerticalStyle">

@@ -43,6 +43,7 @@
     <color name="color_e6e6e6">#e6e6e6</color>
     <color name="color_F7F8F8">#F7F8F8</color>
     <color name="color_999999">#999999</color>
+    <color name="color_ababbb">#ababbb</color>
     <color name="title_color">#333333</color>
     <color name="text_color_588ab7">#588ab7</color>
     <color name="text_color_afe1f4">#afe1f4</color>
@@ -96,6 +97,7 @@
     <color name="text_color_854309">#854309</color>
     <color name="text_color22_FF606972">#FF606972</color>
     <color name="text_color_FF1D2023">#FF1D2023</color>
+    <color name="text_color_171717">#171717</color>
 
     <!--文字用色end-->
 
@@ -119,6 +121,7 @@
     <color name="bg_color_E1E4E7">#E1E4E7</color>
     <color name="bg_color_3F454B">#3F454B</color>
     <color name="bg_color_F8F9FB">#F8F9FB</color>
+    <color name="bg_color_f5f5f6">#f5f5f6</color>
 
     <!--  背景 end-->
 

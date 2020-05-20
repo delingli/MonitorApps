@@ -7,8 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.view.Window;
-import android.view.WindowManager;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -21,7 +19,6 @@ import com.dc.baselib.statusBar.StarusBarUtils;
 import com.dc.baselib.utils.UserManager;
 import com.dc.commonlib.utils.ArounterManager;
 import com.dc.commonlib.utils.UIUtils;
-import com.dc.module_main.login.LoginActivity;
 
 import org.yczbj.ycvideoplayerlib.manager.VideoPlayerManager;
 

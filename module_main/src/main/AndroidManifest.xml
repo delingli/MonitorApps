@@ -12,18 +12,12 @@
             android:theme="@style/Base.AppTheme"
             android:windowSoftInputMode="adjustResize" />
 
-        <activity
-            android:name=".bindaccount.BindAccountActivity"
-            android:configChanges="layoutDirection|fontScale|locale"
-            android:screenOrientation="portrait" />
+
         <activity
             android:name=".splash.SplashActivity"
             android:configChanges="layoutDirection|fontScale|locale"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
         <activity android:name=".TestActivity">
 
@@ -31,15 +25,13 @@
         <activity
             android:name=".login.LoginActivity"
             android:configChanges="layoutDirection|fontScale|locale"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
-        <activity
-            android:name=".regist.RegistActivity"
-            android:configChanges="layoutDirection|fontScale|locale"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".retrievepassword.RetrievePasswordActivity"
-            android:configChanges="layoutDirection|fontScale|locale"
-            android:screenOrientation="portrait" />
+
     </application>
 </manifest>
