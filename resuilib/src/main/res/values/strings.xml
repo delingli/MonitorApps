@@ -80,7 +80,7 @@
     <string name="permission_allow">权限申请</string>
     <!--首页-->
     <string name="sign_in">签到</string>
-    <string name="eda365">eda365</string>
+    <string name="please_input_project">请输入项目名称</string>
     <string name="regist_sucess">恭喜你,注册成功</string>
 
     <!-- 设置-->

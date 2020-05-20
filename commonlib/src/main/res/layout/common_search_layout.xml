@@ -11,6 +11,6 @@
     android:visibility="visible"
     app:closeIcon="@drawable/del"
     app:iconifiedByDefault="false"
-    app:queryHint="@string/eda365">
+    app:queryHint="@string/please_input_project">
 
 </com.dc.commonlib.weiget.customsearch.DlSearchView>
