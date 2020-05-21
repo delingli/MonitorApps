@@ -70,6 +70,7 @@ dependencies {
     api(deps.glide) {
         exclude group: "com.android.support"
     }
+    api 'com.github.PhilJay:MPAndroidChart:v3.0.3'
 
 
 

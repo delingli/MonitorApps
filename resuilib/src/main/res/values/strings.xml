@@ -2,12 +2,25 @@
     <string name="res_name">resuilib</string>
     <string name="app_name">项目综合管理服务平台</string>
 
-<!--我的-->
+    <!--我的-->
     <string name="name">姓名</string>
     <string name="mobile_phone_desc">手机号</string>
+    <string name="login_outs">退出登录</string>
     <string name="me_title">我的</string>
-<!--项目-->
+    <!--项目-->
     <string name="project">项目</string>
+    <string name="construction_area">建筑面积(平方米)</string>
+    <string name="land_area">用地面积(亩)</string>
+    <string name="construction_unit">建设单位</string>
+    <string name="tv_general_contractor_desc">总承包单位</string>
+    <string name="tv_supervision_unit_desc">监理单位</string>
+    <string name="design_units_desc">设计单位</string>
+    <string name="number_registered">在册人数</string>
+    <string name="supervision_unit">监理单位</string>
+    <string name="labor_data">劳务数据</string>
+    <string name="proj_list">项目列表</string>
+    <string name="no_work">未开工</string>
+    <string name="under_construction">在建</string>
 
     <!--登录-->
     <string name="login_hint_email">请输入手机号</string>

@@ -30,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_marginLeft="@dimen/dp_12"
                 android:layout_height="wrap_content"
-                android:src="@drawable/back" />
+                android:src="@drawable/down" />
 
         </LinearLayout>
 
@@ -54,7 +54,7 @@
                 android:layout_marginLeft="@dimen/dp_12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/back" />
+                android:src="@drawable/down" />
         </LinearLayout>
     </LinearLayout>
 

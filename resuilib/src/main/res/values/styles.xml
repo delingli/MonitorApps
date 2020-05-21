@@ -126,13 +126,6 @@
         <item name="android:windowIsTranslucent">true</item>
     </style>
 
-    <declare-styleable name="HorizontalProgressBar">
-        <attr name="RoundedCornersRadius" format="dimension" />
-        <attr name="Progress" format="integer" />
-        <attr name="MaxProgress" format="integer" />
-        <attr name="BgColor" format="color" />
-        <attr name="ProgressColor" format="color" />
-    </declare-styleable>
 
     <style name="Theme_AudioDialog">
         <item name="android:windowBackground">@android:color/transparent</item>
@@ -164,4 +157,5 @@
         <item name="behavior_hideable">true</item>
         <item name="behavior_skipCollapsed">false</item>
     </style>
+
 </resources>

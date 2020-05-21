@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.dc.baselib.mvvm.AbsLifecycleFragment;
+import com.dc.baselib.utils.ToastUtils;
 import com.dc.commonlib.utils.ArounterManager;
 import com.dc.commonlib.weiget.horizontalrecycle.DLHorizontalItem;
 import com.dc.module_bbs.R;
@@ -41,25 +42,28 @@ public class ProjectListFragment extends AbsLifecycleFragment<ProjectListViewMod
     public void initView(View view) {
         super.initView(view);
         RefreshLayout refreshLayout = view.findViewById(R.id.refreshLayout);
-        mPopupWindowView = new PopupWindowView(getContext());
-        mStatePopupWindowView = new PopupWindowView(getContext());
+        mPopupWindowView = new PopupWindowView(getContext(),1);
+        mStatePopupWindowView = new PopupWindowView(getContext(),2);
         createPopupWindowData();
         tv_title = view.findViewById(R.id.tv_title);
         iv_state_arrow = view.findViewById(R.id.iv_state_arrow);
         iv_address_arrow = view.findViewById(R.id.iv_address_arrow);
+        mRecyclerView = view.findViewById(R.id.recyclerView);
         tv_title.setText(R.string.project);
         view.findViewById(R.id.iv_left_back).setVisibility(View.GONE);
         view.findViewById(R.id.ll_address).setOnClickListener(this);
         view.findViewById(R.id.ll_state).setOnClickListener(this);
+        view.findViewById(R.id.ll_to_search).setOnClickListener(this);
         refreshLayout.setEnableRefresh(false);
         refreshLayout.setEnableLoadMore(false);
-        mRecyclerView = view.findViewById(R.id.recyclerView);
+
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(mProjectItemAdapter = new ProjectItemAdapter(getContext(), createData(), -1));
-        view.findViewById(R.id.ll_to_search).setOnClickListener(new View.OnClickListener() {
+        mPopupWindowView.addOnItemClickListener(new PopupWindowView.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
-
+            public void onItemCLick(String id) {
+                ToastUtils.showToast(id);
+                mPopupWindowView.dismiss();
             }
         });
     }
@@ -97,6 +101,8 @@ public class ProjectListFragment extends AbsLifecycleFragment<ProjectListViewMod
             mPopupWindowView.showPopupWindow(v);
         } else if (v.getId() == R.id.ll_state) {
             mStatePopupWindowView.showPopupWindow(v);
+        } else if (v.getId() == R.id.ll_to_search) {
+
         }
     }
 }

@@ -3,13 +3,32 @@
     package="com.dc.module_bbs">
 
     <application android:theme="@style/AppTheme">
-        <activity android:name=".bbsdetail.BBSDetailActivity"
+        <activity
+            android:name=".bbsdetail.BBSDetailActivity"
             android:configChanges="layoutDirection|fontScale|locale"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
 
-        <activity android:name=".projsummary.ProjectSummaryActivity"
+        <activity
+            android:name=".projsummary.ProjectSummaryActivity"
             android:configChanges="layoutDirection|fontScale|locale"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".projectoverview.ProjectOverviewActivity"
+            android:configChanges="layoutDirection|fontScale|locale"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".videomonitoring.VideoMonitoringActivity"
+            android:configChanges="layoutDirection|fontScale|locale"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".labordata.LaborDataActivity"
+            android:configChanges="layoutDirection|fontScale|locale"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.dc.baselib.mvvm.BaseFragment;
+import com.dc.baselib.utils.ToastUtils;
 import com.dc.commonlib.utils.ArounterManager;
 import com.dc.module_me.R;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -16,31 +17,19 @@ import java.util.List;
 
 @Route(path = ArounterManager.ME_MEINFO_URL)
 
-public class MeFragment extends BaseFragment {
+public class MeFragment extends BaseFragment implements View.OnClickListener {
 
     private SmartRefreshLayout mRefreshLayout;
-    private RecyclerView mRecyclerView;
-    private List<MeDataItems> mList;
-    private MezFragmentAdapter mMezFragmentAdapter;
-    private TextView tv_title;
+    private TextView tv_title, tv_phone;
 
     @Override
     public void initView(View view) {
         tv_title = view.findViewById(R.id.tv_title);
         tv_title.setText(R.string.me_title);
-        mRefreshLayout = view.findViewById(R.id.refreshLayout);
-        mRefreshLayout.setEnableRefresh(false);
-        mRefreshLayout.setEnableLoadMore(false);
-        mRecyclerView = view.findViewById(R.id.recyclerView);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mList = new ArrayList<>();
+        view.findViewById(R.id.iv_left_back).setVisibility(View.GONE);
+        view.findViewById(R.id.tv_login_out).setOnClickListener(this);
+        tv_phone = view.findViewById(R.id.tv_phone);
 
-        MeDataItems meDataItems = new MeDataItems(getResources().getString(R.string.name), "张三");
-        MeDataItems meDataItems2 = new MeDataItems(getResources().getString(R.string.mobile_phone_desc), "张三");
-        mList.clear();
-        mList.add(meDataItems);
-        mList.add(meDataItems2);
-        mRecyclerView.setAdapter(mMezFragmentAdapter = new MezFragmentAdapter(getContext(), mList, -1));
     }
 
     @Override
@@ -50,7 +39,14 @@ public class MeFragment extends BaseFragment {
 
     @Override
     protected int getLayout() {
-//        me_fragment_items.xml
         return R.layout.me_fragment;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.tv_login_out) {
+            ToastUtils.showToast("弹出");
+        }
+
     }
 }

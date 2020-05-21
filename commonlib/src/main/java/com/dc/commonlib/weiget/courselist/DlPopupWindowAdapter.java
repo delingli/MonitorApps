@@ -37,9 +37,11 @@ public class DlPopupWindowAdapter extends BaseRecyclerAdapter<DLHorizontalItem> 
             TextView tv_item = holder.getView(R.id.tv_item);
             tv_item.setText(dlHorizontalItem.name);
             if (selection != position) {
-                tv_item.setTextColor(Color.parseColor("#FF1D2023"));
+                tv_item.setTextColor(Color.parseColor("#333333"));
+               tv_item.setBackgroundResource(R.drawable.press_button);
             } else {
-                tv_item.setTextColor(Color.parseColor("#FFFF0225"));
+                tv_item.setBackgroundResource(R.drawable.bg_login_bg);
+                tv_item.setTextColor(Color.parseColor("#ffffff"));
             }
 /*            if (selectPosition == position) {
                 tv_item.setBackgroundResource(R.drawable.press_button);

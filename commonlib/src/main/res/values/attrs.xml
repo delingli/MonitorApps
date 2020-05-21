@@ -6,6 +6,13 @@
         <attr name="letterSize" format="dimension" />
     </declare-styleable>
 
+    <declare-styleable name="HorizontalProgressBar">
+        <attr name="RoundedCornersRadius" format="dimension" />
+        <attr name="Progress" format="integer" />
+        <attr name="MaxProgress" format="integer" />
+        <attr name="BgColor" format="color" />
+        <attr name="ProgressColor" format="color" />
+    </declare-styleable>
     <style name="BottomSheetLoyalBar" parent="Theme.Design.Light.BottomSheetDialog">
         <item name="android:windowIsFloating">false</item>
         <item name="android:statusBarColor" tools:targetApi="lollipop">@android:color/transparent
