@@ -21,10 +21,18 @@
     <string name="proj_list">项目列表</string>
     <string name="no_work">未开工</string>
     <string name="under_construction">在建</string>
+    <string name="planned_start_time">计划开工时间</string>
+    <string name="actual_start_time">实际开工时间</string>
+    <string name="planned_completion_time">计划竣工时间</string>
+    <string name="project_overview">项目概况</string>
+    <string name="video_monitoring">视频监控</string>
+    <string name="tower_crane_monitoring">塔吊监测</string>
+    <string name="proj_progress">工程进度</string>
 
     <!--登录-->
-    <string name="login_hint_email">请输入手机号</string>
-    <string name="login_hint_password">请输入密码</string>
+
+    <string name="login_hint_vercode">请输入图片验证码</string>
+    <string name="login_hint_phone">请输入手机号</string>
     <string name="login_hint_nicknamme">请输入昵称</string>
     <string name="hint_signature">请输入新的签名</string>
     <string name="login_forget_password">忘记密码</string>

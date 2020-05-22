@@ -4,22 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
-    android:background="@color/white"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
-    <Button
-        android:id="@+id/logins"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/dp_39"
-        android:layout_gravity="start"
-        android:layout_marginTop="@dimen/dp_41"
-        android:background="@drawable/bg_login_bg"
-        android:text="@string/login"
-        android:textColor="@color/white"
-        android:textSize="@dimen/dp_16"
-        app:layout_constraintEnd_toEndOf="@id/end_guideline"
-        app:layout_constraintStart_toStartOf="@id/main_guideline"
-        app:layout_constraintTop_toBottomOf="@+id/ll_verification_code" />
 
     <EditText
         android:id="@+id/et_phone"
@@ -31,7 +18,7 @@
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:gravity="center|left"
-        android:hint="@string/login_hint_email"
+        android:hint="@string/login_hint_phone"
         android:inputType="phone"
         android:selectAllOnFocus="true"
         android:textColor="@color/text_color5_333333"
@@ -103,16 +90,6 @@
         app:layout_constraintStart_toStartOf="@+id/main_guideline"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <View
-        style="@style/HorizontalStyle"
-        android:layout_marginLeft="@dimen/dp_35"
-        android:layout_marginRight="@dimen/dp_35"
-        app:layout_constraintEnd_toEndOf="@id/end_guideline"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="@id/main_guideline"
-        app:layout_constraintTop_toBottomOf="@+id/ll_verification_code" />
-
 
     <View
         style="@style/HorizontalStyle"
@@ -123,6 +100,64 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="@id/main_guideline"
         app:layout_constraintTop_toBottomOf="@+id/et_phone" />
+
+    <View
+        android:id="@+id/view_verification_code"
+        style="@style/HorizontalStyle"
+        android:layout_marginLeft="@dimen/dp_35"
+        android:layout_marginRight="@dimen/dp_35"
+        app:layout_constraintEnd_toEndOf="@id/end_guideline"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="@id/main_guideline"
+        app:layout_constraintTop_toBottomOf="@+id/ll_verification_code" />
+
+    <LinearLayout
+        android:id="@+id/fl_verify_root"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_marginLeft="@dimen/dp_35"
+        android:layout_marginRight="@dimen/dp_35"
+        android:orientation="horizontal"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="@id/end_guideline"
+        app:layout_constraintLeft_toLeftOf="@+id/main_guideline"
+        app:layout_constraintStart_toStartOf="@id/main_guideline"
+        app:layout_constraintTop_toBottomOf="@+id/view_verification_code">
+
+        <EditText
+            android:id="@+id/et_captcha_code"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_40"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="@null"
+            android:ellipsize="end"
+            android:hint="@string/login_hint_vercode"
+            android:lines="1"
+            android:paddingLeft="@dimen/dp_10"
+            android:singleLine="true"
+            android:textSize="@dimen/dp_16" />
+
+        <ImageView
+            android:id="@+id/img_captcha"
+            android:layout_width="@dimen/dp_75"
+            android:layout_height="@dimen/dp_40"
+            android:layout_gravity="center_vertical"
+            android:scaleType="fitXY"
+            tools:src="@drawable/default_hold" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view_line_vercode"
+        style="@style/HorizontalStyle"
+        android:layout_marginLeft="@dimen/dp_35"
+        android:layout_marginRight="@dimen/dp_35"
+        app:layout_constraintEnd_toEndOf="@id/end_guideline"
+        app:layout_constraintLeft_toLeftOf="@id/main_guideline"
+        app:layout_constraintStart_toStartOf="@id/main_guideline"
+        app:layout_constraintTop_toBottomOf="@+id/fl_verify_root" />
 
     <android.support.constraint.Guideline
         android:id="@+id/end_guideline"
@@ -138,4 +173,17 @@
         android:orientation="vertical"
         app:layout_constraintGuide_begin="@dimen/dp_35" />
 
+    <Button
+        android:id="@+id/logins"
+        style="@style/DefaultButtonStyle"
+        android:layout_width="0dp"
+        android:layout_gravity="start"
+        android:layout_marginTop="@dimen/dp_41"
+        android:background="@drawable/bg_login_bg"
+        android:text="@string/login"
+        android:textColor="@color/white"
+        android:textSize="@dimen/dp_16"
+        app:layout_constraintEnd_toEndOf="@id/end_guideline"
+        app:layout_constraintStart_toStartOf="@id/main_guideline"
+        app:layout_constraintTop_toBottomOf="@+id/view_line_vercode" />
 </android.support.constraint.ConstraintLayout>

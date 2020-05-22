@@ -18,7 +18,14 @@
     <style name="TabLayoutTextSize">
         <item name="android:textSize">@dimen/dp_18</item>
     </style>
+    <style name="DefaultButtonStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/dp_42</item>
+        <item name="android:background">@drawable/btn_common_bg</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">16sp</item>
 
+    </style>
     <style name="My_TabLayoutTextSize">
         <item name="android:textSize">@dimen/dp_14</item>
     </style>
