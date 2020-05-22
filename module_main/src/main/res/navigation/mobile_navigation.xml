@@ -9,18 +9,18 @@
         android:id="@+id/navigation_home"
         android:name="com.dc.module_main.ui.home.HomeFragment"
         android:label="@string/main_title_home"
-        tools:layout="@layout/main_fragment_home" />
+        tools:layout="@layout/common_fragment_layout" />
 
     <fragment
         android:id="@+id/navigation_bbs"
         android:name="com.dc.module_main.ui.project.ProjectFragment"
         android:label="@string/main_title_bbs"
-        tools:layout="@layout/main_bbs_fragment" />
+        tools:layout="@layout/common_fragment_layout" />
 
 
     <fragment
         android:id="@+id/navigation_me"
         android:name="com.dc.module_main.ui.me.MeFragment"
         android:label="@string/main_title_me"
-        tools:layout="@layout/main_me_fragment" />
+        tools:layout="@layout/common_fragment_layout" />
 </navigation>

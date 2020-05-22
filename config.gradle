@@ -92,9 +92,9 @@ build_versions.target_sdk = 29
 build_versions.compileSdkVersion = 29
 
 build_versions.build_tools = "28.0.3"
-build_versions.versionCode = 14
-build_versions.versionName = "3.4.2"
-build_versions.applicationId = "com.eda365.elecnest.an.debug"
+build_versions.versionCode = 1
+build_versions.versionName = "1.0.0"
+build_versions.applicationId = "com.zld.monitor.proj"
 ext.build_versions = build_versions
 /**App相关编译版本end**/
 def addRepos(handler) {
