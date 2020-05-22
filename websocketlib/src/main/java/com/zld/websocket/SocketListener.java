@@ -35,6 +35,8 @@ public interface SocketListener {
      */
     void onSendDataError(ErrorResponse error);
 
+
+
     /**
      * 接收到文本消息
      *

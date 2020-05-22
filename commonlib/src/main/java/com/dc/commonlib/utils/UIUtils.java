@@ -181,82 +181,8 @@ public class UIUtils {
         return false;
     }
 
-    public static boolean checkUserPassword(Context context, String username, String password) {
-        if (TextUtils.isEmpty(username)) {
-            ToastUtils.showToast(getString(context, R.string.tip_username));
-            return false;
-        }
-        if (TextUtils.isEmpty(password)) {
-            ToastUtils.showToast(getString(context, R.string.tip_password));
-            return false;
-        }
-        return true;
-    }
 
-    public static boolean checkResectEmail(Context context, String email, String
-            verification_code, String password) {
-        if (TextUtils.isEmpty(email)) {
-            ToastUtils.showToast(getString(context, R.string.tip_email));
-            return false;
-        }
-        if (TextUtils.isEmpty(verification_code)) {
-            ToastUtils.showToast(getString(context, R.string.tip_verification_code));
-            return false;
-        }
-        if (TextUtils.isEmpty(password)) {
-            ToastUtils.showToast(getString(context, R.string.tip_password));
-            return false;
 
-        }
-        if (!UIUtils.checkEmail(email)) {
-            ToastUtils.showToast(getString(context, R.string.tip_email_format));
-            return false;
-        }
-
-        if (!UIUtils.isPasswordChecked(password)) {
-            ToastUtils.showToast(getString(context, R.string.tip_password_format));
-            return false;
-        }
-        return true;
-    }
-
-    public static boolean checkEffective(Context context, String email, String
-            verification_code, String username, String password, boolean isOpen) {
-        if (TextUtils.isEmpty(email)) {
-            ToastUtils.showToast(getString(context, R.string.tip_email));
-            return false;
-        }
-        if (TextUtils.isEmpty(verification_code)) {
-            ToastUtils.showToast(getString(context, R.string.tip_verification_code));
-            return false;
-        }
-        if (TextUtils.isEmpty(username)) {
-            ToastUtils.showToast(getString(context, R.string.tip_username));
-            return false;
-
-        }
-        if (!checkUserName(username)) {
-            ToastUtils.showToast(getString(context, R.string.tip_check_username));
-            return false;
-        }
-        if (TextUtils.isEmpty(password)) {
-            ToastUtils.showToast(getString(context, R.string.tip_password));
-            return false;
-        }
-        if (!UIUtils.checkEmail(email)) {
-            ToastUtils.showToast(getString(context, R.string.tip_email_format));
-            return false;
-        }
-
-        if (!UIUtils.isPasswordChecked(password)) {
-            ToastUtils.showToast(getString(context, R.string.tip_password_format));
-            return false;
-        }
-        if (!isOpen) {
-            return false;
-        }
-        return true;
-    }
 
     public static Intent getAppDetailSettingIntent(Context context) {
         Intent localIntent = new Intent();

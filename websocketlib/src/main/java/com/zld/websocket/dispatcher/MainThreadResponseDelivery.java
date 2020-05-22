@@ -149,6 +149,8 @@ public class MainThreadResponseDelivery implements ResponseDelivery {
         }
     }
 
+
+
     @Override
     public <T> void onMessage(String message, T data) {
         if (isEmpty() || message == null) {

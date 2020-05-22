@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.dc.baselib.BaseApplication;
 import com.dc.baselib.BuildConfig;
+import com.dc.baselib.http.Environment;
 import com.dc.baselib.http.interceptor.CacheInterceptor;
 import com.dc.baselib.http.interceptor.CommonParamsInterceptor;
 import com.dc.baselib.http.interceptor.HeaderInterceptor;
@@ -73,7 +74,7 @@ public class RetrofitClient {
                 .retryOnConnectionFailure(true);
 
         retrofit = new Retrofit.Builder()
-                .baseUrl(BuildConfig.HOST)
+                .baseUrl(Environment.getInstance().getHttpUrl())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(mGson))
                 .addConverterFactory(ScalarsConverterFactory.create())//支持字符串

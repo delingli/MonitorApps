@@ -1,5 +1,7 @@
 package com.dc.module_main;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -22,6 +24,7 @@ import com.dc.commonlib.utils.UIUtils;
 
 import org.yczbj.ycvideoplayerlib.manager.VideoPlayerManager;
 
+@Route(path = ArounterManager.MAIN_MAIN_HOME)
 public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView mNavView;
@@ -30,6 +33,11 @@ public class MainActivity extends AppCompatActivity {
 
     protected void initData() {
 
+    }
+
+    public static void startActivity(Context context) {
+        Intent intent = new Intent(context, MainActivity.class);
+        context.startActivity(intent);
     }
 
     @Override

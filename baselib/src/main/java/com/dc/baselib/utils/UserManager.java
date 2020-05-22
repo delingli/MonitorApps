@@ -47,7 +47,7 @@ public class UserManager {
             if (null != minStr) {
                 User u = new Gson().fromJson(minStr, new TypeToken<User>() {
                 }.getType());
-                return u.uid;
+                return u.sid;
             }
 
         } catch (Exception e) {
@@ -67,7 +67,7 @@ public class UserManager {
             if (null != minStr) {
                 User u = new Gson().fromJson(minStr, new TypeToken<User>() {
                 }.getType());
-                return u.token;
+                return u.sid;
             }
 
         } catch (Exception e) {

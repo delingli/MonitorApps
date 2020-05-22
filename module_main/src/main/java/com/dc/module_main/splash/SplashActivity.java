@@ -14,9 +14,11 @@ import android.widget.Toast;
 
 import com.dc.baselib.mvvm.AbsLifecycleActivity;
 import com.dc.baselib.statusBar.StarusBarUtils;
+import com.dc.baselib.utils.UserManager;
 import com.dc.commonlib.dialog.PermisionDialog;
 import com.dc.module_main.MainActivity;
 import com.dc.module_main.R;
+import com.dc.module_main.login.LoginActivity;
 import com.yanzhenjie.permission.Action;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.runtime.Permission;
@@ -125,7 +127,12 @@ public class SplashActivity extends AbsLifecycleActivity<SplashViewModel> implem
 
         @Override
         public void run() {
-            startActivity(MainActivity.class);
+            if (UserManager.getInstance().isLogin()) {
+                MainActivity.startActivity(SplashActivity.this);
+            } else {
+                LoginActivity.startActivity(SplashActivity.this);
+
+            }
             finish();
         }
     }

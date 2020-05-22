@@ -46,8 +46,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         mIvRightButton = findViewById(R.id.iv_right_button);
         mRightText = findViewById(R.id.iv_right_text);
         setContentLayout(getLayout());
-        initListener();
         initView(savedInstanceState);
+        initListener();
         initData();
 
     }

@@ -7,6 +7,7 @@ import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.OnLifecycleEvent;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -50,6 +51,8 @@ public class CountDownButton extends AppCompatButton implements LifecycleObserve
      * 页面关闭后倒计时是否保持，再次开启倒计时继续
      */
     private boolean mCloseKeepCountDown = false;
+    private int textColor = Color.GRAY;
+    private int defaultColor = Color.GREEN;
 
     /**
      * 是否把时间格式化成时分秒
@@ -183,6 +186,16 @@ public class CountDownButton extends AppCompatButton implements LifecycleObserve
         return this;
     }
 
+    public CountDownButton setCountdownColor(int color) {
+        this.textColor = color;
+        return this;
+    }
+
+    public CountDownButton setCountDefaultColor(int color) {
+        this.defaultColor = color;
+        return this;
+    }
+
     /**
      * 倒计时期间，点击事件是否响应
      */
@@ -236,10 +249,12 @@ public class CountDownButton extends AppCompatButton implements LifecycleObserve
         startCountDown(second, TimeUnit.SECONDS);
     }
 
+
     public void startCountDown(long time, final TimeUnit timeUnit) {
         if (mCloseKeepCountDown && checkLastCountTimestamp()) {
             return;
         }
+        this.setTextColor(textColor);
         count(time, 0, timeUnit, true);
     }
 
@@ -280,6 +295,7 @@ public class CountDownButton extends AppCompatButton implements LifecycleObserve
                     showTime = String.valueOf(l);
                 }
                 setText(String.format(mCountDownText, showTime));
+                setTextColor(textColor);
                 if (mOnCountDownTickListener != null) {
                     mOnCountDownTickListener.onTick(l);
                 }
@@ -292,9 +308,10 @@ public class CountDownButton extends AppCompatButton implements LifecycleObserve
                 setText(mNormalText);
                 if (mOnCountDownFinishListener != null) {
                     mOnCountDownFinishListener.onFinish();
-                } else {
-                    CountDownButton.super.setEnabled(true);
                 }
+                CountDownButton.super.setEnabled(true);
+                CountDownButton.super.setTextColor(defaultColor);
+
             }
         };
         mCountDownTimer.start();
