@@ -103,11 +103,13 @@ public class LoginActivity extends AbsLifecycleActivity<LoginViewModel> implemen
                 finish();
             }
         });
-        registerSubscriber(mViewModel.EVENT_SHOW_CAPTURE, String.class).observe(this, new Observer<String>() {
+        registerSubscriber(mViewModel.EVENT_SHOW_CAPTURE, Boolean.class).observe(this, new Observer<Boolean>() {
             @Override
-            public void onChanged(@Nullable String ss) {
-                ll_verify_root.setVisibility(View.VISIBLE);
-                createRandKey();
+            public void onChanged(@Nullable Boolean capture) {
+                if(capture){
+                    ll_verify_root.setVisibility(View.VISIBLE);
+                    createRandKey();
+                }
             }
         });
         registerSubscriber(mViewModel.EVENT_SENDSMS_SUCESS, String.class).observe(this, new Observer<String>() {
@@ -116,7 +118,6 @@ public class LoginActivity extends AbsLifecycleActivity<LoginViewModel> implemen
                 mCountDownButton.startCountDown(60);
             }
         });
-
     }
 
     private class EditTextWatcher implements TextWatcher {

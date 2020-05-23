@@ -132,7 +132,7 @@ public class CountDownButton extends AppCompatButton implements LifecycleObserve
      * @return 是否要保持持久化计时
      */
     private boolean checkLastCountTimestamp() {
-        SharedPreferences sp = getContext().getSharedPreferences(SHARED_PREFERENCES_FILE, Context.MODE_PRIVATE);
+/*        SharedPreferences sp = getContext().getSharedPreferences(SHARED_PREFERENCES_FILE, Context.MODE_PRIVATE);
         long lastCountTimestamp = sp.getLong(SHARED_PREFERENCES_FIELD_TIMESTAMP + getId(), -1);
         long nowTimeMillis = Calendar.getInstance().getTimeInMillis();
         long diff = lastCountTimestamp - nowTimeMillis;
@@ -150,7 +150,7 @@ public class CountDownButton extends AppCompatButton implements LifecycleObserve
                 count(last, offset, timeUnit, isCountDown);
                 return true;
             }
-        }
+        }*/
         return false;
     }
 

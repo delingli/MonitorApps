@@ -1,26 +1,16 @@
 package com.dc.baselib.http;
 
-import android.content.Intent;
-import android.os.Handler;
-import android.os.Looper;
-import android.text.TextUtils;
-
-import com.dc.baselib.BaseApplication;
-import com.dc.baselib.mvvm.basewebsocket.CommonSocketEntity;
 import com.dc.baselib.utils.JsonUtil;
-import com.dc.baselib.utils.ToastUtils;
-import com.dc.baselib.utils.UserManager;
+import com.dc.baselib.websocket.SocketResponse;
+import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zld.websocket.dispatcher.IResponseDispatcher;
 import com.zld.websocket.dispatcher.ResponseDelivery;
 import com.zld.websocket.response.ErrorResponse;
 import com.zld.websocket.response.Response;
 import com.zld.websocket.response.ResponseFactory;
-import com.zld.websocket.util.WSLogUtil;
 
-import org.greenrobot.eventbus.EventBus;
 import org.java_websocket.framing.Framedata;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Type;
@@ -75,26 +65,16 @@ public class WebSocketResponseDispatcher implements IResponseDispatcher {
     @Override
     public void onMessage(String message, ResponseDelivery delivery) {
         try {
-            //TODO 前端不相信后端，后端数据格式太乱各接口格式不统一，so 原样返回手动解析
+            //TODO
             //统一处理成功的 发射数据
-            delivery.onMessage(message, message);
-            /*            if (response.getCode() >= 1000 && response.getCode() < 2000) {
-             *//*          if (null != response.getCommand() && !TextUtils.isEmpty(response.getCommand().getPath())) {
-                    String path = response.getCommand().getPath();
-                } else {
-                    ErrorResponse errorResponse = ResponseFactory.createErrorResponse();
-                    errorResponse.setErrorCode(CODE_ERROR);
-                    Response<String> textResponse = ResponseFactory.createTextResponse();
-                    textResponse.setResponseData(message);
-                    errorResponse.setResponseData(textResponse);
-                    errorResponse.setDescription(response.getMsg());
-                    errorResponse.setReserved(response);
-                    onSendDataError(errorResponse, delivery);
-                }*//*
-            } else {
-
-            }*/
+            SocketResponse socketResponse = new Gson().fromJson(message, new TypeToken<SocketResponse<JSONObject>>() {}.getType() );
+//            Type type =TokenUtil.<SocketResponse<String>>getType();
+// fromJson返回Map或者List, ClassCastException!
+//            SocketResponse<String> socketResponse = new Gson().fromJson(message, type);
+//            SocketResponse socketResponse = JsonUtil.fromJson(message, type);
+            delivery.onMessage(message, socketResponse);
         } catch (Exception e) {
+            e.printStackTrace();
             ErrorResponse errorResponse = ResponseFactory.createErrorResponse();
             Response<String> textResponse = ResponseFactory.createTextResponse();
             textResponse.setResponseData(message);

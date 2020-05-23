@@ -5,12 +5,12 @@ import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.dc.baselib.baseEntiry.User;
-import com.dc.baselib.mvvm.AbsViewModel;
 import com.dc.baselib.mvvm.EventUtils;
-import com.dc.baselib.mvvm.basewebsocket.AbsWebSocketViewModel;
-import com.dc.baselib.mvvm.basewebsocket.CommonSocketEntity;
+import com.dc.baselib.websocket.AbsWebSocketViewModel;
 import com.dc.baselib.utils.ToastUtils;
 import com.dc.baselib.utils.UserManager;
+import com.dc.baselib.websocket.SocketResponse;
+import com.dc.commonlib.common.CommonErrorCode;
 import com.dc.commonlib.common.WSAPI;
 import com.dc.commonlib.utils.JsonUtil;
 import com.dc.commonlib.utils.LogUtil;
@@ -37,53 +37,43 @@ public class LoginViewModel extends AbsWebSocketViewModel<LoginRespository> {
 
 
     @Override
-    protected void onProcessedMessage(String path, String realData) {
+    protected void onProcessedMessage(String path, SocketResponse<JSONObject> socketresponse) {
         if (TextUtils.equals(path, WSAPI.LOGIN_PATH)) {
-            // todo 解析
-            handlerLoginJson(realData);
-        } else if (TextUtils.equals(WSAPI.REG_VERIFY, path)) {
-            handlerRegVerify(realData);
-        }
-    }
-
-    private void handlerLoginJson(String realData) {
-        try {
-            JSONObject object = new JSONObject(realData);
-            String d = object.optString("data");
-            User user = JsonUtil.fromJson(d, User.class);
-            if (user != null && user.is_owner) {
-                UserManager.getInstance().saveUserInfo(getApplication(), user);
-                postData(EVENT_LOGIN_SUCESS, user);
-            } else {
-                // todo 不能进主页权限
-                ToastUtils.showToast("不能进主页");
+            if (null != socketresponse && socketresponse.data != null) {
+                User user = JsonUtil.fromJson(socketresponse.data.toString(), User.class);
+                postData(EVENT_SHOW_CAPTURE, needCaptcha);
+                if (user.captcha) {
+                    needCaptcha = user.captcha;
+                } else if (user.is_owner) {
+                    UserManager.getInstance().saveUserInfo(getApplication(), user);
+                    postData(EVENT_LOGIN_SUCESS, user);
+                } else {
+                    // todo 不能进主页权限
+                }
+                 //弹出提示
+                ToastUtils.showToast(socketresponse.msg);
             }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
+        } else if (TextUtils.equals(WSAPI.LoginVerifyCode, path)) {
+            if (socketresponse != null && socketresponse.data != null) {
 
-    private void handlerRegVerify(String realData) {
-        try {
-            JSONObject object = null;
-            object = new JSONObject(realData);
-            JSONObject captchajson = object.optJSONObject("data");
-            boolean captcha = captchajson.optBoolean("captcha");
-            if (captcha) {
-                postData(EVENT_SHOW_CAPTURE, "capture");
-            } else {
-                postData(EVENT_SENDSMS_SUCESS, "capture");
+                boolean captcha = socketresponse.data.optBoolean("captcha");
+                needCaptcha = captcha;
+                postData(EVENT_SHOW_CAPTURE, needCaptcha);
+                ToastUtils.showToast(socketresponse.msg);
+                postData(EVENT_SENDSMS_SUCESS, "captures");
             }
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
     }
 
     @Override
-    protected void onErrorMessage(String path, String mes) {
+    protected void onErrorMessage(String path, int code, String mes) {
         ToastUtils.showToast(mes);
-        if (TextUtils.equals(WSAPI.REG_VERIFY, path)) {
-        } else if (TextUtils.equals(path, WSAPI.LOGIN_PATH)) {
+        if (TextUtils.equals(WSAPI.LoginVerifyCode, path) || TextUtils.equals(WSAPI.LOGIN_PATH, path)) {
+            if (code == CommonErrorCode.graphic_verification_code) {
+                needCaptcha=true;
+                postData(EVENT_SHOW_CAPTURE, needCaptcha);
+            }
+
         }
     }
 
@@ -116,7 +106,7 @@ public class LoginViewModel extends AbsWebSocketViewModel<LoginRespository> {
             JSONObject params = new JSONObject();
             JSONObject command = new JSONObject();
             JSONObject parameters = new JSONObject();
-            command.put("path", WSAPI.REG_VERIFY);
+            command.put("path", WSAPI.LoginVerifyCode);
             parameters.put("username", account.trim());
 
             if (needCaptcha) {

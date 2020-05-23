@@ -19,7 +19,7 @@
     <string name="supervision_unit">监理单位</string>
     <string name="labor_data">劳务数据</string>
     <string name="proj_list">项目列表</string>
-    <string name="no_work">未开工</string>
+    <string name="no_work">未开工(个)</string>
     <string name="under_construction">在建</string>
     <string name="planned_start_time">计划开工时间</string>
     <string name="actual_start_time">实际开工时间</string>
@@ -29,12 +29,16 @@
     <string name="tower_crane_monitoring">塔吊监测</string>
     <string name="proj_progress">工程进度</string>
     <string name="gain_auth_code">获取验证码</string>
+    <string name="proj_all_count">项目总数</string>
+    <string name="work_count">在建(个)</string>
+    <string name="home_main_desc">开发区建设项目综合管理服务平台</string>
     <!--登录-->
-
+<!--s-->
     <string name="login_hint_vercode">请输入图片验证码</string>
     <string name="login_hint_phone">请输入手机号</string>
     <string name="login_hint_nicknamme">请输入昵称</string>
     <string name="hint_input_phone">请输入正确手机号</string>
+    <string name="tip_notin_app">您无权限进入主页</string>
 
     <string name="login">立即登录</string>
 
@@ -45,6 +49,10 @@
     <string name="already_investment">已投资额</string>
     <string name="unalready_investment_proportion">未投资额</string>
     <string name="image_progress">形象进度</string>
+    <!--首页-->
+    <string name="proj_area">项目区域</string>
+
+
     <!--注册-->
     <string name="regist_hint_email">请输入邮箱</string>
     <string name="regist_hint_verification_code">验证码</string>

@@ -1,4 +1,4 @@
-package com.dc.baselib.mvvm.basewebsocket;
+package com.dc.baselib.websocket;
 
 import android.app.Application;
 import android.content.Intent;
@@ -21,12 +21,10 @@ import org.json.JSONObject;
 
 import java.nio.ByteBuffer;
 
-import static android.support.constraint.Constraints.TAG;
-
 /**
  * 封装抽象WebSocketViewModel Socket监听实现，抽离View层
  * Respository 必要时分担ViewModel的压力处理数据逻辑，
- * todo  由于历史遗留问题，后端数据格式不统一，返回原始数据手动解析以防止JSonException导致崩溃
+ * 由于SocketResponse 中data 数据格式不确定，我们现在统一用string返回，在具体业务层做解析
  */
 public abstract class AbsWebSocketViewModel<T extends BaseRespository> extends AbsViewModel<T> implements SocketListener {
 
@@ -69,32 +67,35 @@ public abstract class AbsWebSocketViewModel<T extends BaseRespository> extends A
 
     }
 
+    public static <T> SocketResponse<JSONObject> getEntityFromResponse(T data) {
+        try {
+            if (data instanceof SocketResponse) {
+                return (SocketResponse<JSONObject>) data;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e("AbsWebSocketViewModel", "getEntityFromResponse", e);
+        }
+        return null;
+    }
+
     @Override
-    public <T> void onMessage(String message, T realdata) {
+    public <T> void onMessage(String message, T data) {
 
         try {
-            JSONObject object = new JSONObject(message);
-            String msg = object.optString("msg");
-            int code = object.optInt("code");
-            JSONObject commandObj = object.optJSONObject("command");
-            String path = null;
-            if (null != commandObj) {
-                path = commandObj.optString("path");
-
-            }
-            if (!TextUtils.isEmpty(path)) {
-                if (code == 2101) {//   todo   清掉本地登陆信息  2101: '对象未登录',
+            SocketResponse<JSONObject> entityFromResponse = getEntityFromResponse(data);
+            if (entityFromResponse != null) {
+                if (entityFromResponse.code == 2101) {
                     UserManager.getInstance().clearUser(getApplication());
-                } else if (code >= 1000 && code < 2000) {
-                    onProcessedMessage(path, message);
+                    //登陆应该在业务里做，上层不做统一处理，组件化也没法在上层依赖进行跳转
+                } else if (entityFromResponse.code >= 1000 && entityFromResponse.code < 2000) {
+                    onProcessedMessage(entityFromResponse.command.path, entityFromResponse);
                 } else {
-                    onErrorMessage(path, msg);
+                    onErrorMessage(entityFromResponse.command.path,entityFromResponse.code, entityFromResponse.msg);
                 }
-
-            } else {
-                onErrorMessage(path, "path路径为空");
-
             }
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -102,15 +103,9 @@ public abstract class AbsWebSocketViewModel<T extends BaseRespository> extends A
 
     }
 
-    /**
-     * 处理完 WebSocket 消息后的回调
-     *
-     * @param path 响应地址
-     * @param data 响应数据
-     */
-    protected abstract void onProcessedMessage(String path, String realData);
+    protected abstract void onProcessedMessage(String path, SocketResponse<JSONObject> socketresponse);
 
-    protected abstract void onErrorMessage(String path, String mes);
+    protected abstract void onErrorMessage(String path,int code, String mes);
 
     @Override
     public void onPing(Framedata framedata) {

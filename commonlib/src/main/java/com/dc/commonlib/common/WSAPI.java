@@ -10,6 +10,6 @@ public class WSAPI {
      */
     public static final String CAPTCHA_CODE = "/check_captcha/";
 
-    public static final String REG_VERIFY = "employee.consumer.RegPhoneVerifyCode";
+    public static final String LoginVerifyCode = "employee.consumer.LoginVerifyCode";
 
 }

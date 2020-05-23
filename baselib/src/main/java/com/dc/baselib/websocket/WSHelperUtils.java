@@ -1,20 +1,4 @@
-package com.dc.baselib.mvvm.basewebsocket;
-
-import android.text.TextUtils;
-
-import com.zld.websocket.request.Request;
-import com.zld.websocket.request.StringRequest;
-import com.zld.websocket.response.ErrorResponse;
-import com.zld.websocket.response.Response;
-import com.zld.websocket.response.TextResponse;
-import com.zld.websocket.util.WSLogUtil;
-
-import org.json.JSONObject;
-
-import java.util.List;
-
-import io.reactivex.Observable;
-
+package com.dc.baselib.websocket;
 /**
  * WebSocket 接口帮助类
  * <p>
@@ -24,8 +8,8 @@ public class WSHelperUtils {
 
     private static final String TAG = "WSHelperUtils";
 
-    @SuppressWarnings("unchecked")
-    public static <T> CommonSocketEntity<String> getEntityFromResponse(T data) {
+//    @SuppressWarnings("unchecked")
+/*    public static <T> CommonSocketEntity<String> getEntityFromResponse(T data) {
         try {
             if (data instanceof CommonSocketEntity) {
                 return (CommonSocketEntity<String>) data;
@@ -34,53 +18,8 @@ public class WSHelperUtils {
             WSLogUtil.e(TAG, "getEntityFromResponse", e);
         }
         return null;
-    }
+    }*/
 
-    /**
-     * 获取错误响应信息中的 Path
-     */
-    public static String getPath(ErrorResponse errorResponse) {
-        String path = null;
-        Response response = errorResponse.getResponseData();
-        if (response instanceof TextResponse) {
-            TextResponse textResponse = (TextResponse) response;
-            if (!TextUtils.isEmpty(textResponse.getResponseData())) {
-                try {
-                    JSONObject requestJson = new JSONObject(textResponse.getResponseData());
-//                    JSONObject requestJson = JSON.parseObject(textResponse.getResponseData());
-
-           /*         if (requestJson.containsKey("command")) {
-                        JSONObject command = requestJson.getJSONObject("command");
-                        if (command.containsKey("path")) {
-                            path = command.getString("path");
-                        }
-                    }*/
-                } catch (Exception e) {
-                    e.printStackTrace();
-//                    ZldLog.e(TAG, e);
-                }
-            }
-        }
-        if (errorResponse.getRequestData() != null) {
-            Request request = errorResponse.getRequestData();
-            if (request instanceof StringRequest) {
-                StringRequest stringRequest = (StringRequest) request;
-                if (!TextUtils.isEmpty(stringRequest.getRequestData())) {
-                    try {
-             /*           CommonSocketEntity<String> entity =
-                                JSON.parseObject(stringRequest.getRequestData(), new TypeReference<CommonEntity<String>>() {
-                                });
-                        if (entity.getCommand() != null && !TextUtils.isEmpty(entity.getCommand().getPath())) {
-                            path = entity.getCommand().getPath();
-                        }*/
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }
-        return path;
-    }
 
 /*    public static JSONObject getCommand(String path) {
         return getCommand(path, null);
