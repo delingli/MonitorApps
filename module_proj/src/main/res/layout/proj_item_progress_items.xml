@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_19"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_color4_666666"
+        android:textSize="@dimen/dp_15"
+        tools:text="2020-02-21" />
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_9">
+
+        <View
+            android:layout_width="@dimen/dp_3"
+            android:layout_height="match_parent"
+            android:background="@color/text_color_3476f9" />
+        <ImageView
+            android:id="@+id/iv_delay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:src="@drawable/delay" />
+        <ImageView
+            android:id="@+id/iv_conduct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+
+            android:src="@drawable/conduct" />
+        <ImageView
+            android:id="@+id/iv_complate"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="wrap_content"
+            android:src="@drawable/completed" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_22"
+        android:drawableLeft="@drawable/choice"
+        android:drawablePadding="@dimen/dp_2"
+        android:gravity="center"
+        android:textColor="@color/text_color_3476f9"
+        android:textSize="@dimen/dp_15"
+        tools:text="前期审批 " />
+</LinearLayout>
