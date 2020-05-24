@@ -9,18 +9,18 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:theme="@style/Base.AppTheme"
-            android:windowSoftInputMode="adjustResize" />
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustResize"></activity>
 
 
         <activity
             android:name=".splash.SplashActivity"
             android:configChanges="layoutDirection|fontScale|locale"
             android:screenOrientation="portrait">
-            <intent-filter>
+     <!--       <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>-->
         </activity>
         <activity android:name=".TestActivity">
 

@@ -34,7 +34,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/dp_12"
-            android:padding="@dimen/dp_8"
+            android:padding="@dimen/dp_5"
             android:src="@drawable/back" />
 
         <TextView

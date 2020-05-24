@@ -46,8 +46,8 @@ public class Environment {
 
     private EnvironmentType initEnv() {
         if (BuildConfig.DEBUG) {
-//            return EnvironmentType.TEST;
-            return EnvironmentType.PRE_BUILDER;
+            return EnvironmentType.TEST;
+//            return EnvironmentType.PRE_BUILDER;
 //           return EnvironmentType.PERF_TEST;
         } else {
             return EnvironmentType.BUILDER;

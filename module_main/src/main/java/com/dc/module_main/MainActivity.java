@@ -3,6 +3,7 @@ package com.dc.module_main;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -25,7 +26,7 @@ import com.dc.commonlib.utils.UIUtils;
 import org.yczbj.ycvideoplayerlib.manager.VideoPlayerManager;
 
 @Route(path = ArounterManager.MAIN_MAIN_HOME)
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private BottomNavigationView mNavView;
     private NavController mNavController;
@@ -40,18 +41,19 @@ public class MainActivity extends AppCompatActivity {
         context.startActivity(intent);
     }
 
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        initView(savedInstanceState);
+    protected int getLayout() {
+        return R.layout.activity_main;
     }
 
+
+    @Override
     protected void initView(Bundle savedInstanceState) {
         if (null != getSupportActionBar()) {
             getSupportActionBar().hide();
         }
-
+        setmToolBarlheadHide(true);
         mNavView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -61,10 +63,10 @@ public class MainActivity extends AppCompatActivity {
                 R.id.navigation_me)
                 .build();
         mNavController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, mNavController, appBarConfiguration);
+//        NavigationUI.setupActionBarWithNavController(this, mNavController, appBarConfiguration);
         NavigationUI.setupWithNavController(mNavView, mNavController);
         StarusBarUtils.setRootViewFitsSystemWindows(this, true);
-        StarusBarUtils.setStatusBarDarkTheme(this, true);
+        StarusBarUtils.setStatusBarColor(this, Color.parseColor("#3476f9"));
         mNavView.setItemIconTintList(null);
 //        mNavView.setLabelVisibilityMode(1);
         mNavController.navigate(R.id.navigation_home);
@@ -72,22 +74,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 int itemId = menuItem.getItemId();
-
                 if (itemId == R.id.navigation_home) {
                     mNavController.navigate(R.id.navigation_home);
+                    StarusBarUtils.setStatusBarColor(MainActivity.this, Color.parseColor("#3476f9"));
                     return true;
                 } else if (itemId == R.id.navigation_bbs) {
                     mNavController.navigate(R.id.navigation_bbs);
+                    StarusBarUtils.setStatusBarDarkTheme(MainActivity.this, true);
                     return true;
                 } else if (itemId == R.id.navigation_me) {
                     mNavController.navigate(R.id.navigation_me);
-
-          /*          if (!UserManager.getInstance().isLogin()) {
-                        LoginActivity.startActivity(MainActivity.this);
-                        return false;
-                    } else {
-                        mNavController.navigate(R.id.navigation_me);
-                    }*/
+                    StarusBarUtils.setStatusBarDarkTheme(MainActivity.this, true);
                     return true;
                 }
                 return false;

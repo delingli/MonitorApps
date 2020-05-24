@@ -11,7 +11,15 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_194"
-        android:background="@drawable/default_hold" />
+        android:background="@drawable/default_hold">
+
+        <ImageView
+            android:id="@+id/iv_videoPic"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="center"
+            tools:src="@drawable/default_hold" />
+    </FrameLayout>
 
     <TextView
         android:id="@+id/tv_title"

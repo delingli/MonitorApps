@@ -26,7 +26,8 @@ public class LoginViewModel extends AbsWebSocketViewModel<LoginRespository> {
     public String EVENT_LOGIN_SUCESS;
     public String EVENT_SHOW_CAPTURE;
     public String EVENT_SENDSMS_SUCESS;
-    private boolean needCaptcha = false;
+    private boolean needVerifyCodeCaptcha = false;
+    private boolean needLoginaptcha = false;
 
     public LoginViewModel(@NonNull Application application) {
         super(application);
@@ -41,24 +42,25 @@ public class LoginViewModel extends AbsWebSocketViewModel<LoginRespository> {
         if (TextUtils.equals(path, WSAPI.LOGIN_PATH)) {
             if (null != socketresponse && socketresponse.data != null) {
                 User user = JsonUtil.fromJson(socketresponse.data.toString(), User.class);
-                postData(EVENT_SHOW_CAPTURE, needCaptcha);
-                if (user.captcha) {
-                    needCaptcha = user.captcha;
-                } else if (user.is_owner) {
+                needLoginaptcha = user.captcha;
+                if (user.is_owner) {
                     UserManager.getInstance().saveUserInfo(getApplication(), user);
                     postData(EVENT_LOGIN_SUCESS, user);
                 } else {
                     // todo 不能进主页权限
+                    ToastUtils.showToast(getApplication().getResources().getString(R.string.no_permissions_login));
+                    return;
                 }
-                 //弹出提示
+                postData(EVENT_SHOW_CAPTURE, needLoginaptcha);
+                //弹出提示
                 ToastUtils.showToast(socketresponse.msg);
             }
         } else if (TextUtils.equals(WSAPI.LoginVerifyCode, path)) {
             if (socketresponse != null && socketresponse.data != null) {
 
                 boolean captcha = socketresponse.data.optBoolean("captcha");
-                needCaptcha = captcha;
-                postData(EVENT_SHOW_CAPTURE, needCaptcha);
+                needVerifyCodeCaptcha = captcha;
+                postData(EVENT_SHOW_CAPTURE, needVerifyCodeCaptcha);
                 ToastUtils.showToast(socketresponse.msg);
                 postData(EVENT_SENDSMS_SUCESS, "captures");
             }
@@ -68,12 +70,17 @@ public class LoginViewModel extends AbsWebSocketViewModel<LoginRespository> {
     @Override
     protected void onErrorMessage(String path, int code, String mes) {
         ToastUtils.showToast(mes);
-        if (TextUtils.equals(WSAPI.LoginVerifyCode, path) || TextUtils.equals(WSAPI.LOGIN_PATH, path)) {
+        if (TextUtils.equals(WSAPI.LOGIN_PATH, path)) {
             if (code == CommonErrorCode.graphic_verification_code) {
-                needCaptcha=true;
-                postData(EVENT_SHOW_CAPTURE, needCaptcha);
+                needLoginaptcha = true;
+                postData(EVENT_SHOW_CAPTURE, needLoginaptcha);
             }
 
+        } else if (TextUtils.equals(WSAPI.LoginVerifyCode, path)) {
+            if (code == CommonErrorCode.graphic_verification_code) {
+                needVerifyCodeCaptcha = true;
+                postData(EVENT_SHOW_CAPTURE, needVerifyCodeCaptcha);
+            }
         }
     }
 
@@ -85,10 +92,8 @@ public class LoginViewModel extends AbsWebSocketViewModel<LoginRespository> {
             command.put("path", WSAPI.LOGIN_PATH);
             parameters.put("username", account);
             parameters.put("sms", sms);
-            if (!TextUtils.isEmpty(randomKey)) {
+            if (needLoginaptcha&&!TextUtils.isEmpty(captcha_code)  && !TextUtils.isEmpty(randomKey)) {
                 parameters.put("rand_captcha_key", randomKey);
-            }
-            if (!TextUtils.isEmpty(captcha_code)) {
                 parameters.put("captcha_code", captcha_code);
             }
             params.put("command", command);
@@ -109,9 +114,10 @@ public class LoginViewModel extends AbsWebSocketViewModel<LoginRespository> {
             command.put("path", WSAPI.LoginVerifyCode);
             parameters.put("username", account.trim());
 
-            if (needCaptcha) {
+            if (needVerifyCodeCaptcha) {
                 if (TextUtils.isEmpty(captcha_code)) {
                     ToastUtils.showToast(getApplication().getString(R.string.tip_capture_format));
+                    postData(EVENT_SHOW_CAPTURE, needVerifyCodeCaptcha);
                     return;
                 }
 

@@ -6,8 +6,10 @@
     android:layout_height="@dimen/dp_117"
     android:layout_marginLeft="@dimen/dp_11"
     android:layout_marginTop="@dimen/dp_9"
-    android:elevation="@dimen/dp_3"
+    android:layout_marginBottom="@dimen/dp_9"
+    android:elevation="@dimen/dp_4"
     android:gravity="center"
+    app:cardCornerRadius="@dimen/dp_4"
     app:cardElevation="@dimen/dp_4">
 
     <LinearLayout
@@ -17,6 +19,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/tv_area_progress"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_gravity="center"
@@ -27,6 +30,7 @@
             tools:text="12/16" />
 
         <TextView
+            android:id="@+id/tv_proj_adress"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_gravity="center"

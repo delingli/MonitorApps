@@ -1,33 +1,16 @@
 package com.dc.module_main.ui.home;
 
-import android.arch.lifecycle.Observer;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.TextView;
 
-import com.dc.baselib.mvvm.AbsLifecycleFragment;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.dc.baselib.mvvm.BaseFragment;
-import com.dc.baselib.utils.ToastUtils;
-import com.dc.baselib.utils.UserManager;
-import com.dc.commonlib.common.ConfigUtils;
-import com.dc.commonlib.utils.KeyBoardUtils;
-import com.dc.commonlib.utils.UIUtils;
+import com.dc.commonlib.utils.ArounterManager;
 import com.dc.module_main.R;
 
 public class HomeFragment extends BaseFragment {
-
-
-
-
-    private boolean canClick = false;
-
-
     @Override
     public void initView(View view) {
-
+        getChildFragmentManager().beginTransaction().replace(R.id.fl_continerz, (BaseFragment) ARouter.getInstance().build(ArounterManager.HOME_HOMEMAINFRAGMENT_URL).navigation(), "HomeFragmentTag").commit();
     }
 
     @Override

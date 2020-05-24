@@ -9,4 +9,8 @@ public class ProjectOverviewViewModel extends AbsViewModel<ProjectOverviewRespos
     public ProjectOverviewViewModel(@NonNull Application application) {
         super(application);
     }
+
+    public ProjectOverviewItem getProjectOverviewItem() {
+        return mRepository.getProjectOverviewItem();
+    }
 }

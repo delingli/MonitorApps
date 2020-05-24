@@ -61,7 +61,6 @@ public class LoginActivity extends AbsLifecycleActivity<LoginViewModel> implemen
         et_verification_code = findViewById(R.id.et_verification_code);
         et_captcha_code = findViewById(R.id.et_captcha_code);
         EditTextWatcher textWatcher = new EditTextWatcher();
-
         et_phone.addTextChangedListener(textWatcher);
         et_verification_code.addTextChangedListener(textWatcher);
 
@@ -154,10 +153,10 @@ public class LoginActivity extends AbsLifecycleActivity<LoginViewModel> implemen
         String graphicCode = et_captcha_code.getText().toString().trim();
         String verification_code = et_verification_code.getText().toString().trim();
         if (id == R.id.btn_logins) {
-            if (UIUtils.isMobileNO(phone)) {
-                ToastUtils.showToast(getResources().getString(R.string.hint_input_phone));
-                return;
-            }
+//            if (UIUtils.isMobileNO(phone)) {
+//                ToastUtils.showToast(getResources().getString(R.string.hint_input_phone));
+//                return;
+//            }
             if (ll_verify_root.getVisibility() == View.VISIBLE && TextUtils.isEmpty(graphicCode)) {
                 ToastUtils.showToast(getResources().getString(R.string.tip_capture_format));
                 return;

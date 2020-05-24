@@ -13,7 +13,7 @@ public class User implements Serializable {
     public String realname;
     public boolean auth_pass;//true:已实名认证
     public boolean captcha;
-    public String sid;
+    public String sid;//tolen
     public String face_image;
     public String company_name;//公司名
     public String company_role;

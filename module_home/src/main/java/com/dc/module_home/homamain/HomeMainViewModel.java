@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 
 import com.dc.baselib.mvvm.AbsViewModel;
 
-public class HomeMainViewModel<HomeMainRespository> extends AbsViewModel {
+public class HomeMainViewModel extends AbsViewModel<HomeMainRespositorys> {
     public HomeMainViewModel(@NonNull Application application) {
         super(application);
     }

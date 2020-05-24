@@ -100,6 +100,7 @@
                 tools:text="23" />
 
             <TextView
+                android:id="@+id/tv_no_work_desc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="left"
@@ -128,19 +129,12 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_54"
+            android:layout_height="@dimen/dp_30"
             android:layout_marginTop="@dimen/dp_27"
 
             android:background="@drawable/bg_shape_top_bg">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/common_margin"
-                android:layout_marginTop="@dimen/dp_30"
-                android:text="@string/proj_area"
-                android:textColor="@color/text_color5_333333"
-                android:textSize="@dimen/dp_18" />
+
         </FrameLayout>
     </LinearLayout>
 

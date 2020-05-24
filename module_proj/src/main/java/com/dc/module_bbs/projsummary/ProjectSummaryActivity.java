@@ -29,7 +29,7 @@ import com.github.mikephil.charting.utils.ViewPortHandler;
 import java.util.ArrayList;
 import java.util.List;
 
-//项目概况 图表
+//项目详情 图表
 public class ProjectSummaryActivity extends AbsLifecycleActivity<ProjectSummaryViewModel> {
 
     private PieChart pieChart;
