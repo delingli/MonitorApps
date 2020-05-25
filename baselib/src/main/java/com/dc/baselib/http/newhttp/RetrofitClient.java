@@ -67,12 +67,10 @@ public class RetrofitClient {
 //                .cache(cache)
                 .cookieJar(cookieJar)
                 .addInterceptor(new HeaderInterceptor())
-                .addInterceptor(new CommonParamsInterceptor())
+//                .addInterceptor(new CommonParamsInterceptor())
                 .addNetworkInterceptor(netCacheInterceptor)
                 .addInterceptor(offlineCacheInterceptor)
-//                .addInterceptor(loggingInterceptor)
                 .retryOnConnectionFailure(true);
-
         retrofit = new Retrofit.Builder()
                 .baseUrl(Environment.getInstance().getHttpUrl())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

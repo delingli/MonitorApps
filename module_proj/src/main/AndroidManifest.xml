@@ -6,9 +6,11 @@
         <activity
             android:name=".projsummary.ProjectSummaryActivity"
             android:configChanges="layoutDirection|fontScale|locale"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".searchlist.SearchActivity"
+            android:configChanges="layoutDirection|fontScale|locale"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".projectoverview.ProjectOverviewActivity"
             android:configChanges="layoutDirection|fontScale|locale"
@@ -22,12 +24,7 @@
         <activity
             android:name=".labordata.LaborDataActivity"
             android:configChanges="layoutDirection|fontScale|locale"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

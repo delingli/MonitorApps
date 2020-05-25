@@ -67,10 +67,10 @@ public abstract class AbsWebSocketViewModel<T extends BaseRespository> extends A
 
     }
 
-    public static <T> SocketResponse<JSONObject> getEntityFromResponse(T data) {
+    public static <T> SocketResponse<String> getEntityFromResponse(T data) {
         try {
             if (data instanceof SocketResponse) {
-                return (SocketResponse<JSONObject>) data;
+                return (SocketResponse<String>) data;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -83,7 +83,7 @@ public abstract class AbsWebSocketViewModel<T extends BaseRespository> extends A
     public <T> void onMessage(String message, T data) {
 
         try {
-            SocketResponse<JSONObject> entityFromResponse = getEntityFromResponse(data);
+            SocketResponse<String> entityFromResponse = getEntityFromResponse(data);
             if (entityFromResponse != null) {
                 if (entityFromResponse.code == 2101) {
                     UserManager.getInstance().clearUser(getApplication());
@@ -103,7 +103,7 @@ public abstract class AbsWebSocketViewModel<T extends BaseRespository> extends A
 
     }
 
-    protected abstract void onProcessedMessage(String path, SocketResponse<JSONObject> socketresponse);
+    protected abstract void onProcessedMessage(String path, SocketResponse<String> socketresponse);
 
     protected abstract void onErrorMessage(String path,int code, String mes);
 

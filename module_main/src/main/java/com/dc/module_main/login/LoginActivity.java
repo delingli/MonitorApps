@@ -15,19 +15,21 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.bumptech.glide.Glide;
 import com.dc.baselib.baseEntiry.User;
 import com.dc.baselib.http.Environment;
 import com.dc.baselib.mvvm.AbsLifecycleActivity;
 import com.dc.baselib.utils.ToastUtils;
 import com.dc.commonlib.common.WSAPI;
+import com.dc.commonlib.utils.ArounterManager;
 import com.dc.commonlib.utils.GlideUtils;
 import com.dc.commonlib.utils.UIUtils;
 import com.dc.commonlib.utils.UUIDUtils;
 import com.dc.commonlib.weiget.CountDownButton;
 import com.dc.module_main.MainActivity;
 import com.dc.module_main.R;
-
+@Route(path = ArounterManager.LOGINACTIVITY_URL)
 public class LoginActivity extends AbsLifecycleActivity<LoginViewModel> implements View.OnClickListener {
 
     private EditText et_phone, et_verification_code, et_captcha_code;

@@ -1,13 +1,26 @@
 package com.dc.module_bbs.searchlist;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.SearchView;
+import android.text.TextUtils;
+import android.view.View;
 
 import com.dc.baselib.mvvm.BaseActivity;
+import com.dc.commonlib.weiget.customsearch.DlSearchView;
+import com.dc.module_bbs.R;
+import com.dc.module_bbs.projectlist.ProjectListFragment;
+
 //搜索项目列表
 public class SearchActivity extends BaseActivity {
+
+    private DlSearchView dlSearchView;
+    private ProjectListFragment mProjectListFragment;
+
     @Override
     protected int getLayout() {
-        return 0;
+        return R.layout.proj_search_fragment;
     }
 
     @Override
@@ -15,8 +28,44 @@ public class SearchActivity extends BaseActivity {
 
     }
 
+    public static void startActivity(Context context) {
+        Intent intent = new Intent(context, SearchActivity.class);
+        context.startActivity(intent);
+    }
+
     @Override
     protected void initView(Bundle savedInstanceState) {
+        setmToolBarlheadHide(true);
+        mProjectListFragment = new ProjectListFragment();
+        Bundle bundle = new Bundle();
+        dlSearchView = findViewById(R.id.dlSearchView);
+        bundle.putString(ProjectListFragment.TYPE_KEY, ProjectListFragment.SEARCH_TYPE);
+        mProjectListFragment.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fl_continers, mProjectListFragment, "").commit();
+        initSearch();
+    }
 
+    private void initSearch() {
+        dlSearchView.setQueryHint("请输入您要查询的内容");
+        dlSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                if (!TextUtils.isEmpty(s)) {
+                    search(s);
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
+            }
+        });
+    }
+
+    private void search(String s) {
+        if (null != mProjectListFragment) {
+            mProjectListFragment.toSearch(s);
+        }
     }
 }

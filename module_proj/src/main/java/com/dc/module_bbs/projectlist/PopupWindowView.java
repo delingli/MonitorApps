@@ -50,7 +50,7 @@ public class PopupWindowView {
                     DLHorizontalItem horizontalItem = mDlPopupWindowAdapter.getList().get(position);
                     mDlPopupWindowAdapter.setSelection(position);
                     if (null != onItemClickListener) {
-                        onItemClickListener.onItemCLick(horizontalItem.id);
+                        onItemClickListener.onItemCLick(horizontalItem.name,horizontalItem.id);
                     }
                 }
             }
@@ -71,7 +71,7 @@ public class PopupWindowView {
     }
 
     public interface OnItemClickListener {
-        void onItemCLick(String id);
+        void onItemCLick(String name,String id);
     }
 
     public void showPopupWindow(View v) {

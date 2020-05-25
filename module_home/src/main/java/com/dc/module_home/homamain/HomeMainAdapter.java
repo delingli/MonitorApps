@@ -42,8 +42,8 @@ public class HomeMainAdapter extends BaseRecyclerAdapter<IAbsHomeItem> implement
             VideoMonitoringHomeItem videomonitoringhomeitem = (VideoMonitoringHomeItem) iAbsHomeItem;
             TextView tv_title = holder.getView(R.id.tv_title);
             ImageView iv_videoPic = holder.getView(R.id.iv_videoPic);
-            tv_title.setText(videomonitoringhomeitem.videoTitle);
-            GlideUtils.loadRoundUrl(getContext(), videomonitoringhomeitem.videoUrl, iv_videoPic);
+            tv_title.setText(videomonitoringhomeitem.name);
+            GlideUtils.loadRoundUrl(getContext(), videomonitoringhomeitem.url, iv_videoPic);
         } else if (iAbsHomeItem instanceof ProjectOverviewHomeItem) {
             ProjectOverviewHomeItem projectOverviewHomeItem = (ProjectOverviewHomeItem) iAbsHomeItem;
             TextView tv_proj_count = holder.getView(R.id.tv_proj_count);
@@ -58,11 +58,11 @@ public class HomeMainAdapter extends BaseRecyclerAdapter<IAbsHomeItem> implement
 
             TextView tv_no_work_desc = holder.getView(R.id.tv_no_work_desc);
 
-            tv_proj_count.setText(projectOverviewHomeItem.projectAll.projectCount+"");
+            tv_proj_count.setText(projectOverviewHomeItem.projectAll.projectCount + "");
             tv_proj_count_desc.setText(projectOverviewHomeItem.projectAll.projectTitle);
-            tv_work_count.setText(projectOverviewHomeItem.projectUnderConstruction.projectCount+"");
+            tv_work_count.setText(projectOverviewHomeItem.projectUnderConstruction.projectCount + "");
             tv_work_count_desc.setText(projectOverviewHomeItem.projectUnderConstruction.projectTitle);
-            tv_no_work.setText(projectOverviewHomeItem.noWorkProject.projectCount+"");
+            tv_no_work.setText(projectOverviewHomeItem.noWorkProject.projectCount + "");
             tv_no_work_desc.setText(projectOverviewHomeItem.noWorkProject.projectTitle);
         }
     }

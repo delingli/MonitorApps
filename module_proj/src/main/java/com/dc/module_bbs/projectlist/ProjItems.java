@@ -1,16 +1,11 @@
 package com.dc.module_bbs.projectlist;
 
 public class ProjItems {
-    public String title;
-    public String state;
-    public String pic_url;
+    public int project_id;
+    public String project__name;
+    public String project__status;
+    public String pic_url;//取第一个
 
     public ProjItems() {
-    }
-
-    public ProjItems(String title, String state, String pic_url) {
-        this.title = title;
-        this.state = state;
-        this.pic_url = pic_url;
     }
 }

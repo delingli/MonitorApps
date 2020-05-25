@@ -47,7 +47,7 @@ public class UserManager {
             if (null != minStr) {
                 User u = new Gson().fromJson(minStr, new TypeToken<User>() {
                 }.getType());
-                return u.sid;
+                return u.user_id;
             }
 
         } catch (Exception e) {
@@ -80,7 +80,7 @@ public class UserManager {
     public User getUserInfo(Context context) {
 
         try {
-            String data = SPUtils.getData(context, USER_INFO);
+            String data = SPUtils.getData(context.getApplicationContext(), USER_INFO);
             String minStr = base64.decryptBASE64(data);//解密
             if (null != minStr) {
                 User u = new Gson().fromJson(minStr, new TypeToken<User>() {

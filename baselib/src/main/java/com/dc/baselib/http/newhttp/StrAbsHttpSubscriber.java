@@ -28,7 +28,7 @@ public abstract class StrAbsHttpSubscriber extends DisposableSubscriber<Response
     public StrAbsHttpSubscriber() {
     }
 
-   private boolean forReal = false;
+    private boolean forReal = false;
 
     public StrAbsHttpSubscriber(boolean forReal) {
         this.forReal = forReal;
@@ -36,28 +36,27 @@ public abstract class StrAbsHttpSubscriber extends DisposableSubscriber<Response
 
     @Override
     public void onNext(ResponseBody responsebody) {
-
         String str = null;
         try {
             str = responsebody.string();
-
-            JSONObject obj = new JSONObject(str);
-            int code = obj.optInt("code");
-            String msg = obj.optString("msg");
-            if (code == 0) {
-                if (forReal) {
-                    onSuccess(str);
-                } else {
-                    onSuccess(msg);
-
-                }
-            } else {
-                if (code == -50) {
-                    UserManager.getInstance().clearUser(BaseApplication.getsInstance());
-                }
-                onFailure(msg, code + "");
-            }
-        } catch (JSONException | IOException e) {
+            onSuccess(str);
+//            JSONObject obj = new JSONObject(str);
+//            int code = obj.optInt("code");
+//            String msg = obj.optString("msg");
+//            if (code == 0) {
+//                if (forReal) {
+//                    onSuccess(str);
+//                } else {
+//                    onSuccess(msg);
+//
+//                }
+//            } else {
+//                if (code == -50) {
+//                    UserManager.getInstance().clearUser(BaseApplication.getsInstance());
+//                }
+//                onFailure(msg, code + "");
+//            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

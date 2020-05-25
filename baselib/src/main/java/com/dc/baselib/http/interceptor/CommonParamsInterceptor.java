@@ -22,16 +22,17 @@ public class CommonParamsInterceptor implements Interceptor {
         Request originalRequest = chain.request();
         //2.获取到方法
         String method = originalRequest.method();
-        if (!TextUtils.isEmpty(UserManager.getInstance().getToken())) {
+        return chain.proceed(originalRequest);
+  /*      if (!TextUtils.isEmpty(UserManager.getInstance().getToken())) {
             HttpUrl modifiedUrl = originalRequest.url().newBuilder()
-                    .addQueryParameter("token", UserManager.getInstance().getToken())
+                    .addQueryParameter("sid", UserManager.getInstance().getToken())
                     .build();
             request = originalRequest.newBuilder().url(modifiedUrl).build();//构建request
             return chain.proceed(request);
 
         } else {
             return chain.proceed(originalRequest);
-        }
+        }*/
         //            Response response = chain.proceed(request);//进行网络请求并获得返回结果
 //            String content = response.body().string();//拿到返回结果，进行分析
 

@@ -4,6 +4,7 @@ package com.dc.baselib.http;
 import android.util.Log;
 
 import com.dc.baselib.BuildConfig;
+import com.zld.websocket.util.WSLogUtil;
 
 /**
  * 运行环境相关的配置
@@ -99,6 +100,8 @@ public class Environment {
      */
     public String getWSUrl() {
         checkAndInitDomain();
+        String wsurl = String.format("wss://%s/wsapi", domain.rootDomain);
+        WSLogUtil.d("WSURL", wsurl);
         return String.format("wss://%s/wsapi", domain.rootDomain);
     }
 

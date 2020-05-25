@@ -1,68 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="home_tab_items">
-        <item>关注</item>
-        <item>推荐</item>
-        <item>硬件设计</item>
-        <item>PCB设计</item>
-        <item>电磁兼容</item>
-        <item>射频设计</item>
-        <item>SI$PI仿真</item>
-        <item>单片机&amp;嵌入式</item>
-        <item>测量&amp;测试</item>
-        <item>可靠性设计</item>
-        <item>可制造性设计</item>
-        <item>器件工程管理</item>
-        <item>研发管理</item>
+    <string-array name="area_labs">
+        <!--项目区域-->
+        <item>全部</item>
+        <item>银湖</item>
+        <item>新登</item>
+        <item>东洲</item>
+        <item>场口</item>
+        <item>金桥</item>
+        <item>鹿山</item>
     </string-array>
-    <string-array name="nest_course_tab_items">
-        <item>推荐</item>
-        <item>硬件设计</item>
-        <item>PCB设计</item>
-        <item>电磁兼容</item>
-        <item>射频设计</item>
-        <item>SI$PI仿真</item>
-        <item>单片机&amp;嵌入式</item>
-        <item>测量&amp;测试</item>
-        <item>可靠性设计</item>
-        <item>可制造性设计</item>
-        <item>器件工程管理</item>
-        <item>研发管理</item>
+    <string-array name="area_labs_ids">
+        <!--项目区域IDS-->
+        <item>000</item>
+        <item>001</item>
+        <item>002</item>
+        <item>003</item>
+        <item>004</item>
+        <item>005</item>
+        <item>006</item>
     </string-array>
-    <string-array name="home_bbs_items">
-        <item>关注</item>
-        <item>板块</item>
+
+    <string-array name="area_labs_status">
+        <!--项目IDS-->
+        <item>全部</item>
+        <item>在建</item>
+        <item>未开工</item>
     </string-array>
-    <string-array name="collections">
-        <item>帖子</item>
-        <item>资讯</item>
-    </string-array>
-    <string-array name="retrievepassword">
-        <item>手机找回</item>
-        <item>邮箱找回</item>
-    </string-array>
-    <string-array name="record_list">
-        <item>正在学习</item>
-        <item>已完成</item>
-    </string-array>
-    <string-array name="course_list_title">
-        <item>最新</item>
-        <item>最热</item>
-        <item>推荐</item>
-    </string-array>
-    <string-array name="course_list">
-        <item>在教课程</item>
-        <item>在学课程</item>
-        <item>收藏课程</item>
-    </string-array>
-    <string-array name="quality_class_detail">
-        <item>介绍</item>
-        <item>目录</item>
-        <item>资料</item>
-    </string-array>
-    <string-array name="bbs_detail">
-        <item>最新回复</item>
-        <item>最新发表</item>
-        <item>精华帖子</item>
+    <string-array name="area_labs_status_ids">
+        <!-- IDS-->
+        <!--    server端口    003 在建  001 未开工-->
+        <item>000</item>
+        <item>003</item>
+        <item>001</item>
     </string-array>
 </resources>

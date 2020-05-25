@@ -38,10 +38,10 @@ public class LoginViewModel extends AbsWebSocketViewModel<LoginRespository> {
 
 
     @Override
-    protected void onProcessedMessage(String path, SocketResponse<JSONObject> socketresponse) {
+    protected void onProcessedMessage(String path, SocketResponse<String> socketresponse) {
         if (TextUtils.equals(path, WSAPI.LOGIN_PATH)) {
             if (null != socketresponse && socketresponse.data != null) {
-                User user = JsonUtil.fromJson(socketresponse.data.toString(), User.class);
+                User user = JsonUtil.fromJson(socketresponse.data, User.class);
                 needLoginaptcha = user.captcha;
                 if (user.is_owner) {
                     UserManager.getInstance().saveUserInfo(getApplication(), user);
@@ -57,12 +57,18 @@ public class LoginViewModel extends AbsWebSocketViewModel<LoginRespository> {
             }
         } else if (TextUtils.equals(WSAPI.LoginVerifyCode, path)) {
             if (socketresponse != null && socketresponse.data != null) {
+                try {
+                    JSONObject jsonObject = new JSONObject(socketresponse.data);
+                    boolean captcha = jsonObject.optBoolean("captcha");
+                    needVerifyCodeCaptcha = captcha;
+                    postData(EVENT_SHOW_CAPTURE, needVerifyCodeCaptcha);
+                    ToastUtils.showToast(socketresponse.msg);
+                    postData(EVENT_SENDSMS_SUCESS, "captures");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
-                boolean captcha = socketresponse.data.optBoolean("captcha");
-                needVerifyCodeCaptcha = captcha;
-                postData(EVENT_SHOW_CAPTURE, needVerifyCodeCaptcha);
-                ToastUtils.showToast(socketresponse.msg);
-                postData(EVENT_SENDSMS_SUCESS, "captures");
+
             }
         }
     }
@@ -92,7 +98,7 @@ public class LoginViewModel extends AbsWebSocketViewModel<LoginRespository> {
             command.put("path", WSAPI.LOGIN_PATH);
             parameters.put("username", account);
             parameters.put("sms", sms);
-            if (needLoginaptcha&&!TextUtils.isEmpty(captcha_code)  && !TextUtils.isEmpty(randomKey)) {
+            if (needLoginaptcha && !TextUtils.isEmpty(captcha_code) && !TextUtils.isEmpty(randomKey)) {
                 parameters.put("rand_captcha_key", randomKey);
                 parameters.put("captcha_code", captcha_code);
             }

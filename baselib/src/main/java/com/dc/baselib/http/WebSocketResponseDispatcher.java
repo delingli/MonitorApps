@@ -1,5 +1,6 @@
 package com.dc.baselib.http;
 
+import com.dc.baselib.baseEntiry.User;
 import com.dc.baselib.utils.JsonUtil;
 import com.dc.baselib.websocket.SocketResponse;
 import com.google.gson.Gson;
@@ -13,6 +14,7 @@ import com.zld.websocket.response.ResponseFactory;
 import org.java_websocket.framing.Framedata;
 import org.json.JSONObject;
 
+import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.nio.ByteBuffer;
 
@@ -67,12 +69,28 @@ public class WebSocketResponseDispatcher implements IResponseDispatcher {
         try {
             //TODO
             //统一处理成功的 发射数据
-            SocketResponse socketResponse = new Gson().fromJson(message, new TypeToken<SocketResponse<JSONObject>>() {}.getType() );
+            JSONObject jsonObject = new JSONObject(message);
+            int code = jsonObject.optInt("code");
+            String msg = jsonObject.optString("msg");
+            String data = jsonObject.optJSONObject("data").toString();
+            JSONObject commandObj = jsonObject.optJSONObject("command");
+            SocketResponse.CommandBean commandBean = new SocketResponse.CommandBean();
+            commandBean.path = commandObj.optString("path");
+            SocketResponse<String> sockeJson = new SocketResponse<>();
+            sockeJson.code = code;
+            sockeJson.msg = msg;
+            sockeJson.data = data;
+            sockeJson.command = commandBean;
+//            Type type = ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+//            SocketResponse<String> ss = new Gson().fromJson(message, SocketResponse.class);
+
+//            SocketResponse socketResponse = new Gson().fromJson(message, new TypeToken<SocketResponse<JSONObject>>() {
+//            }.getType());
 //            Type type =TokenUtil.<SocketResponse<String>>getType();
 // fromJson返回Map或者List, ClassCastException!
 //            SocketResponse<String> socketResponse = new Gson().fromJson(message, type);
 //            SocketResponse socketResponse = JsonUtil.fromJson(message, type);
-            delivery.onMessage(message, socketResponse);
+            delivery.onMessage(message, sockeJson);
         } catch (Exception e) {
             e.printStackTrace();
             ErrorResponse errorResponse = ResponseFactory.createErrorResponse();

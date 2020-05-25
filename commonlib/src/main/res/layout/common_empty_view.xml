@@ -16,8 +16,8 @@
             android:id="@+id/iv_tippic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/flag_ai"
-            tools:src="@drawable/flag_ai" />
+
+            />
 
         <TextView
             android:id="@+id/tv_empty_text"
