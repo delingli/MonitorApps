@@ -2,15 +2,18 @@ package com.dc.module_bbs.projshow;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dc.commonlib.common.BaseRecyclerAdapter;
 import com.dc.commonlib.common.BaseViewHolder;
 import com.dc.commonlib.common.MultiTypeSupport;
+import com.dc.commonlib.utils.UIUtils;
 import com.dc.module_bbs.R;
 import com.dc.module_bbs.preview.PreViewActivity;
 import com.dc.module_bbs.projsummary.ProjectAreaItem;
@@ -225,7 +228,71 @@ public class ProjectShowAdapter extends BaseRecyclerAdapter<AbsProjectInfo> impl
             initPieChart(picChart);
             initPieChartData(picChart, projectInvestmentInfo);
 
-        } else if (item instanceof ProjectInvestmentItem) {
+        } else if (item instanceof ProjectInvestmentItem.ProjectInvestmentItemBean) {
+            ProjectInvestmentItem.ProjectInvestmentItemBean projectInvestmentItem = (ProjectInvestmentItem.ProjectInvestmentItemBean) item;
+            View view_line_bg = holder.getView(R.id.view_line_bg);
+            ImageView iv_state = holder.getView(R.id.iv_state);
+            TextView tv_title = holder.getView(R.id.tv_title);
+            TextView tv_complate_time = holder.getView(R.id.tv_complate_time);
+            TextView tv_phase_title = holder.getView(R.id.tv_phase_title);
+            if (projectInvestmentItem.phase) {  //节点
+                tv_complate_time.setVisibility(View.VISIBLE);
+                tv_complate_time.setText(projectInvestmentItem.real_date);
+                iv_state.setVisibility(View.VISIBLE);
+                tv_phase_title.setVisibility(View.VISIBLE);
+                tv_title.setVisibility(View.GONE);
+                tv_phase_title.setText(projectInvestmentItem.name);
+                view_line_bg.setVisibility(View.GONE);
+                if (projectInvestmentItem.finished) {
+                    //finish 已完成
+                    tv_phase_title.setTextColor(getContext().getResources().getColor(R.color.text_color_3476f9));
+                    if (UIUtils.dateToStamp(projectInvestmentItem.real_date) > UIUtils.dateToStamp(projectInvestmentItem.plane_date)) {
+                        //todo 超时
+                        iv_state.setImageResource(R.drawable.delay);
+                    } else {
+                        iv_state.setImageResource(R.drawable.completed);
+                    }
+                } else {
+                    tv_phase_title.setTextColor(getContext().getResources().getColor(R.color.text_color5_333333));
+                    if (UIUtils.dateToStamp(projectInvestmentItem.real_date) > UIUtils.dateToStamp(projectInvestmentItem.plane_date)) {
+                        //todo 超时
+                        iv_state.setImageResource(R.drawable.delay);
+                    } else {
+                        iv_state.setImageResource(R.drawable.notstarted);
+                    }
+                }
+            } else if (projectInvestmentItem.isFalseData) {
+                view_line_bg.setVisibility(View.VISIBLE);
+                tv_complate_time.setVisibility(View.INVISIBLE);
+                iv_state.setVisibility(View.INVISIBLE);
+                tv_phase_title.setVisibility(View.INVISIBLE);
+                tv_title.setVisibility(View.GONE);
+            } else {
+                view_line_bg.setVisibility(View.VISIBLE);
+                tv_complate_time.setVisibility(View.INVISIBLE);
+                tv_phase_title.setVisibility(View.GONE);
+                tv_title.setVisibility(View.VISIBLE);
+                tv_title.setText(projectInvestmentItem.name);
+                iv_state.setVisibility(View.INVISIBLE);
+                if (projectInvestmentItem.finished) {
+                    tv_title.setTextColor(getContext().getResources().getColor(R.color.text_color_3476f9));
+                    Drawable drawableLeft = getContext().getResources().getDrawable(
+                            R.drawable.choice);
+                    tv_title.setCompoundDrawablesWithIntrinsicBounds(drawableLeft,
+                            null, null, null);
+//                    tv_title.setCompoundDrawablePadding(4);
+                } else {
+                    tv_title.setTextColor(getContext().getResources().getColor(R.color.color_ababbb));
+                    Drawable drawableLeft = getContext().getResources().getDrawable(
+                            R.drawable.nochoice);
+                    tv_title.setCompoundDrawablesWithIntrinsicBounds(drawableLeft,
+                            null, null, null);
+//                    tv_title.setCompoundDrawablePadding(4);
+                }
+
+            }
+
+
         }
     }
 
@@ -237,8 +304,9 @@ public class ProjectShowAdapter extends BaseRecyclerAdapter<AbsProjectInfo> impl
             return R.layout.proj_show_projinfo;
         } else if (item instanceof ProjectInvestmentInfo) {
             return R.layout.proj_show_projj_pie;
-        } else if (item instanceof ProjectInvestmentItem) {
-            return R.layout.proj_item_progress_items;
+        } else if (item instanceof ProjectInvestmentItem.ProjectInvestmentItemBean) {
+//            return R.layout.proj_item_progress_items;
+            return R.layout.proj_item_prohgress_itemz;
         }
         return 0;
     }

@@ -40,9 +40,12 @@ import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.text.NumberFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,6 +65,25 @@ public class UIUtils {
         Pattern p = Pattern.compile(telRegexUserName);
         Matcher m = p.matcher(userName);  // 最后调用m.find()方法来进行判断，
         return m.find();
+    }
+
+    //将时间转换为时间戳
+    public static long dateToStamp(String s) {
+        if (TextUtils.isEmpty(s)) {
+            return 0;
+        }
+//        String res;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null;
+        try {
+            date = simpleDateFormat.parse(s);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        long ss=date.getTime();
+//        long ts = date.getTime();
+//        res = String.valueOf(ts);
+        return date.getTime();
     }
 
     public static void setFlingDistance(ViewPager viewPager) {
@@ -129,9 +151,9 @@ public class UIUtils {
             if (UserManager.getInstance().isLogin()) {
                 String token = UserManager.getInstance().getToken();
                 String uid = UserManager.getInstance().getUserId();
-                 realPlay = weishiUrl + "&timestamp=" + timestamp + "&nonce=" + nonce + "&sign=" + sign + "&token=" + token + "&uid=" + uid;
+                realPlay = weishiUrl + "&timestamp=" + timestamp + "&nonce=" + nonce + "&sign=" + sign + "&token=" + token + "&uid=" + uid;
             } else {
-                 realPlay = weishiUrl + "&timestamp=" + timestamp + "&nonce=" + nonce + "&sign=" + sign;
+                realPlay = weishiUrl + "&timestamp=" + timestamp + "&nonce=" + nonce + "&sign=" + sign;
             }
             return realPlay;
         } else {
@@ -180,8 +202,6 @@ public class UIUtils {
         }
         return false;
     }
-
-
 
 
     public static Intent getAppDetailSettingIntent(Context context) {

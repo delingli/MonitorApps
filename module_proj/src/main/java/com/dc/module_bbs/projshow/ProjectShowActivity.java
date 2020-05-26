@@ -83,7 +83,7 @@ public class ProjectShowActivity extends AbsLifecycleActivity<ProjectShowViewMod
 
             @Override
             public void onLaborClick(ProjectItemBean itemBean) {
-                LaborDataActivity.startActivity(ProjectShowActivity.this,itemBean.getProject());
+                LaborDataActivity.startActivity(ProjectShowActivity.this, itemBean.getProject());
             }
 
             @Override

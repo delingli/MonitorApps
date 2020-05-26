@@ -12,6 +12,7 @@ public class ProjectInvestmentItem extends AbsProjectInfo {
         public String plane_date;
         public String real_date;
         public String name;
+        public boolean isFalseData;
     }
 
 

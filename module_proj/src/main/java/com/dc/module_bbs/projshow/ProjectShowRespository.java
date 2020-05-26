@@ -75,10 +75,9 @@ public class ProjectShowRespository extends BaseRespository {
 
 
             List<ProjectItemBean.MileStonesBean> mile_stones = projItemsBean.getMile_stones();
-            ProjectInvestmentItem projectInvestmentItems = new ProjectInvestmentItem();
+            List<ProjectInvestmentItem.ProjectInvestmentItemBean> projectInvestmentItemList = null;
             if (null != mile_stones) {
-                List<ProjectInvestmentItem.ProjectInvestmentItemBean> projectInvestmentItemList = new ArrayList<>();
-
+                projectInvestmentItemList = new ArrayList<>();
                 for (ProjectItemBean.MileStonesBean mileStonesBean : mile_stones) {
                     ProjectInvestmentItem.ProjectInvestmentItemBean beanItem = new ProjectInvestmentItem.ProjectInvestmentItemBean();
                     beanItem.finished = mileStonesBean.isFinished();
@@ -87,6 +86,19 @@ public class ProjectShowRespository extends BaseRespository {
                     beanItem.name = mileStonesBean.getName();
                     beanItem.phase = true;
                     projectInvestmentItemList.add(beanItem);
+                    if (mileStonesBean.getSubs() == null || mileStonesBean.getSubs().isEmpty()) {
+                        //todo 添加假数据
+                        if (mileStonesBean.equals(mile_stones.get(mile_stones.size() - 1))) {
+                            break;
+                        }
+                        for (int x = 0; x < 3; ++x) {
+                            ProjectInvestmentItem.ProjectInvestmentItemBean beanItemz = new ProjectInvestmentItem.ProjectInvestmentItemBean();
+                            beanItemz.isFalseData = true;
+                            projectInvestmentItemList.add(beanItemz);
+                        }
+
+
+                    }
                     for (ProjectItemBean.MileStonesBean.SubsBean sub : mileStonesBean.getSubs()) {
                         ProjectInvestmentItem.ProjectInvestmentItemBean beanItemz = new ProjectInvestmentItem.ProjectInvestmentItemBean();
                         beanItemz.finished = sub.isFinished();
@@ -98,9 +110,10 @@ public class ProjectShowRespository extends BaseRespository {
                     }
 
                 }
-                projectInvestmentItems.projectInvestmentItemList = projectInvestmentItemList;
             }
-            list.add(projectInvestmentItems);
+            if (null != projectInvestmentItemList) {
+                list.addAll(projectInvestmentItemList);
+            }
             postData(EVENT_SUCESS, list);
 
         }
