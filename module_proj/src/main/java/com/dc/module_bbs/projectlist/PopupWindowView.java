@@ -50,7 +50,7 @@ public class PopupWindowView {
                     DLHorizontalItem horizontalItem = mDlPopupWindowAdapter.getList().get(position);
                     mDlPopupWindowAdapter.setSelection(position);
                     if (null != onItemClickListener) {
-                        onItemClickListener.onItemCLick(horizontalItem.name,horizontalItem.id);
+                        onItemClickListener.onItemCLick(horizontalItem.name, horizontalItem.id);
                     }
                 }
             }
@@ -59,11 +59,21 @@ public class PopupWindowView {
         mPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
+                if (null != onDismissListener) {
+                    onDismissListener.onDismiss();
+                }
             }
         });
 
     }
+public void addOnDismissListener(OnDismissListener onDismissListener){
+        this.onDismissListener=onDismissListener;
+}
+    public interface OnDismissListener {
+        void onDismiss();
+    }
 
+    private OnDismissListener onDismissListener;
     private OnItemClickListener onItemClickListener;
 
     public void addOnItemClickListener(OnItemClickListener onItemClickListener) {
@@ -71,7 +81,7 @@ public class PopupWindowView {
     }
 
     public interface OnItemClickListener {
-        void onItemCLick(String name,String id);
+        void onItemCLick(String name, String id);
     }
 
     public void showPopupWindow(View v) {
@@ -81,7 +91,8 @@ public class PopupWindowView {
             mPopupWindow.showAsDropDown(v, 0, 0);
         }
     }
-    public void dismiss(){
+
+    public void dismiss() {
         mPopupWindow.dismiss();
     }
 

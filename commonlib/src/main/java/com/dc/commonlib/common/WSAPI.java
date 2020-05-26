@@ -11,5 +11,6 @@ public class WSAPI {
     public static final String CAPTCHA_CODE = "/check_captcha/";
 
     public static final String LoginVerifyCode = "employee.consumer.LoginVerifyCode";
+    public static final String REALTIMEPEOPLENUM = "operation.consumer.RealTimePeopleNum";
 
 }

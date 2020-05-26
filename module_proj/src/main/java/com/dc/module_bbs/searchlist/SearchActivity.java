@@ -27,7 +27,11 @@ public class SearchActivity extends BaseActivity {
     protected void initData() {
 
     }
-
+    public static void startActivity(Context context,String regain) {
+        Intent intent = new Intent(context, SearchActivity.class);
+        intent.putExtra(ProjectListFragment.RAGIO_KEY,regain);
+        context.startActivity(intent);
+    }
     public static void startActivity(Context context) {
         Intent intent = new Intent(context, SearchActivity.class);
         context.startActivity(intent);
@@ -37,8 +41,15 @@ public class SearchActivity extends BaseActivity {
     protected void initView(Bundle savedInstanceState) {
         setmToolBarlheadHide(true);
         mProjectListFragment = new ProjectListFragment();
+        String ragin = null;
+        if (getIntent() != null) {
+            ragin = getIntent().getStringExtra(ProjectListFragment.RAGIO_KEY);
+        }
         Bundle bundle = new Bundle();
         dlSearchView = findViewById(R.id.dlSearchView);
+        if (!TextUtils.isEmpty(ragin)) {
+            bundle.putString(ProjectListFragment.RAGIO_KEY, ragin);
+        }
         bundle.putString(ProjectListFragment.TYPE_KEY, ProjectListFragment.SEARCH_TYPE);
         mProjectListFragment.setArguments(bundle);
         getSupportFragmentManager().beginTransaction().replace(R.id.fl_continers, mProjectListFragment, "").commit();

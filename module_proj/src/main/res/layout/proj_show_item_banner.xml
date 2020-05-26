@@ -2,7 +2,13 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_marginLeft="@dimen/common_margin"
+    android:background="@color/bg_color_f1f1f6"
     android:layout_marginRight="@dimen/common_margin"
     android:layout_height="@dimen/dp_195">
+
+    <com.youth.banner.Banner
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </FrameLayout>

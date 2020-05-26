@@ -49,8 +49,8 @@ dependencies {
 
     api deps.event_bus
     api deps.permission
-    api  deps.navigation_fragment
-    api  deps.navigation_ui
+    api deps.navigation_fragment
+    api deps.navigation_ui
     api deps.smart_refresh
     api deps.smart_refresh_header
     api deps.flow_layout
@@ -59,6 +59,7 @@ dependencies {
     //lifecycle livedata
     api deps.lifecycle_compiler
     annotationProcessor deps.lifecycle_annotationProcessor
+    api deps.photoview
 
     api 'pub.devrel:easypermissions:2.0.1'
 
@@ -71,7 +72,7 @@ dependencies {
         exclude group: "com.android.support"
     }
     api 'com.github.PhilJay:MPAndroidChart:v3.0.3'
-
+    api 'com.youth.banner:banner:1.4.10'  //最新版本
 
 
 }

@@ -4,6 +4,6 @@ public class ProjectInfoDetail extends AbsProjectInfo {
     public String projectAdress;
     public String projectAdressName;
     public String startsTime;
-    public String ActualConstruction;
+    public String actualConstructionTime;
     public String endTime;
 }

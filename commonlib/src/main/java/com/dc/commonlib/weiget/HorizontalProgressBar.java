@@ -50,6 +50,16 @@ public class HorizontalProgressBar extends View {
         init(attrs, defStyle);
     }
 
+    public void setBgColor(int bgColor) {
+        this.BgColor = bgColor;
+        invalidate();
+    }
+    public void setProgressColor(int progressColor) {
+        this.progressColor = progressColor;
+        invalidate();
+
+    }
+
     private void init(AttributeSet attrs, int defStyle) {
         // Load attributes
         final TypedArray a = getContext().obtainStyledAttributes(
@@ -79,11 +89,9 @@ public class HorizontalProgressBar extends View {
         a.recycle();
 
         paint = new Paint();
-        paint.setColor(BgColor);
         paint.setAntiAlias(true);
 
         progressPaint = new Paint();
-        progressPaint.setColor(progressColor);
         progressPaint.setAntiAlias(true);
 
         rectF = new RectF();
@@ -114,6 +122,8 @@ public class HorizontalProgressBar extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        paint.setColor(BgColor);
+        progressPaint.setColor(progressColor);
         drawBg(canvas);
         canvas.save();
         canvas.restore();

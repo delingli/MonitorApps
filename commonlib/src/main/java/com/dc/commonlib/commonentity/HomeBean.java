@@ -1,4 +1,4 @@
-package com.dc.module_home.homamain;
+package com.dc.commonlib.commonentity;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -109,7 +109,6 @@ public class HomeBean {
         public int id;
         public double longitude;
         public String name;
-
     }
 
     public static class VideoUrlsBean {

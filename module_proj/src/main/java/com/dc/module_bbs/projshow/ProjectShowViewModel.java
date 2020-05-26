@@ -9,4 +9,8 @@ public class ProjectShowViewModel extends AbsViewModel<ProjectShowRespository> {
     public ProjectShowViewModel(@NonNull Application application) {
         super(application);
     }
+
+    public void getProjectList(int project) {
+        mRepository.getProjectList(project);
+    }
 }

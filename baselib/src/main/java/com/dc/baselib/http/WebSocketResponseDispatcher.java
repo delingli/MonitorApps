@@ -76,6 +76,7 @@ public class WebSocketResponseDispatcher implements IResponseDispatcher {
             JSONObject commandObj = jsonObject.optJSONObject("command");
             SocketResponse.CommandBean commandBean = new SocketResponse.CommandBean();
             commandBean.path = commandObj.optString("path");
+            commandBean.unique = commandObj.optString("unique");
             SocketResponse<String> sockeJson = new SocketResponse<>();
             sockeJson.code = code;
             sockeJson.msg = msg;

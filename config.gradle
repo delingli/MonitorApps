@@ -80,7 +80,7 @@ deps.arouter_api = "com.alibaba:arouter-api:$versions.arouter_api"
 deps.arouter_compiler = "com.alibaba:arouter-compiler:$versions.arouter_compiler"
 deps.lifecycle_compiler = "android.arch.lifecycle:extensions:$versions.lifecycle_compiler"
 deps.lifecycle_annotationProcessor = "android.arch.lifecycle:compiler:$versions.lifecycle_annotationProcessor"
-
+deps.photoview = "com.github.chrisbanes:PhotoView:$versions.photoview"
 deps.permission = "com.yanzhenjie.permission:support:$versions.permission"
 deps.persistent_cookie = "com.github.franmontiel:PersistentCookieJar:$versions.persistent_cookie"
 //view end

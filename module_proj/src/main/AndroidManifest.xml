@@ -14,9 +14,15 @@
         <activity
             android:name=".projectoverview.ProjectOverviewActivity"
             android:configChanges="layoutDirection|fontScale|locale"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".projshow.ProjectShowActivity"
+            android:configChanges="layoutDirection|fontScale|locale"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".preview.PreViewActivity"
+            android:configChanges="layoutDirection|fontScale|locale"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".videomonitoring.VideoMonitoringActivity"
             android:configChanges="layoutDirection|fontScale|locale"

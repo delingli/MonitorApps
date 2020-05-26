@@ -1,5 +1,6 @@
 package com.dc.module_bbs.projectlist;
 
+import android.animation.ObjectAnimator;
 import android.arch.lifecycle.Observer;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -8,17 +9,22 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.dc.baselib.http.TokenUtil;
 import com.dc.baselib.mvvm.AbsLifecycleFragment;
 import com.dc.baselib.utils.ToastUtils;
+import com.dc.commonlib.common.BaseRecyclerAdapter;
 import com.dc.commonlib.utils.ArounterManager;
+import com.dc.commonlib.utils.HiddenAnimUtils;
 import com.dc.commonlib.weiget.horizontalrecycle.DLHorizontalItem;
 import com.dc.module_bbs.R;
+import com.dc.module_bbs.projshow.ProjectShowActivity;
 import com.dc.module_bbs.searchlist.SearchActivity;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.constant.RefreshState;
@@ -47,6 +53,7 @@ public class ProjectListFragment extends AbsLifecycleFragment<ProjectListViewMod
     public static String LIST_TYPE = "key_project_list";
     public static String SEARCH_TYPE = "key_project_search";
     public static String TYPE_KEY = "type_key_project";
+    public static String RAGIO_KEY = "ragin_key_project";
     private String currentType = LIST_TYPE;
     private Toolbar rl_head;
     private LinearLayout ll_to_search;
@@ -86,6 +93,7 @@ public class ProjectListFragment extends AbsLifecycleFragment<ProjectListViewMod
         super.initView(view);
         if (null != getArguments() && !TextUtils.isEmpty(getArguments().getString(TYPE_KEY))) {
             currentType = getArguments().getString(TYPE_KEY);
+            region = getArguments().getString(RAGIO_KEY);
         }
         rl_head = view.findViewById(R.id.rl_head);
         ll_to_search = view.findViewById(R.id.ll_to_search);
@@ -100,14 +108,22 @@ public class ProjectListFragment extends AbsLifecycleFragment<ProjectListViewMod
         tv_area = view.findViewById(R.id.tv_area);
         iv_state_arrow1 = view.findViewById(R.id.iv_state_arrow);
         iv_address_arrow1 = view.findViewById(R.id.iv_address_arrow);
+        iv_address_arrow1.setOnClickListener(this);
+        iv_state_arrow1.setOnClickListener(this);
         refreshLayout = view.findViewById(R.id.refreshLayout);
-        mPopupWindowView = new PopupWindowView(getContext(), 0);
+        if (region != null) {
+            int pos = checkReginforPosition();
+            tv_area.setText(region);
+            mPopupWindowView = new PopupWindowView(getContext(), pos);
+        } else {
+            mPopupWindowView = new PopupWindowView(getContext(), 0);
+
+        }
         mStatePopupWindowView = new PopupWindowView(getContext(), 0);
         createPopupWindowData();
         tv_title = view.findViewById(R.id.tv_title);
-        iv_state_arrow1 = view.findViewById(R.id.iv_state_arrow);
-        iv_address_arrow1 = view.findViewById(R.id.iv_address_arrow);
         mRecyclerView = view.findViewById(R.id.recyclerView);
+        mRecyclerView.setBackgroundColor(getResources().getColor(R.color.bg_color_f7f8f9));
         tv_title.setText(R.string.project);
         view.findViewById(R.id.iv_left_back).setVisibility(View.GONE);
         view.findViewById(R.id.ll_address).setOnClickListener(this);
@@ -146,8 +162,55 @@ public class ProjectListFragment extends AbsLifecycleFragment<ProjectListViewMod
         });
 //        initDefaultArea();
         toGetProjectList();
+        mProjectItemAdapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClickListener(View v, int position) {
+                if (mProjectItemAdapter.getList() != null && mProjectItemAdapter.getList().get(position) != null) {
+                    ProjItems projItems = mProjectItemAdapter.getList().get(position);
+//                    ArounterManager.PROJ_SHOW_URL
+                    ARouter.getInstance().build(ArounterManager.PROJ_SHOW_URL).withInt("projectid", projItems.project_id).navigation();
+//                    ProjectShowActivity.startActivity(getContext(), projItems.project_id);
+                }
 
+            }
+        });
 
+        mPopupWindowView.addOnDismissListener(new PopupWindowView.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(iv_address_arrow1, "rotation", 180, 0);
+                objectAnimator.setDuration(30);//设置动画持续时间
+                objectAnimator.setInterpolator(new LinearInterpolator());
+                objectAnimator.start();
+            }
+        });
+        mStatePopupWindowView.addOnDismissListener(new PopupWindowView.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(iv_state_arrow1, "rotation", 180, 0);
+                objectAnimator.setDuration(30);//设置动画持续时间
+                objectAnimator.setInterpolator(new LinearInterpolator());
+                objectAnimator.start();
+            }
+        });
+    }
+
+    private int checkReginforPosition() {
+        int pos = 0;
+        if (region.equals("银湖")) {
+            pos = 1;
+        } else if (TextUtils.equals(region, "新登")) {
+            pos = 2;
+        } else if (TextUtils.equals(region, "东洲")) {
+            pos = 3;
+        } else if (TextUtils.equals(region, "场口")) {
+            pos = 4;
+        } else if (TextUtils.equals(region, "金桥")) {
+            pos = 5;
+        } else if (TextUtils.equals(region, "鹿山")) {
+            pos = 6;
+        }
+        return pos;
     }
 
     private void initDefaultArea() {
@@ -190,11 +253,18 @@ public class ProjectListFragment extends AbsLifecycleFragment<ProjectListViewMod
     public void onClick(View v) {
         if (v.getId() == R.id.ll_address) {
             mPopupWindowView.showPopupWindow(v);
+            ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(iv_address_arrow1, "rotation", 0, 180);
+            objectAnimator.setDuration(30);//设置动画持续时间
+            objectAnimator.setInterpolator(new LinearInterpolator());
+            objectAnimator.start();
         } else if (v.getId() == R.id.ll_state) {
             mStatePopupWindowView.showPopupWindow(v);
+            ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(iv_state_arrow1, "rotation", 0, 180);
+            objectAnimator.setDuration(30);//设置动画持续时间
+            objectAnimator.setInterpolator(new LinearInterpolator());
+            objectAnimator.start();
         } else if (v.getId() == R.id.ll_to_search) {
             SearchActivity.startActivity(getContext());
-
         }
     }
 

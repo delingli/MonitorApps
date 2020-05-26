@@ -1,28 +1,44 @@
 package com.dc.module_bbs.projshow;
 
+import android.arch.lifecycle.Observer;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.dc.baselib.mvvm.AbsLifecycleActivity;
+import com.dc.commonlib.utils.ArounterManager;
 import com.dc.module_bbs.R;
+import com.dc.module_bbs.labordata.LaborDataActivity;
+import com.dc.module_bbs.projectoverview.ProjectOverviewActivity;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.constant.RefreshState;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * "项目展示
  */
+@Route(path = ArounterManager.PROJ_SHOW_URL)
 public class ProjectShowActivity extends AbsLifecycleActivity<ProjectShowViewModel> {
-
+    public static String KEY_PROJECTID = "projectid";
     private RecyclerView mRecyclerView;
+    @Autowired
+    public int project;
+    private ProjectShowAdapter mProjectShowAdapter;
 
     //    proj_show_projinfo
 //    proj_show_projj_pie  proj_show_projprogress  proj_show_item_banner
@@ -31,15 +47,62 @@ public class ProjectShowActivity extends AbsLifecycleActivity<ProjectShowViewMod
         return R.layout.common_refresh_layout;
     }
 
+    public static void startActivity(Context context, int projectId) {
+        Intent intent = new Intent(context, ProjectShowActivity.class);
+        intent.putExtra(KEY_PROJECTID, projectId);
+        context.startActivity(intent);
+    }
+
+
     @Override
     protected void initView(Bundle savedInstanceState) {
         super.initView(savedInstanceState);
+        if (getIntent() != null) {
+            project = getIntent().getIntExtra(KEY_PROJECTID, 0);
+        }
+        setTitle(R.string.project_show);
+        ARouter.getInstance().inject(this);
         SmartRefreshLayout refreshLayout = findViewById(R.id.refreshLayout);
         refreshLayout.setEnableRefresh(false);
         refreshLayout.setEnableLoadMore(false);
         mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        mRecyclerView.setAdapter();
+        mProjectShowAdapter = new ProjectShowAdapter(this, null, -1);
+        mViewModel.getProjectList(project);
+        mRecyclerView.setAdapter(mProjectShowAdapter);
+        mProjectShowAdapter.addOnProjectColumnListener(new ProjectShowAdapter.OnProjectColumnListener() {
+            @Override
+            public void onProjOverviewClick(ProjectItemBean itemBean) {
+                ProjectOverviewActivity.startActivity(ProjectShowActivity.this, itemBean);
+            }
+
+            @Override
+            public void onVideoMonitoring(ProjectItemBean itemBean) {
+
+            }
+
+            @Override
+            public void onLaborClick(ProjectItemBean itemBean) {
+                LaborDataActivity.startActivity(ProjectShowActivity.this,itemBean.getProject());
+            }
+
+            @Override
+            public void onTowerCraneMonitoringClick(ProjectItemBean itemBean) {
+
+            }
+        });
+    }
+
+    @Override
+    protected void dataObserver() {
+        super.dataObserver();
+        registerSubscriber(mViewModel.mRepository.EVENT_SUCESS, List.class).observe(this, new Observer<List>() {
+            @Override
+            public void onChanged(@Nullable List sstr) {
+                mProjectShowAdapter.setList(sstr);
+            }
+        });
+//
     }
 
     @Override

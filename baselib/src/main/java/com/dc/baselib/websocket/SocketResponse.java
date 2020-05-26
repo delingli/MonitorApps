@@ -2,6 +2,7 @@ package com.dc.baselib.websocket;
 
 /**
  * 对应Socket 传输回来的实体
+ *
  * @param <T>
  */
 public class SocketResponse<T> {
@@ -11,9 +12,9 @@ public class SocketResponse<T> {
     public CommandBean command;
 
 
-    public static   class CommandBean {
+    public static class CommandBean {
         public String path;
-
+        public String unique;
 
     }
 }

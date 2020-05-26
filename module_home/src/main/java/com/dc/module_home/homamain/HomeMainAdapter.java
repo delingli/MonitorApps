@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,6 +27,16 @@ public class HomeMainAdapter extends BaseRecyclerAdapter<IAbsHomeItem> implement
         this.multiTypeSupport = this;
     }
 
+    private OnAreaItemClickListener onAreaItemClickListener;
+
+    public void addOnAreaItemClickListener(OnAreaItemClickListener onAreaItemClickListener) {
+        this.onAreaItemClickListener = onAreaItemClickListener;
+    }
+
+    public interface OnAreaItemClickListener {
+        void onAreaItemClick(String areaAdress);
+    }
+
     @Override
     protected void convert(BaseViewHolder holder, IAbsHomeItem iAbsHomeItem, int position, List<Object> payloads) {
         if (iAbsHomeItem instanceof LabHomeItem) {
@@ -37,7 +48,21 @@ public class HomeMainAdapter extends BaseRecyclerAdapter<IAbsHomeItem> implement
             RecyclerView recyclerView = holder.getView(R.id.recyclerView);
             recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
             recyclerView.setBackgroundColor(getContext().getResources().getColor(R.color.white));
-            recyclerView.setAdapter(new HomeAreaAdapter(getContext(), projectareahomeitem.projectAreas, -1));
+            final HomeAreaAdapter homeAreaAdapter = new HomeAreaAdapter(getContext(), projectareahomeitem.projectAreas, -1);
+
+            homeAreaAdapter.setOnItemClickListener(new OnItemClickListener() {
+                @Override
+                public void onItemClickListener(View v, int position) {
+                    if (null != homeAreaAdapter.getList()) {
+                        ProjectAreaHomeItem.ProjectAreaItems areaItem = homeAreaAdapter.getList().get(position);
+                        if (null != onAreaItemClickListener) {
+                            onAreaItemClickListener.onAreaItemClick(areaItem.projectAdress);
+                        }
+                    }
+
+                }
+            });
+            recyclerView.setAdapter(homeAreaAdapter);
         } else if (iAbsHomeItem instanceof VideoMonitoringHomeItem) {
             VideoMonitoringHomeItem videomonitoringhomeitem = (VideoMonitoringHomeItem) iAbsHomeItem;
             TextView tv_title = holder.getView(R.id.tv_title);

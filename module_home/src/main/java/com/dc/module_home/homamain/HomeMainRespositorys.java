@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import com.dc.baselib.http.newhttp.StrAbsHttpSubscriber;
 import com.dc.baselib.mvvm.BaseRespository;
 import com.dc.baselib.mvvm.EventUtils;
+import com.dc.commonlib.commonentity.HomeBean;
 import com.dc.commonlib.utils.JsonUtil;
 
 import java.util.ArrayList;

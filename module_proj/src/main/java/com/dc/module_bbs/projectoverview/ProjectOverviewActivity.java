@@ -4,11 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.TextView;
 
 import com.dc.baselib.mvvm.AbsLifecycleActivity;
 import com.dc.module_bbs.R;
+import com.dc.module_bbs.projshow.ProjectItemBean;
 
 /**
  * "项目概况"
@@ -24,10 +26,13 @@ public class ProjectOverviewActivity extends AbsLifecycleActivity<ProjectOvervie
     private TextView tv_general_contractor_name;
     private TextView tv_general_contractor_phone;
     private TextView tv_supervision_unit;
-    private TextView design_units;
+    private TextView tv_design_units;
+    public static String KEY_PROJECTITEMBEAN = "projectitembean";
+    private ProjectItemBean mItemBean;
 
-    public static void startActivity(Context context) {
+    public static void startActivity(Context context, ProjectItemBean itemBean) {
         Intent intent = new Intent(context, ProjectOverviewActivity.class);
+        intent.putExtra(KEY_PROJECTITEMBEAN, itemBean);
         context.startActivity(intent);
     }
 
@@ -40,6 +45,9 @@ public class ProjectOverviewActivity extends AbsLifecycleActivity<ProjectOvervie
     protected void initView(Bundle savedInstanceState) {
         super.initView(savedInstanceState);
         setTitle(R.string.project_overview);
+        if (getIntent() != null) {
+            mItemBean = getIntent().getParcelableExtra(KEY_PROJECTITEMBEAN);
+        }
         tv_land_area = findViewById(R.id.tv_land_area);
         tv_construction_area = findViewById(R.id.tv_construction_area);
         tv_construction_unit = findViewById(R.id.tv_construction_unit);
@@ -49,8 +57,8 @@ public class ProjectOverviewActivity extends AbsLifecycleActivity<ProjectOvervie
         tv_general_contractor_name = findViewById(R.id.tv_general_contractor_name);
         tv_general_contractor_phone = findViewById(R.id.tv_general_contractor_phone);
         tv_supervision_unit = findViewById(R.id.tv_supervision_unit);
-        design_units = findViewById(R.id.design_units);
-        ProjectOverviewItem projectOverviewItem = mViewModel.getProjectOverviewItem();
+        tv_design_units = findViewById(R.id.tv_design_units);
+        ProjectOverviewItem projectOverviewItem = mViewModel.getProjectOverviewItem(mItemBean);
         fillData(projectOverviewItem);
         tv_phone.setOnClickListener(this);
         tv_general_contractor_phone.setOnClickListener(this);
@@ -69,7 +77,7 @@ public class ProjectOverviewActivity extends AbsLifecycleActivity<ProjectOvervie
             tv_general_contractor_phone.setText(projectOverviewItem.contractors.contactPhone);
 
             tv_supervision_unit.setText(projectOverviewItem.supervisionunit.company);
-            design_units.setText(projectOverviewItem.designunit.company);
+            tv_design_units.setText(projectOverviewItem.designunit.company);
 
         }
     }

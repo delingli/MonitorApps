@@ -5,10 +5,13 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.dc.baselib.mvvm.AbsLifecycleFragment;
+import com.dc.commonlib.common.CommonConstant;
 import com.dc.commonlib.utils.ArounterManager;
 import com.dc.module_home.R;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -57,6 +60,15 @@ public class HomeMainFragment extends AbsLifecycleFragment<HomeMainViewModel> im
         refreshLayout.autoRefresh();
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(mHomeMainAdapter = new HomeMainAdapter(getContext(), null, -1));
+        mHomeMainAdapter.addOnAreaItemClickListener(new HomeMainAdapter.OnAreaItemClickListener() {
+            @Override
+            public void onAreaItemClick(String areaAdress) {
+                if (!TextUtils.isEmpty(areaAdress)) {
+                    ARouter.getInstance().build(ArounterManager.PROJECTSUMMARYACTIVITY_URL).withString(CommonConstant.PRPJECT_ARTEA, areaAdress).navigation();
+                }
+
+            }
+        });
     }
 
 

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
@@ -17,7 +18,9 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.dc.baselib.mvvm.BaseActivity;
+import com.dc.baselib.mvvm.BaseFragment;
 import com.dc.baselib.statusBar.StarusBarUtils;
 import com.dc.baselib.utils.UserManager;
 import com.dc.commonlib.utils.ArounterManager;
@@ -25,11 +28,15 @@ import com.dc.commonlib.utils.UIUtils;
 
 import org.yczbj.ycvideoplayerlib.manager.VideoPlayerManager;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Route(path = ArounterManager.MAIN_MAIN_HOME)
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener, ViewPager.OnPageChangeListener {
 
     private BottomNavigationView mNavView;
-    private NavController mNavController;
+    private ViewPager mViewPager;
+    private List<BaseFragment> mList;
 
 
     protected void initData() {
@@ -55,6 +62,15 @@ public class MainActivity extends BaseActivity {
         }
         setmToolBarlheadHide(true);
         mNavView = findViewById(R.id.nav_view);
+        mViewPager = findViewById(R.id.viewPager);
+        mNavView.setOnNavigationItemSelectedListener(this);
+        mViewPager.addOnPageChangeListener(this);
+
+        mList = new ArrayList<>();
+        mList.add((BaseFragment) ARouter.getInstance().build(ArounterManager.HOME_HOMEMAINFRAGMENT_URL).navigation());
+        mList.add((BaseFragment) ARouter.getInstance().build(ArounterManager.PROJ_PROJECTFRAGMENT_URL).navigation());
+        mList.add((BaseFragment) ARouter.getInstance().build(ArounterManager.ME_MEINFO_URL).navigation());
+        mViewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(), mList));
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
@@ -62,42 +78,18 @@ public class MainActivity extends BaseActivity {
                 R.id.navigation_bbs,
                 R.id.navigation_me)
                 .build();
-        mNavController = Navigation.findNavController(this, R.id.nav_host_fragment);
-//        NavigationUI.setupActionBarWithNavController(this, mNavController, appBarConfiguration);
-        NavigationUI.setupWithNavController(mNavView, mNavController);
         StarusBarUtils.setRootViewFitsSystemWindows(this, true);
         StarusBarUtils.setStatusBarColor(this, Color.parseColor("#3476f9"));
         mNavView.setItemIconTintList(null);
-//        mNavView.setLabelVisibilityMode(1);
-        mNavController.navigate(R.id.navigation_home);
-        mNavView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                int itemId = menuItem.getItemId();
-                if (itemId == R.id.navigation_home) {
-                    mNavController.navigate(R.id.navigation_home);
-                    StarusBarUtils.setStatusBarColor(MainActivity.this, Color.parseColor("#3476f9"));
-                    return true;
-                } else if (itemId == R.id.navigation_bbs) {
-                    mNavController.navigate(R.id.navigation_bbs);
-                    StarusBarUtils.setStatusBarDarkTheme(MainActivity.this, true);
-                    return true;
-                } else if (itemId == R.id.navigation_me) {
-                    mNavController.navigate(R.id.navigation_me);
-                    StarusBarUtils.setStatusBarDarkTheme(MainActivity.this, true);
-                    return true;
-                }
-                return false;
-            }
-        });
+        mNavView.setSelectedItemId(R.id.navigation_home);//根据具体情况调用
+
+
     }
 
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        if (mNavController != null) {
-            mNavController.navigate(R.id.navigation_home);
-        }
+
     }
 
     @Override
@@ -108,4 +100,47 @@ public class MainActivity extends BaseActivity {
         super.onBackPressed();
     }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        int itemId = menuItem.getItemId();
+        if (itemId == R.id.navigation_home) {
+            mViewPager.setCurrentItem(0, true);
+            return true;
+        } else if (itemId == R.id.navigation_bbs) {
+            mViewPager.setCurrentItem(1, true);
+            return true;
+
+        } else if (itemId == R.id.navigation_me) {
+            mViewPager.setCurrentItem(2, true);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void onPageScrolled(int i, float v, int i1) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        switch (position) {
+            case 0:
+                mNavView.setSelectedItemId(R.id.navigation_home);
+                break;
+            case 1:
+                mNavView.setSelectedItemId(R.id.navigation_bbs);
+                break;
+            case 2:
+                mNavView.setSelectedItemId(R.id.navigation_me);
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int i) {
+
+    }
 }
