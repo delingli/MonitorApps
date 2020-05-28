@@ -18,6 +18,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.dc.baselib.http.TokenUtil;
 import com.dc.baselib.mvvm.AbsLifecycleFragment;
+import com.dc.baselib.statusBar.StarusBarUtils;
 import com.dc.baselib.utils.ToastUtils;
 import com.dc.commonlib.common.BaseRecyclerAdapter;
 import com.dc.commonlib.utils.ArounterManager;
@@ -39,7 +40,6 @@ public class ProjectListFragment extends AbsLifecycleFragment<ProjectListViewMod
 
     private RecyclerView mRecyclerView;
     private ProjectItemAdapter mProjectItemAdapter;
-    private TextView tv_title;
     private ImageView iv_state_arrow, iv_address_arrow;
     private PopupWindowView mStatePopupWindowView, mPopupWindowView;
     private String getProject__status;
@@ -55,7 +55,6 @@ public class ProjectListFragment extends AbsLifecycleFragment<ProjectListViewMod
     public static String TYPE_KEY = "type_key_project";
     public static String RAGIO_KEY = "ragin_key_project";
     private String currentType = LIST_TYPE;
-    private Toolbar rl_head;
     private LinearLayout ll_to_search;
 
     @Override
@@ -91,17 +90,16 @@ public class ProjectListFragment extends AbsLifecycleFragment<ProjectListViewMod
     @Override
     public void initView(View view) {
         super.initView(view);
+
         if (null != getArguments() && !TextUtils.isEmpty(getArguments().getString(TYPE_KEY))) {
             currentType = getArguments().getString(TYPE_KEY);
             region = getArguments().getString(RAGIO_KEY);
         }
-        rl_head = view.findViewById(R.id.rl_head);
+
         ll_to_search = view.findViewById(R.id.ll_to_search);
         if (currentType.equals(SEARCH_TYPE)) {
-            rl_head.setVisibility(View.GONE);
             ll_to_search.setVisibility(View.GONE);
         } else {
-            rl_head.setVisibility(View.VISIBLE);
             ll_to_search.setVisibility(View.VISIBLE);
         }
         tv_state = view.findViewById(R.id.tv_state);
@@ -121,11 +119,8 @@ public class ProjectListFragment extends AbsLifecycleFragment<ProjectListViewMod
         }
         mStatePopupWindowView = new PopupWindowView(getContext(), 0);
         createPopupWindowData();
-        tv_title = view.findViewById(R.id.tv_title);
         mRecyclerView = view.findViewById(R.id.recyclerView);
         mRecyclerView.setBackgroundColor(getResources().getColor(R.color.bg_color_f7f8f9));
-        tv_title.setText(R.string.project);
-        view.findViewById(R.id.iv_left_back).setVisibility(View.GONE);
         view.findViewById(R.id.ll_address).setOnClickListener(this);
         view.findViewById(R.id.ll_state).setOnClickListener(this);
         view.findViewById(R.id.ll_to_search).setOnClickListener(this);

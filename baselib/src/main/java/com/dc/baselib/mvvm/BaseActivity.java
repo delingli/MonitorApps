@@ -35,7 +35,6 @@ public abstract class BaseActivity extends AppCompatActivity {
 
         mInflater = LayoutInflater.from(this);
         setContentView(R.layout.activity_base_layout);
-//        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);//竖屏
         initStatusBar();
         tvLeftCacel = findViewById(R.id.tv_left_cacel);
         mFlcontiner = findViewById(R.id.fl_continer);

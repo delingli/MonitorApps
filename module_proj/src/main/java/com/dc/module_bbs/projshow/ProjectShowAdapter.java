@@ -61,7 +61,6 @@ public class ProjectShowAdapter extends BaseRecyclerAdapter<AbsProjectInfo> impl
         pieChart.setHoleRadius(51f);//设置内圆的半径。外圆的半径好像是不能设置的，改变控件的宽度和高度，半径会自适应。
         pieChart.setHoleColor(Color.WHITE);//设置内圆的颜色
         pieChart.setDrawCenterText(true);//设置是否显示文字
-        pieChart.setCenterText("0亿\n总投资额(亿)");//设置饼状图中心的文字
         pieChart.setCenterTextSize(16f);//设置文字的消息
         pieChart.setCenterTextColor(Color.parseColor("#333333"));//设置文字的颜色
         pieChart.setTransparentCircleRadius(25f);//设置内圆和外圆的一个交叉园的半径，这样会凸显内外部的空间
@@ -87,9 +86,15 @@ public class ProjectShowAdapter extends BaseRecyclerAdapter<AbsProjectInfo> impl
     }
 
     private void initPieChartData(PieChart pieChart, ProjectInvestmentInfo projectinvestmentinfo) {
+        pieChart.setCenterText(projectinvestmentinfo.investment+"亿\n总投资额(亿)");//设置饼状图中心的文字
+
         ArrayList<PieEntry> pieEntries = new ArrayList<>();
-        pieEntries.add(new PieEntry(projectinvestmentinfo.noWorkInvestment));
-        pieEntries.add(new PieEntry(projectinvestmentinfo.invested));
+          if(projectinvestmentinfo.invested!=0){
+            pieEntries.add(new PieEntry(projectinvestmentinfo.invested));
+        }
+        if(projectinvestmentinfo.noWorkInvestment!=0){
+            pieEntries.add(new PieEntry(projectinvestmentinfo.noWorkInvestment));
+        }
 
         PieDataSet pieDataSet = new PieDataSet(pieEntries, null);
         pieDataSet.setColors(Color.parseColor("#cfdef9"), Color.parseColor("#36b365"));

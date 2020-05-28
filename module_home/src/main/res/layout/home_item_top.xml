@@ -7,18 +7,13 @@
     android:background="@color/text_color_3476f9"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/common_margin"
-        android:layout_marginTop="@dimen/dp_39"
-        android:text="@string/home_main_desc"
-        android:textColor="@color/white"
-        android:textSize="@dimen/dp_20" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_39"
+
         android:background="@drawable/survey_back"
         android:orientation="vertical">
 

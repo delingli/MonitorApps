@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import com.dc.baselib.baseEntiry.User;
 import com.dc.baselib.mvvm.AbsViewModel;
 import com.dc.baselib.utils.UserManager;
+import com.dc.commonlib.commonentity.video.VideoAccountBean;
 
 public class HomeMainViewModel extends AbsViewModel<HomeMainRespositorys> {
     public HomeMainViewModel(@NonNull Application application) {
@@ -20,5 +21,19 @@ public class HomeMainViewModel extends AbsViewModel<HomeMainRespositorys> {
                 mRepository.toGetownerCompanyBoard(userInfo.company_id);
             }
         }
+    }
+
+
+    /**
+     * 获取账号密码
+     */
+    public void getHkPlayerAccount(int projectId) {
+        mRepository.getHkPlayerAccount(projectId);
+    }
+    public void loginAccount(VideoAccountBean videoAccountBean){
+        mRepository.loginAccount(videoAccountBean);
+    }
+    public void getVideoListInfo(int projectId, HomeMainRespositorys.OnVideoInfoCallBackListener onVideoInfoCallBackListener) {
+        mRepository.getVideoListInfo(projectId,onVideoInfoCallBackListener);
     }
 }

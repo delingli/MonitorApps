@@ -160,7 +160,7 @@ public class ProjectSummaryActivity extends AbsLifecycleActivity<ProjectSummaryV
 
     private void initPieChartData(ProjectAreaItem projectareaitem) {
 //        getCommentCountSpannableString(projectareaitem.investment);
-        pieChart.setCenterText("0亿\n总投资额(亿)");//设置饼状图中心的文字
+        pieChart.setCenterText(projectareaitem.investment + "亿\n总投资额(亿)");//设置饼状图中心的文字
         pieChart.setCenterTextSize(16f);//设置文字的消息
         pieChart.setCenterTextColor(Color.parseColor("#333333"));//设置文字的颜色
         ArrayList<PieEntry> pieEntries = new ArrayList<>();

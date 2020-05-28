@@ -17,6 +17,7 @@ import com.dc.baselib.mvvm.AbsLifecycleActivity;
 import com.dc.commonlib.utils.ArounterManager;
 import com.dc.module_bbs.R;
 import com.dc.module_bbs.labordata.LaborDataActivity;
+import com.dc.module_bbs.monitoringlist.MonitoringListActivity;
 import com.dc.module_bbs.projectoverview.ProjectOverviewActivity;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
@@ -78,7 +79,7 @@ public class ProjectShowActivity extends AbsLifecycleActivity<ProjectShowViewMod
 
             @Override
             public void onVideoMonitoring(ProjectItemBean itemBean) {
-
+                MonitoringListActivity.startActivity(ProjectShowActivity.this,itemBean.getProject());
             }
 
             @Override

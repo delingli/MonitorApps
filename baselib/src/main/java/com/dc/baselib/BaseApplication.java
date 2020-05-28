@@ -31,6 +31,7 @@ public class BaseApplication extends Application {
             ARouter.openLog();
         }
         initWebSocket();
+
         sInstance = this.getApplicationContext();
         ARouter.init(this);
 //        RNUMConfigure.init(this, "5c762686f1f556fb530001af", "Umeng", UMConfigure.DEVICE_TYPE_PHONE, "");

@@ -1,6 +1,7 @@
 package com.dc.module_home.homamain;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -8,15 +9,25 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.dc.baselib.BaseApplication;
 import com.dc.commonlib.common.BaseRecyclerAdapter;
 import com.dc.commonlib.common.BaseViewHolder;
 import com.dc.commonlib.common.MultiTypeSupport;
+import com.dc.commonlib.commonentity.video.DisplayVideoPlayerManager;
+import com.dc.commonlib.commonentity.video.VideoAccountBean;
+import com.dc.commonlib.commonentity.video.VideoAccountInfoManager;
+import com.dc.commonlib.commonentity.video.widget.DisplayMode;
+import com.dc.commonlib.commonentity.video.widget.VideoDisplayView;
 import com.dc.commonlib.utils.GlideUtils;
+import com.dc.commonlib.utils.LogUtil;
+import com.dc.commonlib.utils.video.PlayerManager;
 import com.dc.module_home.R;
 
 import java.util.List;
 
 public class HomeMainAdapter extends BaseRecyclerAdapter<IAbsHomeItem> implements MultiTypeSupport<IAbsHomeItem> {
+
+
     /**
      * @param context
      * @param list
@@ -25,6 +36,7 @@ public class HomeMainAdapter extends BaseRecyclerAdapter<IAbsHomeItem> implement
     public HomeMainAdapter(Context context, @Nullable List<IAbsHomeItem> list, int itemLayoutId) {
         super(context, list, itemLayoutId);
         this.multiTypeSupport = this;
+
     }
 
     private OnAreaItemClickListener onAreaItemClickListener;
@@ -35,6 +47,27 @@ public class HomeMainAdapter extends BaseRecyclerAdapter<IAbsHomeItem> implement
 
     public interface OnAreaItemClickListener {
         void onAreaItemClick(String areaAdress);
+    }
+
+    private OnVideoClickItemClickListener onVideoClickItemClickListener;
+
+    public void addOnVideoClickItemClickListener(OnVideoClickItemClickListener onVideoClickItemClickListener) {
+        this.onVideoClickItemClickListener = onVideoClickItemClickListener;
+    }
+
+    public interface OnVideoClickItemClickListener {
+        void onVideoItemClick(String areaAdress);
+    }
+
+    @Override
+    public void onViewRecycled(@NonNull BaseViewHolder holder) {
+        super.onViewRecycled(holder);
+        if (holder.getTag() instanceof VideoDisplayView) {
+            VideoDisplayView videoDisplayView = (VideoDisplayView) holder.getTag();
+            videoDisplayView.onStop();
+            videoDisplayView.release();
+        }
+//        onStop
     }
 
     @Override
@@ -49,7 +82,6 @@ public class HomeMainAdapter extends BaseRecyclerAdapter<IAbsHomeItem> implement
             recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
             recyclerView.setBackgroundColor(getContext().getResources().getColor(R.color.white));
             final HomeAreaAdapter homeAreaAdapter = new HomeAreaAdapter(getContext(), projectareahomeitem.projectAreas, -1);
-
             homeAreaAdapter.setOnItemClickListener(new OnItemClickListener() {
                 @Override
                 public void onItemClickListener(View v, int position) {
@@ -64,11 +96,38 @@ public class HomeMainAdapter extends BaseRecyclerAdapter<IAbsHomeItem> implement
             });
             recyclerView.setAdapter(homeAreaAdapter);
         } else if (iAbsHomeItem instanceof VideoMonitoringHomeItem) {
-            VideoMonitoringHomeItem videomonitoringhomeitem = (VideoMonitoringHomeItem) iAbsHomeItem;
+            final VideoMonitoringHomeItem videomonitoringhomeitem = (VideoMonitoringHomeItem) iAbsHomeItem;
             TextView tv_title = holder.getView(R.id.tv_title);
-            ImageView iv_videoPic = holder.getView(R.id.iv_videoPic);
+            final VideoDisplayView videodisplayview = holder.getView(R.id.videoPlayers);
+            videodisplayview.addOnItemClickListener(new VideoDisplayView.OnItemClickListener() {
+                @Override
+                public void OnItemClick() {
+                    if (null != videomonitoringhomeitem.listBean) {
+                        LogUtil.d("LDL", "播放执行调用..");
+                        videodisplayview.startPreview(videomonitoringhomeitem.listBean);
+                    }
+                }
+            });
+            GlideUtils.loadUrl(getContext(), videomonitoringhomeitem.placeHolder, videodisplayview.getIv_placeholder());
+
+   /*         if (holder.getTag() != null) {
+                VideoDisplayView videoDisplayView = (VideoDisplayView) holder.getTag();
+                videoDisplayView.onResume();
+            }else {
+                holder.setTag(videodisplayview);
+                videodisplayview.setDisplayMode(DisplayMode.LIVE);
+                if (null != videomonitoringhomeitem.listBean) {
+                    LogUtil.d("LDL","播放执行调用..");
+                    videodisplayview.startPreview(videomonitoringhomeitem.listBean);
+                }
+            }*/
+            holder.setTag(videodisplayview);
+            videodisplayview.setDisplayMode(DisplayMode.LIVE);
+            if (null != videomonitoringhomeitem.listBean && videomonitoringhomeitem.isFirst) {
+                LogUtil.d("LDL", "播放执行调用..");
+                videodisplayview.startPreview(videomonitoringhomeitem.listBean);
+            }
             tv_title.setText(videomonitoringhomeitem.name);
-            GlideUtils.loadRoundUrl(getContext(), videomonitoringhomeitem.url, iv_videoPic);
         } else if (iAbsHomeItem instanceof ProjectOverviewHomeItem) {
             ProjectOverviewHomeItem projectOverviewHomeItem = (ProjectOverviewHomeItem) iAbsHomeItem;
             TextView tv_proj_count = holder.getView(R.id.tv_proj_count);

@@ -13,7 +13,9 @@ android {
 
         consumerProguardFiles 'consumer-rules.pro'
     }
-
+    sourceSets.main {
+        jniLibs.srcDirs = ['libs']
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -26,4 +28,5 @@ android {
 dependencies {
     api project(path: ':baselib')
     api project(path: ':YCVideoPlayerLib')
+    api fileTree(dir: 'libs', include: ['*.aar', '*.jar'], exclude: [])
 }

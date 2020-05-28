@@ -3,6 +3,7 @@ package com.zld.monitor.proj;
 import android.content.Context;
 
 import com.dc.baselib.BaseApplication;
+import com.dc.commonlib.utils.video.PlayerManager;
 import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.header.WaterDropHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -40,7 +41,7 @@ public class ElectricNestApplication extends BaseApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-
+        PlayerManager.init(this);
     }
 
 

@@ -3,6 +3,14 @@
     package="com.dc.module_bbs">
 
     <application android:theme="@style/AppTheme">
+        <activity android:name=".monitoringlist.MonitoringListActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustPan|stateHidden"
+
+           />
         <activity
             android:name=".projsummary.ProjectSummaryActivity"
             android:configChanges="layoutDirection|fontScale|locale"

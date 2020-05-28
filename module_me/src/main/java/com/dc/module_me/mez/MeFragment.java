@@ -23,14 +23,11 @@ import java.util.List;
 public class MeFragment extends BaseFragment implements View.OnClickListener {
 
     private SmartRefreshLayout mRefreshLayout;
-    private TextView tv_title, tv_phone, tv_names;
+    private TextView tv_phone, tv_names;
 
     @Override
     public void initView(View view) {
-        tv_title = view.findViewById(R.id.tv_title);
         tv_names = view.findViewById(R.id.tv_names);
-        tv_title.setText(R.string.me_title);
-        view.findViewById(R.id.iv_left_back).setVisibility(View.GONE);
         view.findViewById(R.id.tv_login_out).setOnClickListener(this);
         tv_phone = view.findViewById(R.id.tv_phone);
         if (UserManager.getInstance().isLogin()) {

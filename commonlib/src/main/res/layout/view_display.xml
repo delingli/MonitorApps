@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/el_container"
+    android:layout_height="match_parent">
+
+    <SurfaceView
+        android:id="@+id/display_surface"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <ImageView
+        android:id="@+id/iv_placeholder"
+        android:layout_width="match_parent"
+        android:scaleType="centerCrop"
+        android:layout_height="match_parent"/>
+
+    <com.dc.commonlib.commonentity.video.widget.PlayerControlView
+        android:id="@+id/player_control"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:id="@+id/ll_menu_root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <View
+            android:id="@+id/speed_blank_click"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <com.dc.commonlib.commonentity.video.widget.SpeedControlMenu
+            android:id="@+id/speed_view"
+            android:layout_width="240dp"
+            android:layout_height="match_parent"
+            android:visibility="gone"/>
+
+        <RelativeLayout
+            android:id="@+id/rl_arc_menu"
+            android:layout_width="240dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="#aa000000"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="云控制台"
+                android:textColor="#fefefe"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:layout_marginTop="55dp"
+                />
+            <com.dc.commonlib.commonentity.video.widget.ArcMenu
+                android:id="@+id/arc_menu"
+                android:layout_width="240dp"
+                android:layout_centerInParent="true"
+                android:layout_height="330dp" />
+        </RelativeLayout>
+    </LinearLayout>
+    <com.dc.commonlib.commonentity.video.widget.TipsView
+        android:id="@+id/tips_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</RelativeLayout>

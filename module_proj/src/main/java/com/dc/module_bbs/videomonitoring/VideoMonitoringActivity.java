@@ -23,4 +23,5 @@ public class VideoMonitoringActivity extends AbsLifecycleActivity<VideoMonitorin
     protected void initData() {
 
     }
+
 }

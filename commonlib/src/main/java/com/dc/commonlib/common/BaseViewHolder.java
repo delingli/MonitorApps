@@ -9,6 +9,15 @@ import android.view.View;
 public class BaseViewHolder extends RecyclerView.ViewHolder {
 
     private final SparseArray<View> views;
+    private View Tag;
+
+    public View getTag() {
+        return Tag;
+    }
+
+    public void setTag(View tag) {
+        Tag = tag;
+    }
 
     public View convertView;
 

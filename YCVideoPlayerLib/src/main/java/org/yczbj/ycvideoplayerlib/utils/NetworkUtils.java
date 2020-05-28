@@ -29,6 +29,27 @@ public class NetworkUtils {
      * 为了避免因多次接收到广播反复提醒的情况而设置的标志位，用于缓存收到新的广播前的网络状态
      */
     private static State tempState;
+    /**
+     * 获取网络连接状态
+     *
+     * @return 0-不可用，1-移动连接可用，2-wifi可用, 3-其他
+     */
+    public static int getNetworkConnectState(Context context) {
+        ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (manager == null || manager.getActiveNetworkInfo() == null) return 0;
+        NetworkInfo activeNetwork = manager.getActiveNetworkInfo();
+        if (activeNetwork.isConnected()) {
+            if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI) {
+                return 2;
+            } else if (activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE) {
+                return 1;
+            } else {
+                return 3;
+            }
+        } else {
+            return 0;
+        }
+    }
 
     /**
      * 获取当前网络连接状态

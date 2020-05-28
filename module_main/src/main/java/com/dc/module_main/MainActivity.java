@@ -23,6 +23,7 @@ import com.dc.baselib.mvvm.BaseActivity;
 import com.dc.baselib.mvvm.BaseFragment;
 import com.dc.baselib.statusBar.StarusBarUtils;
 import com.dc.baselib.utils.UserManager;
+import com.dc.commonlib.commonentity.video.DisplayVideoPlayerManager;
 import com.dc.commonlib.utils.ArounterManager;
 import com.dc.commonlib.utils.UIUtils;
 
@@ -60,7 +61,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         if (null != getSupportActionBar()) {
             getSupportActionBar().hide();
         }
-        setmToolBarlheadHide(true);
+        setBackShow(false);
+
         mNavView = findViewById(R.id.nav_view);
         mViewPager = findViewById(R.id.viewPager);
         mNavView.setOnNavigationItemSelectedListener(this);
@@ -79,11 +81,17 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                 R.id.navigation_me)
                 .build();
         StarusBarUtils.setRootViewFitsSystemWindows(this, true);
-        StarusBarUtils.setStatusBarColor(this, Color.parseColor("#3476f9"));
+//        setPaddingTop();
         mNavView.setItemIconTintList(null);
         mNavView.setSelectedItemId(R.id.navigation_home);//根据具体情况调用
 
+    }
 
+    @Override
+    protected void initStatusBar() {
+        super.initStatusBar();
+//
+//        setPaddingTop();
     }
 
     @Override
@@ -94,7 +102,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
     @Override
     public void onBackPressed() {
-        if (VideoPlayerManager.instance().onBackPressed()) {
+        if (DisplayVideoPlayerManager.instance().onBackPressed()) {
             return;
         }
         super.onBackPressed();
@@ -104,13 +112,19 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         int itemId = menuItem.getItemId();
         if (itemId == R.id.navigation_home) {
+            setTitle(R.string.home_main_desc);
+            setmToolBarlheadBg(R.color.text_color_3476f9);
             mViewPager.setCurrentItem(0, true);
             return true;
         } else if (itemId == R.id.navigation_bbs) {
+            setTitle(R.string.project);
+            setmToolBarlheadBg(R.color.white);
             mViewPager.setCurrentItem(1, true);
             return true;
 
         } else if (itemId == R.id.navigation_me) {
+            setTitle(R.string.me_title);
+            setmToolBarlheadBg(R.color.white);
             mViewPager.setCurrentItem(2, true);
             return true;
         }

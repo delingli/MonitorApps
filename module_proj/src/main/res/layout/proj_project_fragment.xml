@@ -6,7 +6,6 @@
     android:background="@color/bg_color_f7f8f9"
     android:orientation="vertical">
 
-    <include layout="@layout/common_toolbar_layout" />
 
     <View style="@style/HorizontalStyle" />
 

@@ -8,7 +8,7 @@ import android.util.Log;
  * Sp处理类，
  */
 public class SPUtils {
-    public static final String FILE_NAME = "NUOYAN_DATA";
+    public static final String FILE_NAME = "ZHILIANDA_DATA";
     public static final String CACHE_FILE_NAME = "CACHE_DATA";
     public static final String CONFIG = "CONFIG";
     public static final String ISWIFIPLAY = "isWificonfig";
