@@ -39,7 +39,7 @@ public class SearchActivity extends BaseActivity {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        setmToolBarlheadHide(true);
+        setTitle(R.string.project);
         mProjectListFragment = new ProjectListFragment();
         String ragin = null;
         if (getIntent() != null) {

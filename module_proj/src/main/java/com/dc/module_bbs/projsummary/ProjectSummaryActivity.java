@@ -164,8 +164,8 @@ public class ProjectSummaryActivity extends AbsLifecycleActivity<ProjectSummaryV
         pieChart.setCenterTextSize(16f);//设置文字的消息
         pieChart.setCenterTextColor(Color.parseColor("#333333"));//设置文字的颜色
         ArrayList<PieEntry> pieEntries = new ArrayList<>();
-        pieEntries.add(new PieEntry(projectareaitem.noWorksPercentage));
-        pieEntries.add(new PieEntry(projectareaitem.WorksPercentage));
+        pieEntries.add(new PieEntry((float) projectareaitem.noWorksPercentage));
+        pieEntries.add(new PieEntry((float) projectareaitem.WorksPercentage));
 
         PieDataSet pieDataSet = new PieDataSet(pieEntries, null);
         pieDataSet.setColors(Color.parseColor("#cfdef9"), Color.parseColor("#36b365"));
@@ -261,11 +261,11 @@ public class ProjectSummaryActivity extends AbsLifecycleActivity<ProjectSummaryV
         barEntries1.add(new BarEntry(2, construction_project_cnt));
 
         float noWorkInvestment = projectAreaItem.noWorkInvestment;
-        float invested = projectAreaItem.invested;
+        float construction_investment = projectAreaItem.construction_investment;
 
         ArrayList<BarEntry> barEntries2 = new ArrayList<>();
         barEntries2.add(new BarEntry(1, noWorkInvestment));
-        barEntries2.add(new BarEntry(2, invested));
+        barEntries2.add(new BarEntry(2, construction_investment));
 
 
         BarDataSet barDataSet1 = new BarDataSet(barEntries1, "项目数");
@@ -336,7 +336,7 @@ public class ProjectSummaryActivity extends AbsLifecycleActivity<ProjectSummaryV
     private void toFillBottonBarData(ProjectAreaItem projectAreaItem, BarChart barChar_project_schedule) {
         ArrayList<BarEntry> barEntries = new ArrayList<>();
         XAxis xAxis = barChar_project_schedule.getXAxis();
-        xAxis.setTextSize(12f);
+        xAxis.setTextSize(15f);
         xAxis.setLabelCount(4, false);//第一个参数是轴坐标的个数，第二个参数是 是否不均匀分布，true是不均匀分布
         xAxis.setDrawLabels(true);//是否显示X坐标轴上的刻度，默认是true
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);//设置x坐标数据的位置

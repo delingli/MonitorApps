@@ -251,45 +251,45 @@ public class HomeMainRespositorys extends BaseRespository {
                 List<ProjectAreaHomeItem.ProjectAreaItems> llAreas = new ArrayList<>();
                 if (null != homebean.region_projects.yinhu) {
                     ProjectAreaHomeItem.ProjectAreaItems areaItems1 = new ProjectAreaHomeItem.ProjectAreaItems();
-                    areaItems1.completedProjects = homebean.region_projects.yinhu.get(0);
-                    areaItems1.totalProjects = homebean.region_projects.yinhu.get(1);
+                    areaItems1.completedProjects = homebean.region_projects.yinhu.get(1);
+                    areaItems1.totalProjects = homebean.region_projects.yinhu.get(1)+homebean.region_projects.yinhu.get(0);
                     areaItems1.projectAdress = "银湖";
                     llAreas.add(areaItems1);
                 }
                 if (null != homebean.region_projects.xindeng) {
                     ProjectAreaHomeItem.ProjectAreaItems areaItems1 = new ProjectAreaHomeItem.ProjectAreaItems();
-                    areaItems1.completedProjects = homebean.region_projects.xindeng.get(0);
-                    areaItems1.totalProjects = homebean.region_projects.xindeng.get(1);
+                    areaItems1.completedProjects = homebean.region_projects.xindeng.get(1);
+                    areaItems1.totalProjects = homebean.region_projects.xindeng.get(1)+homebean.region_projects.xindeng.get(0);
                     areaItems1.projectAdress = "新登";
                     llAreas.add(areaItems1);
                 }
                 if (null != homebean.region_projects.changkou) {
                     ProjectAreaHomeItem.ProjectAreaItems areaItems1 = new ProjectAreaHomeItem.ProjectAreaItems();
-                    areaItems1.completedProjects = homebean.region_projects.changkou.get(0);
-                    areaItems1.totalProjects = homebean.region_projects.changkou.get(1);
+                    areaItems1.completedProjects = homebean.region_projects.changkou.get(1);
+                    areaItems1.totalProjects = homebean.region_projects.changkou.get(1)+ homebean.region_projects.changkou.get(0);
                     areaItems1.projectAdress = "场口";
                     llAreas.add(areaItems1);
                 }
 
                 if (null != homebean.region_projects.dongzhou) {
                     ProjectAreaHomeItem.ProjectAreaItems areaItems1 = new ProjectAreaHomeItem.ProjectAreaItems();
-                    areaItems1.completedProjects = homebean.region_projects.dongzhou.get(0);
-                    areaItems1.totalProjects = homebean.region_projects.dongzhou.get(1);
+                    areaItems1.completedProjects = homebean.region_projects.dongzhou.get(1);
+                    areaItems1.totalProjects = homebean.region_projects.dongzhou.get(1)+ homebean.region_projects.dongzhou.get(0);
                     areaItems1.projectAdress = "东洲";
                     llAreas.add(areaItems1);
                 }
 
                 if (null != homebean.region_projects.jinqiao) {
                     ProjectAreaHomeItem.ProjectAreaItems areaItems1 = new ProjectAreaHomeItem.ProjectAreaItems();
-                    areaItems1.completedProjects = homebean.region_projects.jinqiao.get(0);
-                    areaItems1.totalProjects = homebean.region_projects.jinqiao.get(1);
+                    areaItems1.completedProjects = homebean.region_projects.jinqiao.get(1);
+                    areaItems1.totalProjects = homebean.region_projects.jinqiao.get(1)+homebean.region_projects.jinqiao.get(0);
                     areaItems1.projectAdress = "金桥";
                     llAreas.add(areaItems1);
                 }
                 if (null != homebean.region_projects.lushan) {
                     ProjectAreaHomeItem.ProjectAreaItems areaItems1 = new ProjectAreaHomeItem.ProjectAreaItems();
-                    areaItems1.completedProjects = homebean.region_projects.lushan.get(0);
-                    areaItems1.totalProjects = homebean.region_projects.lushan.get(1);
+                    areaItems1.completedProjects = homebean.region_projects.lushan.get(1);
+                    areaItems1.totalProjects = homebean.region_projects.lushan.get(1)+homebean.region_projects.lushan.get(0);
                     areaItems1.projectAdress = "鹿山";
                     llAreas.add(areaItems1);
                 }

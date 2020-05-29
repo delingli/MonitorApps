@@ -90,7 +90,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     @Override
     protected void initStatusBar() {
         super.initStatusBar();
-        StarusBarUtils.setTranslucentStatus(this);
+//        StarusBarUtils.setTranslucentStatus(this);
 //
 //        setPaddingTop();
     }
@@ -114,9 +114,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         int itemId = menuItem.getItemId();
         if (itemId == R.id.navigation_home) {
             setTitle(R.string.home_main_desc);
-//            setmToolBarlheadHide(true);
+            setmToolBarlheadHide(true);
             mViewPager.setCurrentItem(0, true);
-            setPaddingTop();
             return true;
         } else if (itemId == R.id.navigation_bbs) {
             setTitle(R.string.project);

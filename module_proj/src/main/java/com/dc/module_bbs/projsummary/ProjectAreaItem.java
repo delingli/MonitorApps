@@ -9,8 +9,9 @@ public class ProjectAreaItem {
     public float invested;//已投资总额  单位：元
     public float investment;//总投资总额  单位：元
     public float noWorkInvestment;//未开工投资额  单位：元
-    public float noWorksPercentage;
-    public float WorksPercentage;
+    public float construction_investment;//在建
+    public double noWorksPercentage;
+    public double WorksPercentage;
     public List<ScheduleSummary> schedule_summary;
 
     public static class ScheduleSummary {

@@ -11,16 +11,14 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_39"
-
+        android:layout_height="@dimen/dp_158"
         android:background="@drawable/survey_back"
         android:orientation="vertical">
 
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="120dp">
+            android:layout_height="@dimen/dp_109">
 
             <android.support.constraint.Guideline
                 android:id="@+id/home_guideline"

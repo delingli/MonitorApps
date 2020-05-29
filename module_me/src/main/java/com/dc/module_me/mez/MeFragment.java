@@ -37,7 +37,14 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
         if (UserManager.getInstance().isLogin()) {
             User user = UserManager.getInstance().getUserInfo(getContext());
             tv_names.setText(user.realname);
-            tv_phone.setText(user.username);
+            if (user.username != null && user.username.contains("@")) {
+                String phone = user.username.substring(0,user.username.lastIndexOf("@"));
+                tv_phone.setText(phone);
+
+            } else {
+                tv_phone.setText(user.username);
+
+            }
         }
 
     }

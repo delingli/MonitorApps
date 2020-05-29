@@ -3,6 +3,7 @@ package com.dc.commonlib.utils;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.DecimalFormat;
 
 public class MoneyUtils {
 
@@ -21,10 +22,10 @@ public class MoneyUtils {
 
     }
 
-    public static float percentage(String base, String pct) {
+    public static double percentage(String base, String pct) {
         BigDecimal aa = new BigDecimal(base);
         BigDecimal bb = new BigDecimal(pct);
-        return bb.divide(aa, 2, BigDecimal.ROUND_HALF_UP).floatValue();
+        return bb.divide(aa, 2, BigDecimal.ROUND_HALF_EVEN).doubleValue();
     }
 
     public static long percentageInt(String base, String pct) {

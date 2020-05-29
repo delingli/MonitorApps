@@ -9,6 +9,7 @@ import com.dc.baselib.utils.ToastUtils;
 import com.dc.commonlib.commonentity.HomeBean;
 import com.dc.commonlib.utils.JsonUtil;
 import com.dc.commonlib.utils.MoneyUtils;
+import com.google.gson.annotations.SerializedName;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class ProjectSummaryRespository extends BaseRespository {
         EVENT_AREA_PROJECT = EventUtils.getEventKey();
     }
 
-    public void toGetownerCompanyBoard(int company_id, String region) {
+    public void toGetownerCompanyBoard(int company_id, final String region) {
         addDisposable(mRetrofit.create(IProjectSummaryService.class)
                 .getownerCompanyBoard(company_id, region)
                 .subscribeOn(Schedulers.io())
@@ -34,7 +35,7 @@ public class ProjectSummaryRespository extends BaseRespository {
                     public void onSuccess(String s) {
                         if (!TextUtils.isEmpty(s)) {
                             HomeBean homebean = JsonUtil.fromJson(s, HomeBean.class);
-                            conversionData(homebean);
+                            conversionData(homebean, region);
                         }
                     }
 
@@ -45,16 +46,43 @@ public class ProjectSummaryRespository extends BaseRespository {
                 }));
     }
 
-    private void conversionData(HomeBean homebean) {
+    private void conversionData(HomeBean homebean, String region) {
         if (null != homebean) {
             ProjectAreaItem projectAreaItem = new ProjectAreaItem();
             projectAreaItem.construction_project_cnt = homebean.construction_project_cnt;
             projectAreaItem.invested = MoneyUtils.yuanToHundredMillion(homebean.invested + "");
             projectAreaItem.investment = MoneyUtils.yuanToHundredMillion(homebean.investment + "");
-            projectAreaItem.noWorkInvestment = MoneyUtils.yuanToHundredMillion((homebean.investment - homebean.invested) + "");
+//            projectAreaItem.noWorkInvestment = MoneyUtils.yuanToHundredMillion((homebean.investment - homebean.invested) + "");
+            projectAreaItem.  noWorkInvestment=MoneyUtils.yuanToHundredMillion(homebean.prepare_investment+"");
+            projectAreaItem.  construction_investment=MoneyUtils.yuanToHundredMillion(homebean.construction_investment+"");
+            if (homebean.region_projects != null) {
+                if (TextUtils.equals(region, "东洲")) {
 
-            projectAreaItem.prepare_project_cnt = homebean.prepare_project_cnt;
-            projectAreaItem.project_cnt = homebean.project_cnt;
+                } else if (TextUtils.equals(region, "银湖")) {
+                    projectAreaItem.prepare_project_cnt = homebean.region_projects.yinhu.get(0);
+                    projectAreaItem.construction_project_cnt = homebean.region_projects.yinhu.get(1);
+                    projectAreaItem.project_cnt = homebean.region_projects.yinhu.get(0) + homebean.region_projects.yinhu.get(1);
+
+                } else if (TextUtils.equals(region, "新登")) {
+                    projectAreaItem.prepare_project_cnt = homebean.region_projects.xindeng.get(0);
+                    projectAreaItem.construction_project_cnt = homebean.region_projects.xindeng.get(1);
+                    projectAreaItem.project_cnt = homebean.region_projects.yinhu.get(0) + homebean.region_projects.xindeng.get(1);
+
+                } else if (TextUtils.equals(region, "场口")) {
+                    projectAreaItem.prepare_project_cnt = homebean.region_projects.changkou.get(0);
+                    projectAreaItem.construction_project_cnt = homebean.region_projects.changkou.get(1);
+                    projectAreaItem.project_cnt = homebean.region_projects.yinhu.get(0) + homebean.region_projects.changkou.get(1);
+                } else if (TextUtils.equals(region, "金桥")) {
+                    projectAreaItem.prepare_project_cnt = homebean.region_projects.jinqiao.get(0);
+                    projectAreaItem.construction_project_cnt = homebean.region_projects.jinqiao.get(1);
+                    projectAreaItem.project_cnt = homebean.region_projects.yinhu.get(0) + homebean.region_projects.jinqiao.get(1);
+                } else if (TextUtils.equals(region, "鹿山")) {
+                    projectAreaItem.prepare_project_cnt = homebean.region_projects.lushan.get(0);
+                    projectAreaItem.construction_project_cnt = homebean.region_projects.lushan.get(1);
+                    projectAreaItem.project_cnt = homebean.region_projects.yinhu.get(0) + homebean.region_projects.lushan.get(1);
+                }
+
+            }
             projectAreaItem.WorksPercentage = MoneyUtils.percentage(homebean.investment + "", homebean.invested + "");
             projectAreaItem.noWorksPercentage = MoneyUtils.percentage(homebean.investment + "", (homebean.investment - homebean.invested) + "");
 //最后格式化并输出
@@ -74,5 +102,7 @@ public class ProjectSummaryRespository extends BaseRespository {
             postData(EVENT_AREA_PROJECT, projectAreaItem);
         }
     }
+
+
 }
 
