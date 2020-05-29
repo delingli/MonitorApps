@@ -81,7 +81,7 @@ public class HomeMainFragment extends AbsLifecycleFragment<HomeMainViewModel> im
                     if (next.projectId == listBean.getProjectId()) {
                         next.listBean = listBean;
                         next.name = listBean.getCameraName();
-                        LogUtil.d("LDL","数据改变了几次 ？");
+                        LogUtil.d("LDL", "数据改变了几次 ？");
                     }
                 }
 
@@ -101,7 +101,7 @@ public class HomeMainFragment extends AbsLifecycleFragment<HomeMainViewModel> im
                         @Override
                         public void onVideoList(CameraInfoListBean.ListBean listBean) {
                             toRefreshData(listBean);
-                            LogUtil.d("LDL","数据刷新调用了几次 ？");
+                            LogUtil.d("LDL", "数据刷新调用了几次 ？");
 
                         }
                     });
@@ -144,6 +144,7 @@ public class HomeMainFragment extends AbsLifecycleFragment<HomeMainViewModel> im
 
             }
         });
+
 //        mViewModel.getHkPlayerAccount();
 
     }

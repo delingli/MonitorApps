@@ -1,5 +1,7 @@
 package com.dc.module_me.mez;
 
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -9,6 +11,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.dc.baselib.baseEntiry.User;
 import com.dc.baselib.mvvm.BaseFragment;
+import com.dc.baselib.statusBar.StarusBarUtils;
 import com.dc.baselib.utils.ToastUtils;
 import com.dc.baselib.utils.UserManager;
 import com.dc.commonlib.utils.ArounterManager;
@@ -27,6 +30,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     public void initView(View view) {
+
         tv_names = view.findViewById(R.id.tv_names);
         view.findViewById(R.id.tv_login_out).setOnClickListener(this);
         tv_phone = view.findViewById(R.id.tv_phone);
@@ -51,8 +55,26 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.tv_login_out) {
-            UserManager.getInstance().clearUser(getContext());
-            ARouter.getInstance().build(ArounterManager.LOGINACTIVITY_URL).navigation();
+
+            AlertDialog alertDialog = new AlertDialog.Builder(getContext())
+                    .setTitle("退出程序")
+                    .setMessage("是否退出程序")
+                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            UserManager.getInstance().clearUser(getContext());
+                            ARouter.getInstance().build(ArounterManager.LOGINACTIVITY_URL).navigation();
+                            getActivity().finish();
+                        }
+                    })
+                    .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            return;
+                        }
+                    }).create();
+            alertDialog.show();
+
         }
 
     }

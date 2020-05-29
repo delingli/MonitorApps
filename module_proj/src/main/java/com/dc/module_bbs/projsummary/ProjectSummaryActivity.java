@@ -336,12 +336,11 @@ public class ProjectSummaryActivity extends AbsLifecycleActivity<ProjectSummaryV
     private void toFillBottonBarData(ProjectAreaItem projectAreaItem, BarChart barChar_project_schedule) {
         ArrayList<BarEntry> barEntries = new ArrayList<>();
         XAxis xAxis = barChar_project_schedule.getXAxis();
-        xAxis.setTextSize(13f);
-        xAxis.setLabelCount(4, true);//第一个参数是轴坐标的个数，第二个参数是 是否不均匀分布，true是不均匀分布
+        xAxis.setTextSize(12f);
+        xAxis.setLabelCount(4, false);//第一个参数是轴坐标的个数，第二个参数是 是否不均匀分布，true是不均匀分布
         xAxis.setDrawLabels(true);//是否显示X坐标轴上的刻度，默认是true
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);//设置x坐标数据的位置
         xAxis.setDrawGridLines(false);//是否显示网格线中与x轴垂直的网格线
-//        xAxis.setLabelCount(6, true);//设置x轴显示的标签的个数
         final List<String> xValue = new ArrayList<>();
         xValue.add("zero");//index = 0 的位置的数据在IndexAxisValueFormatter中时不显示的。
 
