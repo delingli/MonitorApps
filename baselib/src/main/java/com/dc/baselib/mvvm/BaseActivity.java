@@ -98,7 +98,9 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     public void setPaddingTop() {
-        mToolBarlhead.setPadding(0, StarusBarUtils.getStatusBarHeight(this), 0, 0);
+        if(null!=mToolBarlhead){
+            mToolBarlhead.setPadding(0, StarusBarUtils.getStatusBarHeight(this), 0, 0);
+        }
     }
 
     public void setmToolBarlheadHide(boolean hide) {

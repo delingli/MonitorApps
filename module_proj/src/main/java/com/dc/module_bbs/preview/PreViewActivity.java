@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 
 import com.dc.baselib.mvvm.AbsLifecycleActivity;
+import com.dc.baselib.statusBar.StarusBarUtils;
 import com.dc.module_bbs.R;
 
 import java.util.Arrays;
@@ -45,6 +46,7 @@ public class PreViewActivity extends AbsLifecycleActivity<PreViewViewModel> {
 //        mViewPager.setAdapter();
         mViewPager.setAdapter(mCustomPagerAdapter);
         mViewPager.setCurrentItem(pos);
+        StarusBarUtils.setStatusBarColor(this,R.color.black);
     }
 
     @Override
