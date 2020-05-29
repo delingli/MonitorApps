@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.dc.baselib.R;
@@ -28,6 +29,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     private View view_line;
     private TextView iv_left_cacel;
     private TextView tvLeftCacel;
+    private RelativeLayout mRl_head;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,7 +41,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         tvLeftCacel = findViewById(R.id.tv_left_cacel);
         mFlcontiner = findViewById(R.id.fl_continer);
         view_line = findViewById(R.id.view_line);
-        mToolBarlhead = findViewById(R.id.rl_head);
+        mToolBarlhead = findViewById(R.id.tool_bars);
+        mRl_head = findViewById(R.id.rl_head);
         mIvLeftBack = findViewById(R.id.iv_left_back);
         tTvTitle = findViewById(R.id.tv_title);
         mIvRightButton = findViewById(R.id.iv_right_button);
@@ -91,6 +94,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public void setmToolBarlheadBg(int color) {
         mToolBarlhead.setBackgroundColor(color);
+        mRl_head.setBackgroundColor(color);
     }
 
     public void setPaddingTop() {

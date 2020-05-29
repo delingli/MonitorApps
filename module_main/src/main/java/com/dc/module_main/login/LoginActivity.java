@@ -73,7 +73,7 @@ public class LoginActivity extends AbsLifecycleActivity<LoginViewModel> implemen
     protected void initListener() {
         super.initListener();
         mCountDownButton.setNormalText(getResources().getString(R.string.gain_auth_code))
-                .setCountDownText("重新获取(", "s)")
+                .setCountDownText("秒后重发")
                 .setCountDefaultColor(Color.parseColor("#3476f9"))
                 .setCountdownColor(Color.parseColor("#ababbb"))
                 .setCloseKeepCountDown(true) // 关闭页面保持倒计时开关

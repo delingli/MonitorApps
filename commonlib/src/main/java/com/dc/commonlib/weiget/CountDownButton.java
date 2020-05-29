@@ -175,7 +175,10 @@ public class CountDownButton extends AppCompatButton implements LifecycleObserve
         mCountDownText = front + "%1$s" + latter;
         return this;
     }
-
+    public CountDownButton setCountDownText(String end) {
+        mCountDownText =   "%1$s" + end;
+        return this;
+    }
     /**
      * 关闭页面是否保持倒计时
      *
@@ -311,6 +314,7 @@ public class CountDownButton extends AppCompatButton implements LifecycleObserve
                 }
                 CountDownButton.super.setEnabled(true);
                 CountDownButton.super.setTextColor(defaultColor);
+                CountDownButton.super.setText("重新发送");
 
             }
         };

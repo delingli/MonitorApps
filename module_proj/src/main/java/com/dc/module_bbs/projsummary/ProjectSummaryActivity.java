@@ -336,8 +336,8 @@ public class ProjectSummaryActivity extends AbsLifecycleActivity<ProjectSummaryV
     private void toFillBottonBarData(ProjectAreaItem projectAreaItem, BarChart barChar_project_schedule) {
         ArrayList<BarEntry> barEntries = new ArrayList<>();
         XAxis xAxis = barChar_project_schedule.getXAxis();
-        xAxis.setTextSize(8);
-        xAxis.setLabelCount(4, false);//第一个参数是轴坐标的个数，第二个参数是 是否不均匀分布，true是不均匀分布
+        xAxis.setTextSize(13f);
+        xAxis.setLabelCount(4, true);//第一个参数是轴坐标的个数，第二个参数是 是否不均匀分布，true是不均匀分布
         xAxis.setDrawLabels(true);//是否显示X坐标轴上的刻度，默认是true
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);//设置x坐标数据的位置
         xAxis.setDrawGridLines(false);//是否显示网格线中与x轴垂直的网格线
@@ -369,7 +369,7 @@ public class ProjectSummaryActivity extends AbsLifecycleActivity<ProjectSummaryV
         BarData barData = new BarData(barDataSet);
         barData.setDrawValues(true);//是否显示柱子的数值
         barData.setValueTextSize(14f);//柱子上面标注的数值的字体大小
-        barData.setBarWidth(0.4f);//每个柱子的宽度
+        barData.setBarWidth(0.5f);//每个柱子的宽度
         barChar_project_schedule.setData(barData);
     }
 

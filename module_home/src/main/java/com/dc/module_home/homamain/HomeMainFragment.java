@@ -156,7 +156,7 @@ public class HomeMainFragment extends AbsLifecycleFragment<HomeMainViewModel> im
 
     @Override
     protected int getLayout() {
-        return R.layout.common_refresh_layout;
+        return R.layout.home_activity;
     }
 
     @Override

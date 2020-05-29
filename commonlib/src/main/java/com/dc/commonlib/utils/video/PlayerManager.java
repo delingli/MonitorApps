@@ -11,6 +11,7 @@ import com.hik.mcrsdk.rtsp.RtspClient;
 import com.hikvision.sdk.VMSNetSDK;
 import com.hikvision.sdk.consts.HttpConstants;
 import com.hikvision.sdk.consts.SDKConstant;
+import com.hikvision.sdk.net.bean.CustomRect;
 import com.hikvision.sdk.net.bean.RootCtrlCenter;
 import com.hikvision.sdk.net.bean.SubResourceNodeBean;
 import com.hikvision.sdk.net.bean.SubResourceParam;
@@ -114,6 +115,15 @@ public class PlayerManager {
                 }
             }
         });
+    }
+
+    public void zoomLiveOpt(int window, boolean b, CustomRect customRect1, CustomRect customRect2) {
+        VMSNetSDK.getInstance().zoomLiveOpt(window, b, customRect1, customRect2);
+
+    }
+
+    public void zoomPlayBackOpt(int window, boolean b, CustomRect customRect1, CustomRect customRect2) {
+        VMSNetSDK.getInstance().zoomPlayBackOpt(window, b, customRect1, customRect2);
     }
 
     /**

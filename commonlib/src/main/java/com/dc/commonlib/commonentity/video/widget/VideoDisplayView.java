@@ -16,6 +16,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -36,6 +37,7 @@ import com.dc.commonlib.utils.video.PlayerManager;
 import com.dc.commonlib.utils.video.VideoPlayBackManager;
 import com.hikvision.sdk.VMSNetSDK;
 import com.hikvision.sdk.consts.SDKConstant;
+import com.hikvision.sdk.net.bean.CustomRect;
 import com.hikvision.sdk.net.bean.PlaybackSpeed;
 import com.hikvision.sdk.net.business.OnVMSNetSDKBusiness;
 
@@ -55,7 +57,7 @@ import java.util.concurrent.Executors;
  * 视频播放
  * 负责展示视频画面，以及sdk的调用
  */
-public class VideoDisplayView extends RelativeLayout {
+public class VideoDisplayView extends RelativeLayout implements View.OnLongClickListener {
 
 
     private static final int PLAY_WINDOW_ONE = 1;
@@ -94,9 +96,17 @@ public class VideoDisplayView extends RelativeLayout {
     TipsView mTipsView;
     private RelativeLayout mContainer;
     private ImageView iv_placeholder;
+    private Button btn_big;
+    private Button btn_small;
 
     private void initId(View v) {
         mDisplayView = v.findViewById(R.id.display_surface);
+        btn_big = v.findViewById(R.id.btn_big);
+        btn_small = v.findViewById(R.id.btn_small);
+        btn_big.setOnLongClickListener(this);
+
+        btn_small.setOnLongClickListener(this);
+
         mPlayerControlView = v.findViewById(R.id.player_control);
         speedControlMenu = v.findViewById(R.id.speed_view);
         mTipsView = v.findViewById(R.id.tips_view);
@@ -137,6 +147,7 @@ public class VideoDisplayView extends RelativeLayout {
 
     public void showPlaceHolder() {
         iv_placeholder.setVisibility(View.VISIBLE);
+        iv_placeholder.setVisibility(View.GONE);
     }
 
     private List<ArcMenu.ArcAreaData> menuSubView = new ArrayList<>();
@@ -328,14 +339,20 @@ public class VideoDisplayView extends RelativeLayout {
     private SurfaceHolder.Callback mSurfaceHolderCallback = new SurfaceHolder.Callback() {
         @Override
         public void surfaceCreated(SurfaceHolder holder) {
+            LogUtil.d("LDL","surfaceChanged创建");
+
             if (mDisplayMode == DisplayMode.HISTORY) {
                 VMSNetSDK.getInstance().resumePlayBackOpt(PLAY_WINDOW_ONE);
                 VMSNetSDK.getInstance().setVideoWindowOpt(PLAY_WINDOW_ONE, holder);
+            }else {
+                startPreview(mCurrPreviewCamera);
+
             }
         }
 
         @Override
         public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+        LogUtil.d("LDL","surfaceChanged改变");
         }
 
         @Override
@@ -345,6 +362,8 @@ public class VideoDisplayView extends RelativeLayout {
                 VMSNetSDK.getInstance().setVideoWindowOpt(PLAY_WINDOW_ONE, null);
             } else {
                 VMSNetSDK.getInstance().stopLiveOpt(PLAY_WINDOW_ONE);
+                LogUtil.d("LDL","surfaceChanged销毁");
+
             }
         }
     };
@@ -367,6 +386,28 @@ public class VideoDisplayView extends RelativeLayout {
     public boolean exitFullScreen() {
         mCurrScreenMode = PlayerScreenMode.Small;
         return changeScreenMode(mCurrScreenMode);
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        if (v.getId() == R.id.btn_big) {
+            CustomRect customRect1=new CustomRect();
+            customRect1.setValue(0f,0f,0f,0f);
+            CustomRect customRect2=new CustomRect();
+            customRect2.setValue(40f,40f,40f,40f);
+            VMSNetSDK.getInstance().zoomLiveOpt(PLAY_WINDOW_ONE, true,customRect1, customRect2);
+
+
+
+        } else if (v.getId() == R.id.btn_small) {
+            CustomRect customRect1=new CustomRect();
+            customRect1.setValue(0f,0f,0f,0f);
+            CustomRect customRect2=new CustomRect();
+            customRect2.setValue(40f,40f,40f,40f);
+            VMSNetSDK.getInstance().zoomLiveOpt(PLAY_WINDOW_ONE, false,customRect2, customRect1);
+
+        }
+        return false;
     }
 
     public interface OnItemClickListener {
@@ -879,13 +920,13 @@ public class VideoDisplayView extends RelativeLayout {
                 if (mPlayerControlView != null) {
                     mPlayerControlView.setScreenModeStatus(mCurrScreenMode);
                 }
-                SurfaceView surfaceview = mContainer.findViewById(R.id.display_surface);
 
                 RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.MATCH_PARENT);
                 contentView.addView(mContainer, params);
                 mCurrScreenMode = PlayerScreenMode.Full;
-                startPreview(mCurrPreviewCamera);
+                //todo
+                startPreview(mCurrPreviewCamera); //tofo
                 exitFull = false;
             } else if (screenMode == PlayerScreenMode.Small) {
 //要进去小屏幕
@@ -909,6 +950,7 @@ public class VideoDisplayView extends RelativeLayout {
                 RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
                 this.addView(mContainer, params);
                 mCurrScreenMode = PlayerScreenMode.Small;
+                //todo
                 startPreview(mCurrPreviewCamera);
                 exitFull = true;
             }

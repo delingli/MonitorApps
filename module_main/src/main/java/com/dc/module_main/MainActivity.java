@@ -80,7 +80,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                 R.id.navigation_bbs,
                 R.id.navigation_me)
                 .build();
-        StarusBarUtils.setRootViewFitsSystemWindows(this, true);
+//        StarusBarUtils.setRootViewFitsSystemWindows(this, true);
 //        setPaddingTop();
         mNavView.setItemIconTintList(null);
         mNavView.setSelectedItemId(R.id.navigation_home);//根据具体情况调用
@@ -113,18 +113,18 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         int itemId = menuItem.getItemId();
         if (itemId == R.id.navigation_home) {
             setTitle(R.string.home_main_desc);
-            setmToolBarlheadBg(R.color.text_color_3476f9);
+            setmToolBarlheadHide(true);
             mViewPager.setCurrentItem(0, true);
             return true;
         } else if (itemId == R.id.navigation_bbs) {
             setTitle(R.string.project);
-            setmToolBarlheadBg(R.color.white);
+            setmToolBarlheadHide(false);
             mViewPager.setCurrentItem(1, true);
             return true;
 
         } else if (itemId == R.id.navigation_me) {
             setTitle(R.string.me_title);
-            setmToolBarlheadBg(R.color.white);
+            setmToolBarlheadHide(false);
             mViewPager.setCurrentItem(2, true);
             return true;
         }

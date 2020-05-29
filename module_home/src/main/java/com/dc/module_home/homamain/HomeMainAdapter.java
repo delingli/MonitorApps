@@ -108,7 +108,7 @@ public class HomeMainAdapter extends BaseRecyclerAdapter<IAbsHomeItem> implement
                     }
                 }
             });
-            GlideUtils.loadUrl(getContext(), videomonitoringhomeitem.placeHolder, videodisplayview.getIv_placeholder());
+//            GlideUtils.loadUrl(getContext(), videomonitoringhomeitem.placeHolder, videodisplayview.getIv_placeholder());
 
    /*         if (holder.getTag() != null) {
                 VideoDisplayView videoDisplayView = (VideoDisplayView) holder.getTag();
