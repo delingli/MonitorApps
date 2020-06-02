@@ -13,8 +13,7 @@ public class MonitoringListViewModel extends AbsViewModel<MonitoringListResposit
     /**
      * 获取账号密码
      */
-    public void getHkPlayerAccount(int projectId) {
-        mRepository.getHkPlayerAccount(projectId);
+    public void getHkPlayerAccount(int projectId) { mRepository.getHkPlayerAccount(projectId);
     }
 
     public void getVideoListInfo(boolean refresh,final int projectId) {

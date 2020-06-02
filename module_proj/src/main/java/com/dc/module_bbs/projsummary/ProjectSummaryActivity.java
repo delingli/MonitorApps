@@ -219,7 +219,7 @@ public class ProjectSummaryActivity extends AbsLifecycleActivity<ProjectSummaryV
         pieChart.setCenterTextSize(12f);//设置文字的消息
         pieChart.setCenterText(getSpannable(projectareaitem.investment +
                 "\n总投资额(亿)"));//设置饼状图中心的文字
-
+        pieChart.setRotationAngle(0);
         pieChart.setCenterTextColor(Color.parseColor("#333333"));//设置文字的颜色
         pieChart.setEntryLabelColor(getResources().getColor(R.color.text_color5_333333));
         pieChart.setEntryLabelTextSize(12f);

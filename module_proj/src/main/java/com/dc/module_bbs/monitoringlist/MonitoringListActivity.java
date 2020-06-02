@@ -51,6 +51,11 @@ public class MonitoringListActivity extends AbsLifecycleActivity<MonitoringListV
     }
 
     @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
     protected void initView(Bundle savedInstanceState) {
         super.initView(savedInstanceState);
         setTitle(R.string.monitoring);

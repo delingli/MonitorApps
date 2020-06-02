@@ -244,9 +244,7 @@ public class HomeMainRespositorys extends BaseRespository {
             projectOverviewHomeItem.projectUnderConstruction = projectUnderConstruction;
             projectOverviewHomeItem.noWorkProject = noWorkProject;
             list.add(projectOverviewHomeItem);
-            LabHomeItem labHomeItem = new LabHomeItem();
-            labHomeItem.title = "项目区域";
-            list.add(labHomeItem);
+
             if (homebean.region_projects != null) {
                 List<ProjectAreaHomeItem.ProjectAreaItems> llAreas = new ArrayList<>();
                 if (null != homebean.region_projects.yinhu) {

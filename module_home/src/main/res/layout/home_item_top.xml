@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dp_135"
+    android:layout_height="@dimen/dp_163"
     android:background="@color/text_color_3476f9"
     android:orientation="vertical">
 
@@ -122,13 +122,23 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_30"
+            android:layout_height="@dimen/dp_57"
             android:layout_gravity="bottom"
             android:background="@drawable/bg_shape_top_bg"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent" >
+        <TextView
+            android:layout_width="wrap_content"
+            android:textSize="@dimen/dp_18"
+            android:textStyle="bold"
+            android:layout_marginLeft="@dimen/common_margin"
+            android:layout_gravity="center_vertical"
+            android:text="@string/proj_area"
+            android:textColor="@color/text_color5_333333"
+            android:layout_height="wrap_content"/>
+        </FrameLayout>
     </android.support.constraint.ConstraintLayout>
 
 

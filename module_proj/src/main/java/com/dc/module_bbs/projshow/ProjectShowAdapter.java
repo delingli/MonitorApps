@@ -103,6 +103,7 @@ public class ProjectShowAdapter extends BaseRecyclerAdapter<AbsProjectInfo> impl
     private void initPieChartData(PieChart pieChart, ProjectInvestmentInfo projectinvestmentinfo) {
         pieChart.setCenterTextSize(12);
         pieChart.setCenterText( getSpannable(getContext(),projectinvestmentinfo.investment + "\n总投资额(亿)"));//设置饼状图中心的文字
+        pieChart.setRotationAngle(0);
 
         ArrayList<PieEntry> pieEntries = new ArrayList<>();
         if (projectinvestmentinfo.noWorkInvestment != 0) {

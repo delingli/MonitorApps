@@ -4,9 +4,9 @@
 
     <application android:theme="@style/AppTheme">
         <activity android:name=".monitoringlist.MonitoringListActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustPan|stateHidden"
 
