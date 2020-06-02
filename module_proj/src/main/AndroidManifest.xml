@@ -18,7 +18,8 @@
         <activity
             android:name=".searchlist.SearchActivity"
             android:configChanges="layoutDirection|fontScale|locale"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity
             android:name=".projectoverview.ProjectOverviewActivity"
             android:configChanges="layoutDirection|fontScale|locale"

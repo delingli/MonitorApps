@@ -72,7 +72,12 @@ public class WebSocketResponseDispatcher implements IResponseDispatcher {
             JSONObject jsonObject = new JSONObject(message);
             int code = jsonObject.optInt("code");
             String msg = jsonObject.optString("msg");
-            String data = jsonObject.optJSONObject("data").toString();
+            JSONObject dataJson = jsonObject.optJSONObject("data");
+            String dataz = null;
+            if (dataJson != null) {
+                dataz = dataJson.toString();
+
+            }
             JSONObject commandObj = jsonObject.optJSONObject("command");
             SocketResponse.CommandBean commandBean = new SocketResponse.CommandBean();
             commandBean.path = commandObj.optString("path");
@@ -80,7 +85,7 @@ public class WebSocketResponseDispatcher implements IResponseDispatcher {
             SocketResponse<String> sockeJson = new SocketResponse<>();
             sockeJson.code = code;
             sockeJson.msg = msg;
-            sockeJson.data = data;
+            sockeJson.data = dataz;
             sockeJson.command = commandBean;
 //            Type type = ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
 //            SocketResponse<String> ss = new Gson().fromJson(message, SocketResponse.class);

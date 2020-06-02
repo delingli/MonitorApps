@@ -7,13 +7,16 @@ import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
 import com.dc.commonlib.common.BaseRecyclerAdapter;
+import com.dc.commonlib.utils.ScreenUtils;
 import com.dc.commonlib.weiget.courselist.DlPopupWindowAdapter;
 import com.dc.commonlib.weiget.horizontalrecycle.DLHorizontalItem;
 import com.dc.module_bbs.R;
@@ -21,17 +24,20 @@ import com.dc.module_bbs.R;
 import java.util.List;
 
 public class PopupWindowView {
-    private PopupWindow mPopupWindow;
+    private MyPopupWindow mPopupWindow;
     DlPopupWindowAdapter mDlPopupWindowAdapter;
     private Context context;
+    private  View view;
 
     public PopupWindowView(Context context, int pos) {
         this.context = context;
-        RecyclerView recyclerView = (RecyclerView) View.inflate(context, R.layout.dl_popup_window_view, null);
+        view = View.inflate(context, R.layout.dl_popup_window_view, null);
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
+        View view_bg = view.findViewById(R.id.view_bg);
         recyclerView.setLayoutManager(new GridLayoutManager(context, 3));
         recyclerView.setAdapter(mDlPopupWindowAdapter = new DlPopupWindowAdapter(context, null, -1));
         mDlPopupWindowAdapter.setSelection(pos);
-        mPopupWindow = new PopupWindow(recyclerView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
+        mPopupWindow = new MyPopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
         mPopupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         mPopupWindow.setOutsideTouchable(true);
         mPopupWindow.setTouchable(true);
@@ -64,11 +70,18 @@ public class PopupWindowView {
                 }
             }
         });
-
+        view_bg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
     }
-public void addOnDismissListener(OnDismissListener onDismissListener){
-        this.onDismissListener=onDismissListener;
-}
+
+    public void addOnDismissListener(OnDismissListener onDismissListener) {
+        this.onDismissListener = onDismissListener;
+    }
+
     public interface OnDismissListener {
         void onDismiss();
     }
@@ -85,10 +98,14 @@ public void addOnDismissListener(OnDismissListener onDismissListener){
     }
 
     public void showPopupWindow(View v) {
+
         if (null != mPopupWindow && mPopupWindow.isShowing()) {
             mPopupWindow.dismiss();
         } else {
-            mPopupWindow.showAsDropDown(v, 0, 0);
+            int windowPos[] = ScreenUtils.calculatePopWindowPos(v,view);
+            int xOff = 20;// 可以自己调整偏移
+            mPopupWindow.showAsDropDown(v);
+//            mPopupWindow.showAtLocation(v, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, windowPos[0], windowPos[1]);
         }
     }
 

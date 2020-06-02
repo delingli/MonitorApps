@@ -75,22 +75,17 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         mViewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(), mList));
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home,
-                R.id.navigation_bbs,
-                R.id.navigation_me)
-                .build();
 //        StarusBarUtils.setRootViewFitsSystemWindows(this, true);
 //        setPaddingTop();
         mNavView.setItemIconTintList(null);
         mNavView.setSelectedItemId(R.id.navigation_home);//根据具体情况调用
-
+        setmToolBarlheadHide(true);
+        StarusBarUtils.setTranslucentStatus(this);
     }
 
     @Override
     protected void initStatusBar() {
-        super.initStatusBar();
-//        StarusBarUtils.setTranslucentStatus(this);
+//        super.initStatusBar();
 //
 //        setPaddingTop();
     }
@@ -114,18 +109,17 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         int itemId = menuItem.getItemId();
         if (itemId == R.id.navigation_home) {
             setTitle(R.string.home_main_desc);
-            setmToolBarlheadHide(true);
             mViewPager.setCurrentItem(0, true);
             return true;
         } else if (itemId == R.id.navigation_bbs) {
             setTitle(R.string.project);
-            setmToolBarlheadHide(false);
+            StarusBarUtils.setStatusBarDarkTheme(this, true);
             mViewPager.setCurrentItem(1, true);
             return true;
 
         } else if (itemId == R.id.navigation_me) {
             setTitle(R.string.me_title);
-            setmToolBarlheadHide(false);
+            StarusBarUtils.setStatusBarDarkTheme(this, true);
             mViewPager.setCurrentItem(2, true);
             return true;
         }

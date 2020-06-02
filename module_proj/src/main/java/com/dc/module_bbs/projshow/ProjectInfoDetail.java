@@ -6,4 +6,7 @@ public class ProjectInfoDetail extends AbsProjectInfo {
     public String startsTime;
     public String actualConstructionTime;
     public String endTime;
+
+    public String project__status;//003 在建  001 未开工
+
 }

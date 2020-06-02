@@ -4,6 +4,7 @@ import android.app.Application;
 import android.support.annotation.NonNull;
 
 import com.dc.baselib.mvvm.AbsViewModel;
+import com.dc.commonlib.utils.MoneyUtils;
 import com.dc.module_bbs.projshow.ProjectItemBean;
 
 public class ProjectOverviewViewModel extends AbsViewModel<ProjectOverviewRespository> {
@@ -20,8 +21,9 @@ public class ProjectOverviewViewModel extends AbsViewModel<ProjectOverviewRespos
 
     private ProjectOverviewItem conversionData(ProjectItemBean itemBean) {
         ProjectOverviewItem projectOverviewItem = new ProjectOverviewItem();
-        projectOverviewItem.landArea = itemBean.getCovered_area() / 100 + "";
-        projectOverviewItem.constructionArea = itemBean.getConstruction_area() / 100 + "";
+        projectOverviewItem.landArea = MoneyUtils.percentagefor2(itemBean.getCovered_area()/100)+"";
+
+        projectOverviewItem.constructionArea = MoneyUtils.percentagefor2(itemBean.getConstruction_area()/100)+"";
         ProjectOverviewItem.ConstructionUnit constructionUnit = new ProjectOverviewItem.ConstructionUnit();
         constructionUnit.company = itemBean.getEmployer();
         constructionUnit.contact = itemBean.getEmployer_contact();

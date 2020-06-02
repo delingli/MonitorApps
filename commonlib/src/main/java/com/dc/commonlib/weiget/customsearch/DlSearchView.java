@@ -39,4 +39,8 @@ public class DlSearchView extends SearchView {
             mView.setBackgroundResource(R.color.transparent);
         }
     }
+
+    public SearchAutoComplete getmEdit() {
+        return mEdit;
+    }
 }

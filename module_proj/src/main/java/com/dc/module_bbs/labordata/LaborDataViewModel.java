@@ -51,6 +51,11 @@ public class LaborDataViewModel extends AbsWebSocketViewModel<LaborDataResposito
         }
     }
 
+    @Override
+    protected void onErrorMessage(String path, SocketResponse<String> socketresponse) {
+
+    }
+
     private void conversionTWokerDataBean(WokerDataBean wokerDataBean) {
 
         List<IAbsLaborData> ll = new ArrayList<>();
@@ -193,10 +198,7 @@ public class LaborDataViewModel extends AbsWebSocketViewModel<LaborDataResposito
         }
     }
 
-    @Override
-    protected void onErrorMessage(String path, int code, String mes) {
 
-    }
 
 
     @Override

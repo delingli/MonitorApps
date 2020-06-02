@@ -4,7 +4,12 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.style.StyleSpan;
+import android.text.style.TextAppearanceSpan;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -13,6 +18,7 @@ import android.widget.TextView;
 import com.dc.commonlib.common.BaseRecyclerAdapter;
 import com.dc.commonlib.common.BaseViewHolder;
 import com.dc.commonlib.common.MultiTypeSupport;
+import com.dc.commonlib.utils.MoneyUtils;
 import com.dc.commonlib.utils.UIUtils;
 import com.dc.module_bbs.R;
 import com.dc.module_bbs.preview.PreViewActivity;
@@ -44,26 +50,35 @@ public class ProjectShowAdapter extends BaseRecyclerAdapter<AbsProjectInfo> impl
         super(context, list, itemLayoutId);
         this.multiTypeSupport = this;
     }
+    private Spannable getSpannable(Context context,String s) {
 
+        SpannableStringBuilder spanBuilder = new SpannableStringBuilder(s);//text：文字
+
+        spanBuilder.setSpan(new TextAppearanceSpan(null, 0, UIUtils.dip2px(context, 16), null, null),//修改的字体大小
+
+                0, s.indexOf("\n"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        spanBuilder.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0,s.indexOf("\n"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+
+        return spanBuilder;
+    }
     private void initPieChart(PieChart pieChart) {
         pieChart.setDescription(null);
-//        Description description = pieChart.getDescription();
-//        description.setText(""); //设置描述的文字
-
         pieChart.setHighlightPerTapEnabled(true); //设置piecahrt图表点击Item高亮是否可用
-        pieChart.animateX(2000);
+        pieChart.animateX(1000);
         pieChart.setUsePercentValues(true);//设置使用百分比（后续有详细介绍）
-        pieChart.setDrawEntryLabels(false); // 设置entry中的描述label是否画进饼状图中
+        pieChart.setDrawEntryLabels(true); // 设置entry中的描述label是否画进饼状图中
         pieChart.setEntryLabelColor(Color.parseColor("#666666"));//设置该文字是的颜色
         pieChart.setEntryLabelTextSize(12f);//设置该文字的字体大小
 
         pieChart.setDrawHoleEnabled(true);//设置圆孔的显隐，也就是内圆
-        pieChart.setHoleRadius(51f);//设置内圆的半径。外圆的半径好像是不能设置的，改变控件的宽度和高度，半径会自适应。
+        pieChart.setHoleRadius(61f);//设置内圆的半径。外圆的半径好像是不能设置的，改变控件的宽度和高度，半径会自适应。
         pieChart.setHoleColor(Color.WHITE);//设置内圆的颜色
         pieChart.setDrawCenterText(true);//设置是否显示文字
         pieChart.setCenterTextSize(16f);//设置文字的消息
         pieChart.setCenterTextColor(Color.parseColor("#333333"));//设置文字的颜色
-        pieChart.setTransparentCircleRadius(25f);//设置内圆和外圆的一个交叉园的半径，这样会凸显内外部的空间
+        pieChart.setTransparentCircleRadius(15f);//设置内圆和外圆的一个交叉园的半径，这样会凸显内外部的空间
         pieChart.setTransparentCircleColor(Color.BLACK);//设置透明圆的颜色
         pieChart.setTransparentCircleAlpha(50);//设置透明圆你的透明度
 
@@ -86,33 +101,42 @@ public class ProjectShowAdapter extends BaseRecyclerAdapter<AbsProjectInfo> impl
     }
 
     private void initPieChartData(PieChart pieChart, ProjectInvestmentInfo projectinvestmentinfo) {
-        pieChart.setCenterText(projectinvestmentinfo.investment+"亿\n总投资额(亿)");//设置饼状图中心的文字
+        pieChart.setCenterTextSize(12);
+        pieChart.setCenterText( getSpannable(getContext(),projectinvestmentinfo.investment + "\n总投资额(亿)"));//设置饼状图中心的文字
 
         ArrayList<PieEntry> pieEntries = new ArrayList<>();
-          if(projectinvestmentinfo.invested!=0){
-            pieEntries.add(new PieEntry(projectinvestmentinfo.invested));
+        if (projectinvestmentinfo.noWorkInvestment != 0) {
+            pieEntries.add(new PieEntry(
+                    MoneyUtils.percentage(projectinvestmentinfo.investment,projectinvestmentinfo.noWorkInvestment)
+                    , "未投资额"));
         }
-        if(projectinvestmentinfo.noWorkInvestment!=0){
-            pieEntries.add(new PieEntry(projectinvestmentinfo.noWorkInvestment));
+        if (projectinvestmentinfo.invested != 0) {
+
+            pieEntries.add(new PieEntry(MoneyUtils.percentage(projectinvestmentinfo.investment,projectinvestmentinfo.invested), "已投资额"));
         }
+
 
         PieDataSet pieDataSet = new PieDataSet(pieEntries, null);
         pieDataSet.setColors(Color.parseColor("#cfdef9"), Color.parseColor("#36b365"));
         pieDataSet.setSliceSpace(3f);//设置每块饼之间的空隙
         pieDataSet.setSelectionShift(10f);//点击某个饼时拉长的宽度
-
+        pieDataSet.setSliceSpace(1f);//设置每块饼之间的空隙
+        pieDataSet.setSelectionShift(10f);//点击某个饼时拉长的宽度
+        pieDataSet.setValueLinePart1Length(0.3f);
+        pieDataSet.setValueLinePart2Length(0.4f);
+        pieDataSet.setValueLineColor(getContext().getResources().getColor(R.color.text_color_36b365));
+        pieDataSet.setXValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
+        pieDataSet.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
+        //数据连接线距图形片内部边界的距离，为百分数(0~100f)
+        pieDataSet.setValueLinePart1OffsetPercentage(100f);
+        //设置x,y在圆外显示的值为透明(transparent = 0x00000000)
+//        pieData.setValueTextColor(transparent);
+        pieDataSet.setValueLineColor(0xff000000);
         PieData pieData = new PieData(pieDataSet);
-
-//        DecimalFormat percentFormat = new DecimalFormat();
-//        percentFormat.applyPattern("#0%");
-//        PercentFormatter percentFormatter=new
         pieData.setValueFormatter(new PercentFormatter(new DecimalFormat("###,###,##0.00")));
-
-
         pieData.setDrawValues(true);
         pieData.setValueTextSize(12f);
         pieData.setValueTextColor(Color.parseColor("#333333"));
-        pieChart.setCenterTextSize(16);
         pieChart.setData(pieData);
         pieChart.invalidate();
 
@@ -161,6 +185,7 @@ public class ProjectShowAdapter extends BaseRecyclerAdapter<AbsProjectInfo> impl
         } else if (item instanceof ProjectInfoDetail) {
             final ProjectInfoDetail projectInfoDetail = (ProjectInfoDetail) item;
             TextView tv_proj_adress = holder.getView(R.id.tv_proj_adress);
+            TextView tv_state = holder.getView(R.id.tv_state);
             TextView tv_proj_adressinfo = holder.getView(R.id.tv_proj_adressinfo);
             TextView tv_planned_start_time = holder.getView(R.id.tv_planned_start_time);
             TextView tv_actual_start_time = holder.getView(R.id.tv_actual_start_time);
@@ -171,6 +196,16 @@ public class ProjectShowAdapter extends BaseRecyclerAdapter<AbsProjectInfo> impl
                 tv_planned_start_time.setText("-");
             } else {
                 tv_planned_start_time.setText(projectInfoDetail.startsTime);
+            }
+            if (TextUtils.equals(projectInfoDetail.project__status, "003")) {//在建
+                tv_state.setText(getContext().getResources().getString(R.string.under_construction));
+                tv_state.setBackgroundResource(R.drawable.bg_project_under_constructionbg);
+                tv_state.setTextColor(getContext().getResources().getColor(R.color.text_color_36b365));
+            } else if (TextUtils.equals(projectInfoDetail.project__status, "001")) {
+                tv_state.setBackgroundResource(R.drawable.bg_project_noworkbg);
+                tv_state.setTextColor(getContext().getResources().getColor(R.color.text_color_f54966));
+                //未开工
+                tv_state.setText(getContext().getResources().getString(R.string.no_works));
             }
             if (TextUtils.isEmpty(projectInfoDetail.actualConstructionTime)) {
                 tv_actual_start_time.setText("-");
@@ -240,6 +275,8 @@ public class ProjectShowAdapter extends BaseRecyclerAdapter<AbsProjectInfo> impl
             TextView tv_title = holder.getView(R.id.tv_title);
             TextView tv_complate_time = holder.getView(R.id.tv_complate_time);
             TextView tv_phase_title = holder.getView(R.id.tv_phase_title);
+            view_line_bg.setBackgroundColor(getContext().getResources().getColor(R.color.text_color_3476f9));
+
             if (projectInvestmentItem.phase) {  //节点
                 tv_complate_time.setVisibility(View.VISIBLE);
                 tv_complate_time.setText(projectInvestmentItem.real_date);
@@ -266,6 +303,7 @@ public class ProjectShowAdapter extends BaseRecyclerAdapter<AbsProjectInfo> impl
                         iv_state.setImageResource(R.drawable.notstarted);
                     }
                 }
+
             } else if (projectInvestmentItem.isFalseData) {
                 view_line_bg.setVisibility(View.VISIBLE);
                 tv_complate_time.setVisibility(View.INVISIBLE);
@@ -273,6 +311,7 @@ public class ProjectShowAdapter extends BaseRecyclerAdapter<AbsProjectInfo> impl
                 tv_phase_title.setVisibility(View.INVISIBLE);
                 tv_title.setVisibility(View.GONE);
             } else {
+
                 view_line_bg.setVisibility(View.VISIBLE);
                 tv_complate_time.setVisibility(View.INVISIBLE);
                 tv_phase_title.setVisibility(View.GONE);
@@ -285,6 +324,8 @@ public class ProjectShowAdapter extends BaseRecyclerAdapter<AbsProjectInfo> impl
                             R.drawable.choice);
                     tv_title.setCompoundDrawablesWithIntrinsicBounds(drawableLeft,
                             null, null, null);
+                    view_line_bg.setBackgroundColor(getContext().getResources().getColor(R.color.text_color_3476f9));
+
 //                    tv_title.setCompoundDrawablePadding(4);
                 } else {
                     tv_title.setTextColor(getContext().getResources().getColor(R.color.color_ababbb));
@@ -293,11 +334,14 @@ public class ProjectShowAdapter extends BaseRecyclerAdapter<AbsProjectInfo> impl
                     tv_title.setCompoundDrawablesWithIntrinsicBounds(drawableLeft,
                             null, null, null);
 //                    tv_title.setCompoundDrawablePadding(4);
+                    view_line_bg.setBackgroundColor(getContext().getResources().getColor(R.color.color_ababbb));
+
                 }
 
             }
 
 
+        } else if (item instanceof ProjLab) {
         }
     }
 
@@ -312,6 +356,9 @@ public class ProjectShowAdapter extends BaseRecyclerAdapter<AbsProjectInfo> impl
         } else if (item instanceof ProjectInvestmentItem.ProjectInvestmentItemBean) {
 //            return R.layout.proj_item_progress_items;
             return R.layout.proj_item_prohgress_itemz;
+        } else if (item instanceof ProjLab) {
+//            return R.layout.proj_item_progress_items;
+            return R.layout.proj_item_lab_show;
         }
         return 0;
     }

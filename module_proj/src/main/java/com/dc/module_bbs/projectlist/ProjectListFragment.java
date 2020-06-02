@@ -23,6 +23,7 @@ import com.dc.baselib.utils.ToastUtils;
 import com.dc.commonlib.common.BaseRecyclerAdapter;
 import com.dc.commonlib.utils.ArounterManager;
 import com.dc.commonlib.utils.HiddenAnimUtils;
+import com.dc.commonlib.weiget.StatusBarHeightView;
 import com.dc.commonlib.weiget.horizontalrecycle.DLHorizontalItem;
 import com.dc.module_bbs.R;
 import com.dc.module_bbs.projshow.ProjectShowActivity;
@@ -56,6 +57,7 @@ public class ProjectListFragment extends AbsLifecycleFragment<ProjectListViewMod
     public static String RAGIO_KEY = "ragin_key_project";
     private String currentType = LIST_TYPE;
     private LinearLayout ll_to_search;
+    private StatusBarHeightView mStatueBar;
 
     @Override
     public void dataObserver() {
@@ -95,13 +97,10 @@ public class ProjectListFragment extends AbsLifecycleFragment<ProjectListViewMod
             currentType = getArguments().getString(TYPE_KEY);
             region = getArguments().getString(RAGIO_KEY);
         }
-
+        view.findViewById(R.id.iv_left_back).setVisibility(View.GONE);
+        TextView tv_title = view.findViewById(R.id.tv_title);
+        tv_title.setText(getResources().getString(R.string.project));
         ll_to_search = view.findViewById(R.id.ll_to_search);
-        if (currentType.equals(SEARCH_TYPE)) {
-            ll_to_search.setVisibility(View.GONE);
-        } else {
-            ll_to_search.setVisibility(View.VISIBLE);
-        }
         tv_state = view.findViewById(R.id.tv_state);
         tv_area = view.findViewById(R.id.tv_area);
         iv_state_arrow1 = view.findViewById(R.id.iv_state_arrow);
@@ -120,6 +119,7 @@ public class ProjectListFragment extends AbsLifecycleFragment<ProjectListViewMod
         mStatePopupWindowView = new PopupWindowView(getContext(), 0);
         createPopupWindowData();
         mRecyclerView = view.findViewById(R.id.recyclerView);
+        mStatueBar = view.findViewById(R.id.statueBar);
         mRecyclerView.setBackgroundColor(getResources().getColor(R.color.bg_color_f7f8f9));
         view.findViewById(R.id.ll_address).setOnClickListener(this);
         view.findViewById(R.id.ll_state).setOnClickListener(this);
@@ -162,9 +162,12 @@ public class ProjectListFragment extends AbsLifecycleFragment<ProjectListViewMod
             public void onItemClickListener(View v, int position) {
                 if (mProjectItemAdapter.getList() != null && mProjectItemAdapter.getList().get(position) != null) {
                     ProjItems projItems = mProjectItemAdapter.getList().get(position);
-//                    ArounterManager.PROJ_SHOW_URL
-                    ARouter.getInstance().build(ArounterManager.PROJ_SHOW_URL).withInt("projectid", projItems.project_id).navigation();
-//                    ProjectShowActivity.startActivity(getContext(), projItems.project_id);
+                    if (TextUtils.equals(projItems.project__status, "001")) {
+                        ToastUtils.showToast(getContext().getString(R.string.project_no_works));
+                    } else {
+                        ARouter.getInstance().build(ArounterManager.PROJ_SHOW_URL).withInt("projectid", projItems.project_id).navigation();
+
+                    }
                 }
 
             }
@@ -188,6 +191,13 @@ public class ProjectListFragment extends AbsLifecycleFragment<ProjectListViewMod
                 objectAnimator.start();
             }
         });
+        if (currentType.equals(SEARCH_TYPE)) {
+            ll_to_search.setVisibility(View.GONE);
+            mStatueBar.setVisibility(View.GONE);
+        } else {
+            ll_to_search.setVisibility(View.VISIBLE);
+            mStatueBar.setVisibility(View.VISIBLE);
+        }
     }
 
     private int checkReginforPosition() {
@@ -259,7 +269,7 @@ public class ProjectListFragment extends AbsLifecycleFragment<ProjectListViewMod
             objectAnimator.setInterpolator(new LinearInterpolator());
             objectAnimator.start();
         } else if (v.getId() == R.id.ll_to_search) {
-            SearchActivity.startActivity(getContext());
+            SearchActivity.startActivity(getContext(), true);
         }
     }
 

@@ -71,7 +71,7 @@ dependencies {
     api(deps.glide) {
         exclude group: "com.android.support"
     }
-    api 'com.github.PhilJay:MPAndroidChart:v3.0.3'
+    api 'com.github.PhilJay:MPAndroidChart:v3.0.2'
     api 'com.youth.banner:banner:1.4.10'
     api fileTree(dir: 'libs', include: ['*.aar', '*.jar'], exclude: [])  //最新版本
 

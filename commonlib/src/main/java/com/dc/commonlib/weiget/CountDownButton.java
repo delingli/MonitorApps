@@ -51,7 +51,7 @@ public class CountDownButton extends AppCompatButton implements LifecycleObserve
      * 页面关闭后倒计时是否保持，再次开启倒计时继续
      */
     private boolean mCloseKeepCountDown = false;
-    private int textColor = Color.GRAY;
+    private int textColor = Color.parseColor("#ababbb");
     private int defaultColor = Color.GREEN;
 
     /**
@@ -420,6 +420,11 @@ public class CountDownButton extends AppCompatButton implements LifecycleObserve
     public void setEnabled(boolean enabled) {
         if (isCounting) {
             return;
+        }
+        if(enabled){
+            setTextColor(defaultColor);
+        }else {
+            setTextColor(textColor);
         }
         super.setEnabled(enabled);
 

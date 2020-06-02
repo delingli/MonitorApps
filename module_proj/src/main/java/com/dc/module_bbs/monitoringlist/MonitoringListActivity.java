@@ -63,8 +63,10 @@ public class MonitoringListActivity extends AbsLifecycleActivity<MonitoringListV
         mRefreshLayout.setOnRefreshListener(this);
         mRefreshLayout.setOnLoadMoreListener(this);
         recyclerView = findViewById(R.id.recyclerView);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(monitoringAdapter = new MonitoringAdapter(this, null, -1));
+        monitoringAdapter.setEmptyImg(R.drawable.no_data);
         if (projectId != -1) {
             mRefreshLayout.autoRefresh();
         }
@@ -99,8 +101,8 @@ public class MonitoringListActivity extends AbsLifecycleActivity<MonitoringListV
 
     @Override
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-        if (VideoAccountInfoManager.getInstance().getVideoAccountInfo(BaseApplication.getsInstance(),projectId+"") != null) {
-            if (VideoAccountInfoManager.getInstance().getVideoAccountInfo(BaseApplication.getsInstance(),projectId+"").isLogin()) {
+        if (VideoAccountInfoManager.getInstance().getVideoAccountInfo(BaseApplication.getsInstance(), projectId + "") != null) {
+            if (VideoAccountInfoManager.getInstance().getVideoAccountInfo(BaseApplication.getsInstance(), projectId + "").isLogin()) {
                 mViewModel.getVideoListInfo(false, projectId);
             } else {
                 mViewModel.getHkPlayerAccount(projectId);
@@ -110,8 +112,8 @@ public class MonitoringListActivity extends AbsLifecycleActivity<MonitoringListV
 
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-        if (VideoAccountInfoManager.getInstance().getVideoAccountInfo(BaseApplication.getsInstance(),projectId+"") != null) {
-            if (VideoAccountInfoManager.getInstance().getVideoAccountInfo(BaseApplication.getsInstance(),projectId+"").isLogin()) {
+        if (VideoAccountInfoManager.getInstance().getVideoAccountInfo(BaseApplication.getsInstance(), projectId + "") != null) {
+            if (VideoAccountInfoManager.getInstance().getVideoAccountInfo(BaseApplication.getsInstance(), projectId + "").isLogin()) {
                 mViewModel.getVideoListInfo(true, projectId);
             } else {
                 mViewModel.getHkPlayerAccount(projectId);

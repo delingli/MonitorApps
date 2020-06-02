@@ -29,6 +29,7 @@ import com.dc.commonlib.utils.UUIDUtils;
 import com.dc.commonlib.weiget.CountDownButton;
 import com.dc.module_main.MainActivity;
 import com.dc.module_main.R;
+
 @Route(path = ArounterManager.LOGINACTIVITY_URL)
 public class LoginActivity extends AbsLifecycleActivity<LoginViewModel> implements View.OnClickListener {
 
@@ -38,6 +39,7 @@ public class LoginActivity extends AbsLifecycleActivity<LoginViewModel> implemen
     private Button btn_logins;
     private LinearLayout ll_verify_root;
     private String randomKey;
+    private ImageView iv_del;
 
     public static void startActivity(Context context) {
         Intent intent = new Intent(context, LoginActivity.class);
@@ -54,7 +56,9 @@ public class LoginActivity extends AbsLifecycleActivity<LoginViewModel> implemen
         super.initView(savedInstanceState);
         setmToolBarlheadHide(true);
         btn_logins = findViewById(R.id.btn_logins);
+        iv_del = findViewById(R.id.iv_del);
         btn_logins.setOnClickListener(this);
+        iv_del.setOnClickListener(this);
         et_phone = findViewById(R.id.et_phone);
         mCountDownButton = findViewById(R.id.btn_verification_code);
         img_captcha = findViewById(R.id.img_captcha);
@@ -65,7 +69,6 @@ public class LoginActivity extends AbsLifecycleActivity<LoginViewModel> implemen
         EditTextWatcher textWatcher = new EditTextWatcher();
         et_phone.addTextChangedListener(textWatcher);
         et_verification_code.addTextChangedListener(textWatcher);
-
 
     }
 
@@ -85,6 +88,7 @@ public class LoginActivity extends AbsLifecycleActivity<LoginViewModel> implemen
                         mCountDownButton.setEnabled(et_verification_code.getText().length() > 0);
                     }
                 }).setOnClickListener(this);
+        mCountDownButton.setEnabled(false);
     }
 
 
@@ -104,12 +108,15 @@ public class LoginActivity extends AbsLifecycleActivity<LoginViewModel> implemen
                 finish();
             }
         });
-        registerSubscriber(mViewModel.EVENT_SHOW_CAPTURE, Boolean.class).observe(this, new Observer<Boolean>() {
+        registerSubscriber(mViewModel.EVENT_SHOW_CAPTURE, String.class).observe(this, new Observer<String>() {
             @Override
-            public void onChanged(@Nullable Boolean capture) {
-                if(capture){
+            public void onChanged(@Nullable String capture) {
+                if (capture.equals(mViewModel.sucess)) {
                     ll_verify_root.setVisibility(View.VISIBLE);
                     createRandKey();
+                } else {
+                    ll_verify_root.setVisibility(View.GONE);
+
                 }
             }
         });
@@ -135,6 +142,14 @@ public class LoginActivity extends AbsLifecycleActivity<LoginViewModel> implemen
         public void afterTextChanged(Editable s) {
             String account = et_phone.getText().toString();
             String et_verification_codes = et_verification_code.getText().toString();
+
+            if (!TextUtils.isEmpty(account)) {
+                iv_del.setVisibility(View.VISIBLE);
+            } else {
+                iv_del.setVisibility(View.INVISIBLE);
+            }
+
+
             mCountDownButton.setEnabled(account.length() > 0);
             if (!TextUtils.isEmpty(account) && !TextUtils.isEmpty(et_verification_codes)) {
                 if (et_verification_codes.length() < 4) {
@@ -179,10 +194,13 @@ public class LoginActivity extends AbsLifecycleActivity<LoginViewModel> implemen
                 return;
             }
             mViewModel.onVerifyClick(phone, graphicCode, randomKey);
+        } else if (id == R.id.iv_del) {
+            et_phone.setText("");
         }
 
 
     }
+
     private void createRandKey() {
         randomKey = UUIDUtils.createUUid();
         String url = Environment.getInstance().getHttpUrl() + WSAPI.CAPTCHA_CODE + randomKey + "/";

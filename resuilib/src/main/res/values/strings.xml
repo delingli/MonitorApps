@@ -24,7 +24,7 @@
     <string name="supervision_unit">监理单位</string>
     <string name="labor_data">劳务数据</string>
     <string name="proj_list">项目列表</string>
-    <string name="no_work">未开工(个)</string>
+    <string name="no_work">未开工</string>
     <string name="under_construction">在建</string>
     <string name="planned_start_time">计划开工时间</string>
     <string name="actual_start_time">实际开工时间</string>
@@ -42,6 +42,7 @@
     <string name="alls">全部</string>
     <string name="tip_input_key">请输入关键词</string>
     <string name="project_show">项目展示</string>
+    <string name="project_no_works">项目未开工</string>
 
     <!--登录-->
     <!--s-->
@@ -54,7 +55,7 @@
     <string name="login">立即登录</string>
 
     <string name="login_welcome_language">欢迎来到XXX</string>
-    <string name="proj_desc">项目概括</string>
+    <string name="proj_desc">项目概况</string>
     <string name="all_count">总数(个)</string>
     <string name="investment_proportion">投资额比例</string>
     <string name="already_investment">已投资额</string>
@@ -66,7 +67,7 @@
 
     <!--注册-->
     <string name="regist_hint_email">请输入邮箱</string>
-    <string name="regist_hint_verification_code">验证码</string>
+    <string name="regist_hint_verification_code">请输入验证码</string>
     <string name="regist_get_verification_code">获取验证码</string>
     <string name="regist_hint_username">设置用户名/不可更改</string>
     <string name="regist_hint_password">设置密码</string>

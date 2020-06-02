@@ -28,6 +28,8 @@ public class LoginViewModel extends AbsWebSocketViewModel<LoginRespository> {
     public String EVENT_SENDSMS_SUCESS;
     private boolean needVerifyCodeCaptcha = false;
     private boolean needLoginaptcha = false;
+    public static String sucess = "sucess";
+    public static String hide = "hide";
 
     public LoginViewModel(@NonNull Application application) {
         super(application);
@@ -51,7 +53,12 @@ public class LoginViewModel extends AbsWebSocketViewModel<LoginRespository> {
                     ToastUtils.showToast(getApplication().getResources().getString(R.string.no_permissions_login));
                     return;
                 }
-                postData(EVENT_SHOW_CAPTURE, needLoginaptcha);
+                if (needLoginaptcha) {
+                    postData(EVENT_SHOW_CAPTURE, sucess);
+
+                } else {
+                    postData(EVENT_SHOW_CAPTURE, hide);
+                }
                 //弹出提示
                 ToastUtils.showToast(socketresponse.msg);
             }
@@ -61,7 +68,13 @@ public class LoginViewModel extends AbsWebSocketViewModel<LoginRespository> {
                     JSONObject jsonObject = new JSONObject(socketresponse.data);
                     boolean captcha = jsonObject.optBoolean("captcha");
                     needVerifyCodeCaptcha = captcha;
-                    postData(EVENT_SHOW_CAPTURE, needVerifyCodeCaptcha);
+                    if (needVerifyCodeCaptcha) {
+                        postData(EVENT_SHOW_CAPTURE, sucess);
+                    } else {
+                        postData(EVENT_SHOW_CAPTURE, hide);
+
+                    }
+
                     ToastUtils.showToast(socketresponse.msg);
                     postData(EVENT_SENDSMS_SUCESS, "captures");
                 } catch (JSONException e) {
@@ -74,21 +87,46 @@ public class LoginViewModel extends AbsWebSocketViewModel<LoginRespository> {
     }
 
     @Override
-    protected void onErrorMessage(String path, int code, String mes) {
-        ToastUtils.showToast(mes);
+    protected void onErrorMessage(String path, SocketResponse<String> socketresponse) {
+        ToastUtils.showToast(socketresponse.msg);
         if (TextUtils.equals(WSAPI.LOGIN_PATH, path)) {
-            if (code == CommonErrorCode.graphic_verification_code) {
-                needLoginaptcha = true;
-                postData(EVENT_SHOW_CAPTURE, needLoginaptcha);
+            if (socketresponse.data != null) {
+                try {
+                    JSONObject jsonObject = new JSONObject(socketresponse.data);
+                    needLoginaptcha = jsonObject.optBoolean("captcha");
+                    if(needLoginaptcha){
+                        postData(EVENT_SHOW_CAPTURE, sucess);
+
+                    }else {
+                        postData(EVENT_SHOW_CAPTURE, hide);
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
 
         } else if (TextUtils.equals(WSAPI.LoginVerifyCode, path)) {
-            if (code == CommonErrorCode.graphic_verification_code) {
-                needVerifyCodeCaptcha = true;
-                postData(EVENT_SHOW_CAPTURE, needVerifyCodeCaptcha);
+            if (socketresponse.code == CommonErrorCode.graphic_verification_code) {
+                if (socketresponse.data != null) {
+                    try {
+                        JSONObject jsonObject = new JSONObject(socketresponse.data);
+                        needVerifyCodeCaptcha= jsonObject.optBoolean("captcha");
+                        if(needVerifyCodeCaptcha){
+                            postData(EVENT_SHOW_CAPTURE, sucess);
+
+                        }else {
+                            postData(EVENT_SHOW_CAPTURE, hide);
+
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         }
     }
+
 
     public void loginWithVerificationCode(String account, String sms, String captcha_code, String randomKey) {
         try {
@@ -123,7 +161,7 @@ public class LoginViewModel extends AbsWebSocketViewModel<LoginRespository> {
             if (needVerifyCodeCaptcha) {
                 if (TextUtils.isEmpty(captcha_code)) {
                     ToastUtils.showToast(getApplication().getString(R.string.tip_capture_format));
-                    postData(EVENT_SHOW_CAPTURE, needVerifyCodeCaptcha);
+                    postData(EVENT_SHOW_CAPTURE, sucess);
                     return;
                 }
 
@@ -153,7 +191,7 @@ public class LoginViewModel extends AbsWebSocketViewModel<LoginRespository> {
                 try {
                     User user = JsonUtil.fromJson(textResponse.getResponseData(), User.class);
                     if (null != user && user.captcha) {
-                        postData(EVENT_SHOW_CAPTURE, "sucess");
+                        postData(EVENT_SHOW_CAPTURE, sucess);
                     }
           /*          WSCommonEntity<User> entity = JSON.parseObject(textResponse.getResponseData(), new TypeReference<CommonEntity<UserInfo>>() {
                     });

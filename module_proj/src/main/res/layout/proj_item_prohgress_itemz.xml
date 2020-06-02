@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dp_19">
+    android:layout_height="@dimen/dp_25">
 
     <TextView
         android:id="@+id/tv_complate_time"
@@ -29,13 +29,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="@dimen/dp_158" />
+        app:layout_constraintGuide_begin="@dimen/dp_130" />
 
     <FrameLayout
         android:id="@+id/fl_center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dp_9"
         app:layout_constraintLeft_toLeftOf="@+id/proj_guideline2"
         app:layout_constraintStart_toStartOf="@+id/proj_guideline2"
         app:layout_constraintTop_toTopOf="parent">
@@ -62,6 +61,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/dp_9"
+        android:layout_marginRight="@dimen/dp_12"
         app:layout_constraintLeft_toRightOf="@+id/fl_center"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_goneMarginLeft="@dimen/dp_20">
@@ -82,7 +82,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:drawableLeft="@drawable/choice"
+            android:layout_marginTop="@dimen/dp_3"
             android:drawablePadding="@dimen/dp_4"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:maxLines="1"
             android:gravity="center"
             android:textColor="@color/text_color_3476f9"
             android:textSize="@dimen/dp_15"

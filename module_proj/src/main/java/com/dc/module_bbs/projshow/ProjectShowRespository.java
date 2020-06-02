@@ -58,20 +58,22 @@ public class ProjectShowRespository extends BaseRespository {
             projectInfoDetail.startsTime = projItemsBean.getPlan_start_day();
             projectInfoDetail.endTime = projItemsBean.getPlan_end_day();
             projectInfoDetail.actualConstructionTime = projItemsBean.getReal_start_day();
+            projectInfoDetail.project__status=projItemsBean.getProject__status();
             projectInfoDetail.projectItemBean = projItemsBean;
             list.add(projectInfoDetail);
 
             ProjectInvestmentInfo projectInvestmentInfo = new ProjectInvestmentInfo();
-            projectInvestmentInfo.invested = MoneyUtils.yuanToHundredMillion(projItemsBean.getInvested());
-            projectInvestmentInfo.investment = MoneyUtils.yuanToHundredMillion(projItemsBean.getInvestment());
+            projectInvestmentInfo.invested = (float) MoneyUtils.yuanToHundredMillion(projItemsBean.getInvested());
+            projectInvestmentInfo.investment =(float) MoneyUtils.yuanToHundredMillion(projItemsBean.getInvestment());
 
             String s = MoneyUtils.subtract(projItemsBean.getInvestment(), projItemsBean.getInvested());
-            projectInvestmentInfo.noWorkInvestment = MoneyUtils.yuanToHundredMillion(s);
+            projectInvestmentInfo.noWorkInvestment =(float) MoneyUtils.yuanToHundredMillion(s);
             LogUtil.d("YUAN:", "已投资：" + projItemsBean.getInvested() + "转换亿后:" + projectInvestmentInfo.invested
                     + "总投资:" + projItemsBean.getInvestment() + "转换亿后:" + projectInvestmentInfo.investment
                     + "未投资:" + s + "转换亿后:"
                     + projectInvestmentInfo.noWorkInvestment);
             list.add(projectInvestmentInfo);
+
 
 
             List<ProjectItemBean.MileStonesBean> mile_stones = projItemsBean.getMile_stones();
@@ -111,6 +113,9 @@ public class ProjectShowRespository extends BaseRespository {
 
                 }
             }
+
+            ProjLab projLab=new ProjLab();
+            list.add(projLab);
             if (null != projectInvestmentItemList) {
                 list.addAll(projectInvestmentItemList);
             }

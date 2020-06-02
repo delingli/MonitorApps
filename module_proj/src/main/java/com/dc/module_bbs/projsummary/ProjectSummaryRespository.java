@@ -50,14 +50,20 @@ public class ProjectSummaryRespository extends BaseRespository {
         if (null != homebean) {
             ProjectAreaItem projectAreaItem = new ProjectAreaItem();
             projectAreaItem.construction_project_cnt = homebean.construction_project_cnt;
-            projectAreaItem.invested = MoneyUtils.yuanToHundredMillion(homebean.invested + "");
-            projectAreaItem.investment = MoneyUtils.yuanToHundredMillion(homebean.investment + "");
-//            projectAreaItem.noWorkInvestment = MoneyUtils.yuanToHundredMillion((homebean.investment - homebean.invested) + "");
-            projectAreaItem.  noWorkInvestment=MoneyUtils.yuanToHundredMillion(homebean.prepare_investment+"");
-            projectAreaItem.  construction_investment=MoneyUtils.yuanToHundredMillion(homebean.construction_investment+"");
+            projectAreaItem.invested = (float) MoneyUtils.yuanToHundredMillion(homebean.invested + "");
+            projectAreaItem.investment =(float) MoneyUtils.yuanToHundredMillion(homebean.investment + "");
+
+
+            projectAreaItem.Noinvestment = (float) MoneyUtils.yuanToHundredMillion((homebean.investment - homebean.invested) + "");
+
+
+            projectAreaItem.  prepare_investment=(float) MoneyUtils.yuanToHundredMillion(homebean.prepare_investment+"");
+            projectAreaItem.  construction_investment=(float) MoneyUtils.yuanToHundredMillion(homebean.construction_investment+"");
             if (homebean.region_projects != null) {
                 if (TextUtils.equals(region, "东洲")) {
-
+                    projectAreaItem.prepare_project_cnt = homebean.region_projects.dongzhou.get(0);
+                    projectAreaItem.construction_project_cnt = homebean.region_projects.dongzhou.get(1);
+                    projectAreaItem.project_cnt = homebean.region_projects.dongzhou.get(0) + homebean.region_projects.dongzhou.get(1);
                 } else if (TextUtils.equals(region, "银湖")) {
                     projectAreaItem.prepare_project_cnt = homebean.region_projects.yinhu.get(0);
                     projectAreaItem.construction_project_cnt = homebean.region_projects.yinhu.get(1);
@@ -83,9 +89,7 @@ public class ProjectSummaryRespository extends BaseRespository {
                 }
 
             }
-            projectAreaItem.WorksPercentage = MoneyUtils.percentage(homebean.investment + "", homebean.invested + "");
-            projectAreaItem.noWorksPercentage = MoneyUtils.percentage(homebean.investment + "", (homebean.investment - homebean.invested) + "");
-//最后格式化并输出
+            //最后格式化并输出
 
             if (homebean.schedule_summary != null && !homebean.schedule_summary.isEmpty()) {
                 ProjectAreaItem.ScheduleSummary scheduleSummary;

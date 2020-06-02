@@ -91,7 +91,8 @@ public abstract class AbsWebSocketViewModel<T extends BaseRespository> extends A
                 } else if (entityFromResponse.code >= 1000 && entityFromResponse.code < 2000) {
                     onProcessedMessage(entityFromResponse.command.path, entityFromResponse);
                 } else {
-                    onErrorMessage(entityFromResponse.command.path,entityFromResponse.code, entityFromResponse.msg);
+                    onErrorMessage(entityFromResponse.command.path, entityFromResponse);
+
                 }
             }
 
@@ -105,7 +106,7 @@ public abstract class AbsWebSocketViewModel<T extends BaseRespository> extends A
 
     protected abstract void onProcessedMessage(String path, SocketResponse<String> socketresponse);
 
-    protected abstract void onErrorMessage(String path,int code, String mes);
+    protected abstract void onErrorMessage(String path,SocketResponse<String> socketresponse);
 
     @Override
     public void onPing(Framedata framedata) {

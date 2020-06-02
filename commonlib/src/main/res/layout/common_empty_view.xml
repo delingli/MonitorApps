@@ -14,10 +14,9 @@
 
         <ImageView
             android:id="@+id/iv_tippic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            />
+            android:layout_width="@dimen/dp_158"
+            android:layout_height="@dimen/dp_112"
+            android:src="@drawable/no_data" />
 
         <TextView
             android:id="@+id/tv_empty_text"

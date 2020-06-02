@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -67,6 +68,8 @@ public class ProjectShowActivity extends AbsLifecycleActivity<ProjectShowViewMod
         refreshLayout.setEnableRefresh(false);
         refreshLayout.setEnableLoadMore(false);
         mRecyclerView = findViewById(R.id.recyclerView);
+        mRecyclerView.setBackgroundColor(getResources().getColor(R.color.white));
+
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mProjectShowAdapter = new ProjectShowAdapter(this, null, -1);
         mViewModel.getProjectList(project);

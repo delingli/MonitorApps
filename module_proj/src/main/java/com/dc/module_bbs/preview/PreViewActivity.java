@@ -13,10 +13,10 @@ import java.util.Arrays;
 
 public class PreViewActivity extends AbsLifecycleActivity<PreViewViewModel> {
 
-    private ViewPager mViewPager;
     private String[] picUrls;
-    private CustomPagerAdapter mCustomPagerAdapter;
     private int pos;
+    private CustomViewPager mViewPager;
+    private CustomPagerAdapter mCustomPagerAdapter;
 
     @Override
     protected int getLayout() {
@@ -43,10 +43,10 @@ public class PreViewActivity extends AbsLifecycleActivity<PreViewViewModel> {
         }
         mViewPager = findViewById(R.id.viewPager);
         mCustomPagerAdapter = new CustomPagerAdapter(Arrays.asList(picUrls), PreViewActivity.this);
-//        mViewPager.setAdapter();
         mViewPager.setAdapter(mCustomPagerAdapter);
         mViewPager.setCurrentItem(pos);
-        StarusBarUtils.setStatusBarColor(this,R.color.black);
+        mViewPager.startLoop();
+        StarusBarUtils.setStatusBarColor(this, R.color.black);
     }
 
     @Override

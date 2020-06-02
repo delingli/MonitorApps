@@ -32,6 +32,9 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
     public void initView(View view) {
 
         tv_names = view.findViewById(R.id.tv_names);
+        view.findViewById(R.id.iv_left_back).setVisibility(View.GONE);
+       TextView tv_title= view.findViewById(R.id.tv_title);
+       tv_title.setText(getResources().getString(R.string.me_title));
         view.findViewById(R.id.tv_login_out).setOnClickListener(this);
         tv_phone = view.findViewById(R.id.tv_phone);
         if (UserManager.getInstance().isLogin()) {
