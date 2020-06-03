@@ -80,7 +80,7 @@ public class ProjectSummaryActivity extends AbsLifecycleActivity<ProjectSummaryV
         setTitle(region);
         btn_projList = findViewById(R.id.btn_projList);
         recycleview = findViewById(R.id.recycleview);
-        recycleview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
+        recycleview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
         btn_projList.setOnClickListener(this);
         tv_already_investment = findViewById(R.id.tv_already_investment);
@@ -226,13 +226,13 @@ public class ProjectSummaryActivity extends AbsLifecycleActivity<ProjectSummaryV
         ArrayList<PieEntry> pieEntries = new ArrayList<>();
 
         if (projectareaitem.invested != 0) {
-            double percentage = MoneyUtils.percentage(projectareaitem.investment+"", projectareaitem.invested+"");
+            double percentage = MoneyUtils.percentage(projectareaitem.investment, projectareaitem.invested);
 
             pieEntries.add(new PieEntry((float) percentage, "已投资额"));
         }
         PieDataSet pieDataSet = new PieDataSet(pieEntries, null);
         if (projectareaitem.Noinvestment != 0) {
-            double percentage = MoneyUtils.percentage(projectareaitem.investment+"", projectareaitem.Noinvestment+"");
+            double percentage = MoneyUtils.percentage(projectareaitem.investment, projectareaitem.Noinvestment);
             pieEntries.add(new PieEntry((float) percentage, "未投资额"));
         }
         pieDataSet.setColors(Color.parseColor("#36b365"), Color.parseColor("#cfdef9"));
@@ -456,7 +456,7 @@ public class ProjectSummaryActivity extends AbsLifecycleActivity<ProjectSummaryV
         }
         ProjItemBootomAdapter projItemBootomAdapter = new ProjItemBootomAdapter(ProjectSummaryActivity.this, xValue, -1);
         recycleview.setAdapter(projItemBootomAdapter);
-        xAxis.setValueFormatter(new IndexAxisValueFormatter(xValue));//设置x轴标签格式化器
+//        xAxis.setValueFormatter(new IndexAxisValueFormatter(xValue));//设置x轴标签格式化器
 
 
         BarDataSet barDataSet = new BarDataSet(barEntries, "");

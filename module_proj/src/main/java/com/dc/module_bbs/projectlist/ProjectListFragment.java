@@ -244,7 +244,7 @@ public class ProjectListFragment extends AbsLifecycleFragment<ProjectListViewMod
 
     private boolean refresh = true;
 
-    private void toGetProjectList() {
+    public void toGetProjectList() {
         mViewModel.getProjectList(refresh, getProject__status, region);
     }
 

@@ -13,6 +13,7 @@ import com.dc.baselib.BaseApplication;
 import com.dc.commonlib.common.BaseRecyclerAdapter;
 import com.dc.commonlib.common.BaseViewHolder;
 import com.dc.commonlib.common.MultiTypeSupport;
+import com.dc.commonlib.commonentity.video.CameraType;
 import com.dc.commonlib.commonentity.video.DisplayVideoPlayerManager;
 import com.dc.commonlib.commonentity.video.VideoAccountBean;
 import com.dc.commonlib.commonentity.video.VideoAccountInfoManager;
@@ -123,9 +124,14 @@ public class HomeMainAdapter extends BaseRecyclerAdapter<IAbsHomeItem> implement
             }*/
             holder.setTag(videodisplayview);
             videodisplayview.setDisplayMode(DisplayMode.LIVE);
-            if (null != videomonitoringhomeitem.listBean && videomonitoringhomeitem.isFirst) {
-                LogUtil.d("LDL", "播放执行调用..");
-                videodisplayview.startPreview(videomonitoringhomeitem.listBean);
+            if (null != videomonitoringhomeitem.listBean ) {
+                if( videomonitoringhomeitem.isFirst){
+                    LogUtil.d("LDL", "播放执行调用..");
+
+                    videodisplayview.startPreview(videomonitoringhomeitem.listBean);
+                }
+                int cameraType = videomonitoringhomeitem.listBean.getCameraType();
+
             }
             tv_title.setText(videomonitoringhomeitem.name);
         } else if (iAbsHomeItem instanceof ProjectOverviewHomeItem) {

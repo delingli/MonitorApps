@@ -181,6 +181,7 @@
                 <android.support.v7.widget.RecyclerView
                     android:layout_width="match_parent"
                     android:id="@+id/recycleview"
+                    android:layout_marginLeft="@dimen/dp_30"
                     android:background="@color/white"
                     android:layout_height="wrap_content"/>
 

@@ -7,7 +7,9 @@ import android.support.v7.widget.SearchView;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.dc.baselib.mvvm.BaseActivity;
 import com.dc.commonlib.utils.KeyBoardUtils;
@@ -21,6 +23,7 @@ public class SearchActivity extends BaseActivity {
     private DlSearchView dlSearchView;
     private ProjectListFragment mProjectListFragment;
     private boolean mForSearch;
+
     @Override
     protected int getLayout() {
         return R.layout.proj_search_fragment;
@@ -87,9 +90,28 @@ public class SearchActivity extends BaseActivity {
                 return false;
             }
         });
+/*        dlSearchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                fillData();
+                return false;
+            }
+        });*/
+        final TextView textView = dlSearchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+        ImageView mCloseButton = dlSearchView.findViewById(android.support.v7.appcompat.R.id.search_close_btn);
+        if (mCloseButton.isClickable()) {
+            mCloseButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //清除搜索框并加载默认数据
+                    dlSearchView.clearFocus();
+                    textView.setText(null);
 
+                    fillData();
+                }
+            });
+        }
     }
-
     private void showInputMethod(View view) {
         KeyBoardUtils.showSoftInputMode(this, view);
     }
@@ -97,6 +119,12 @@ public class SearchActivity extends BaseActivity {
     private void search(String s) {
         if (null != mProjectListFragment) {
             mProjectListFragment.toSearch(s);
+        }
+    }
+
+    private void fillData() {
+        if (null != mProjectListFragment) {
+            mProjectListFragment.toGetProjectList();
         }
     }
 

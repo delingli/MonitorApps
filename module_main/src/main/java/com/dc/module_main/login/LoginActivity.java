@@ -170,18 +170,10 @@ public class LoginActivity extends AbsLifecycleActivity<LoginViewModel> implemen
         String graphicCode = et_captcha_code.getText().toString().trim();
         String verification_code = et_verification_code.getText().toString().trim();
         if (id == R.id.btn_logins) {
-//            if (UIUtils.isMobileNO(phone)) {
-//                ToastUtils.showToast(getResources().getString(R.string.hint_input_phone));
-//                return;
-//            }
             if (ll_verify_root.getVisibility() == View.VISIBLE && TextUtils.isEmpty(graphicCode)) {
                 ToastUtils.showToast(getResources().getString(R.string.tip_capture_format));
                 return;
             }
-//            if (ll_verify_root.getVisibility() == View.VISIBLE) {
-//                parameters.put("rand_captcha_key", randomKey);
-//                parameters.put("captcha_code", captcha);
-//            }
             mViewModel.loginWithVerificationCode(phone, verification_code, graphicCode, randomKey);
         } else if (id == R.id.img_captcha) {
             if (ll_verify_root.getVisibility() != View.VISIBLE) {
