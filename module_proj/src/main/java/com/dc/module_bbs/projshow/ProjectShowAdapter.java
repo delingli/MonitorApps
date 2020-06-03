@@ -19,6 +19,7 @@ import com.dc.commonlib.common.BaseRecyclerAdapter;
 import com.dc.commonlib.common.BaseViewHolder;
 import com.dc.commonlib.common.MultiTypeSupport;
 import com.dc.commonlib.utils.MoneyUtils;
+import com.dc.commonlib.utils.TextColorSizeHelper;
 import com.dc.commonlib.utils.UIUtils;
 import com.dc.module_bbs.R;
 import com.dc.module_bbs.preview.PreViewActivity;
@@ -50,7 +51,8 @@ public class ProjectShowAdapter extends BaseRecyclerAdapter<AbsProjectInfo> impl
         super(context, list, itemLayoutId);
         this.multiTypeSupport = this;
     }
-    private Spannable getSpannable(Context context,String s) {
+
+    private Spannable getSpannable(Context context, String s) {
 
         SpannableStringBuilder spanBuilder = new SpannableStringBuilder(s);//text：文字
 
@@ -58,11 +60,12 @@ public class ProjectShowAdapter extends BaseRecyclerAdapter<AbsProjectInfo> impl
 
                 0, s.indexOf("\n"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-        spanBuilder.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0,s.indexOf("\n"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spanBuilder.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, s.indexOf("\n"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 
         return spanBuilder;
     }
+
     private void initPieChart(PieChart pieChart) {
         pieChart.setDescription(null);
         pieChart.setHighlightPerTapEnabled(true); //设置piecahrt图表点击Item高亮是否可用
@@ -102,18 +105,18 @@ public class ProjectShowAdapter extends BaseRecyclerAdapter<AbsProjectInfo> impl
 
     private void initPieChartData(PieChart pieChart, ProjectInvestmentInfo projectinvestmentinfo) {
         pieChart.setCenterTextSize(12);
-        pieChart.setCenterText( getSpannable(getContext(),projectinvestmentinfo.investment + "\n总投资额(亿)"));//设置饼状图中心的文字
+        pieChart.setCenterText(getSpannable(getContext(), projectinvestmentinfo.investment + "\n总投资额(亿)"));//设置饼状图中心的文字
         pieChart.setRotationAngle(0);
 
         ArrayList<PieEntry> pieEntries = new ArrayList<>();
         if (projectinvestmentinfo.noWorkInvestment != 0) {
             pieEntries.add(new PieEntry(
-                    MoneyUtils.percentage(projectinvestmentinfo.investment,projectinvestmentinfo.noWorkInvestment)
+                    MoneyUtils.percentage(projectinvestmentinfo.investment, projectinvestmentinfo.noWorkInvestment)
                     , "未投资额"));
         }
         if (projectinvestmentinfo.invested != 0) {
 
-            pieEntries.add(new PieEntry(MoneyUtils.percentage(projectinvestmentinfo.investment,projectinvestmentinfo.invested), "已投资额"));
+            pieEntries.add(new PieEntry(MoneyUtils.percentage(projectinvestmentinfo.investment, projectinvestmentinfo.invested), "已投资额"));
         }
 
 
@@ -191,7 +194,7 @@ public class ProjectShowAdapter extends BaseRecyclerAdapter<AbsProjectInfo> impl
             TextView tv_planned_start_time = holder.getView(R.id.tv_planned_start_time);
             TextView tv_actual_start_time = holder.getView(R.id.tv_actual_start_time);
             TextView tv_planned_completion_time = holder.getView(R.id.tv_planned_completion_time);
-            tv_proj_adress.setText(projectInfoDetail.projectAdressName);
+            List list = new ArrayList<TextColorSizeHelper.SpanInfo>();
             tv_proj_adressinfo.setText(projectInfoDetail.projectAdress);
             if (TextUtils.isEmpty(projectInfoDetail.startsTime)) {
                 tv_planned_start_time.setText("-");
@@ -199,14 +202,41 @@ public class ProjectShowAdapter extends BaseRecyclerAdapter<AbsProjectInfo> impl
                 tv_planned_start_time.setText(projectInfoDetail.startsTime);
             }
             if (TextUtils.equals(projectInfoDetail.project__status, "003")) {//在建
-                tv_state.setText(getContext().getResources().getString(R.string.under_construction));
-                tv_state.setBackgroundResource(R.drawable.bg_project_under_constructionbg);
-                tv_state.setTextColor(getContext().getResources().getColor(R.color.text_color_36b365));
+                list.add(
+                        new TextColorSizeHelper.SpanInfo(
+                                getContext().getResources().getString(R.string.under_construction),
+                                UIUtils.dip2px(getContext(), 14),
+                                Color.parseColor("#36b365"),
+                                Color.parseColor("#4D36b365"),
+                                // 圆角背景
+                                Color.parseColor("#36b365"),
+                                UIUtils.dip2px(getContext(), 2),
+                                true
+                        )
+                );
+                tv_proj_adress.setText(TextColorSizeHelper.getTextSpan(getContext(), projectInfoDetail.projectAdressName + "    " + getContext().getResources().getString(R.string.under_construction), list));
+//                tv_state.setBackgroundResource(R.drawable.bg_project_under_constructionbg);
+//                tv_state.setTextColor(getContext().getResources().getColor(R.color.text_color_36b365));
             } else if (TextUtils.equals(projectInfoDetail.project__status, "001")) {
-                tv_state.setBackgroundResource(R.drawable.bg_project_noworkbg);
+
+                list.add(
+                        new TextColorSizeHelper.SpanInfo(
+                                getContext().getResources().getString(R.string.under_construction),
+                                UIUtils.dip2px(getContext(), 14),
+                                Color.parseColor("#36b365"),
+                                Color.parseColor("#4D36b365"),
+                                // 圆角背景
+                                Color.parseColor("#36b365"),
+                                UIUtils.dip2px(getContext(), 2),
+                                true
+                        )
+                );
+                tv_proj_adress.setText(TextColorSizeHelper.getTextSpan(getContext(), projectInfoDetail.projectAdressName + "    " + getContext().getResources().getString(R.string.no_work), list));
+
+        /*        tv_state.setBackgroundResource(R.drawable.bg_project_noworkbg);
                 tv_state.setTextColor(getContext().getResources().getColor(R.color.text_color_f54966));
                 //未开工
-                tv_state.setText(getContext().getResources().getString(R.string.no_works));
+                tv_state.setText(getContext().getResources().getString(R.string.no_works));*/
             }
             if (TextUtils.isEmpty(projectInfoDetail.actualConstructionTime)) {
                 tv_actual_start_time.setText("-");
@@ -326,7 +356,6 @@ public class ProjectShowAdapter extends BaseRecyclerAdapter<AbsProjectInfo> impl
                     tv_title.setCompoundDrawablesWithIntrinsicBounds(drawableLeft,
                             null, null, null);
                     view_line_bg.setBackgroundColor(getContext().getResources().getColor(R.color.text_color_3476f9));
-
 //                    tv_title.setCompoundDrawablePadding(4);
                 } else {
                     tv_title.setTextColor(getContext().getResources().getColor(R.color.color_ababbb));

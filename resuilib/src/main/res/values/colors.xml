@@ -2,7 +2,7 @@
 <resources>
     <!--APP的主题色-->
     <color name="colorPrimary">#ffffff</color>
-    <color name="colorPrimaryDark">#D32F2F</color>
+    <color name="colorPrimaryDark">#ffffff</color>
     <color name="colorAccent">#FF5252</color>
     <!--app主题色调以供统一修改 设置toolBar或者按钮背景色-->
     <color name="theme_blue">#1296db</color>
