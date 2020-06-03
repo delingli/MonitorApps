@@ -34,8 +34,8 @@ public class LaborDataAdapter extends BaseRecyclerAdapter<IAbsLaborData> impleme
             LaborDataItem laborDataItem = (LaborDataItem) item;
             tv_supervision_unit.setText(laborDataItem.title + ":" + laborDataItem.allNumber + "人");
             tv_number_registered.setText(laborDataItem.attendanceNumber + "人");
-            long progress = MoneyUtils.percentageInt(laborDataItem.allNumber + "", laborDataItem.attendanceNumber + "");
-            proj_horizontalprogressbar.setProgress((int) progress);
+            int progress = MoneyUtils.percentageInt(laborDataItem.allNumber , laborDataItem.attendanceNumber );
+            proj_horizontalprogressbar.setProgress(progress);
             if (laborDataItem.isTeam) {
                 proj_horizontalprogressbar.setBgColor(getContext().getResources().getColor(R.color.bg_color_cfdef9));
                 proj_horizontalprogressbar.setProgressColor(getContext().getResources().getColor(R.color.bg_color_3a50f7));

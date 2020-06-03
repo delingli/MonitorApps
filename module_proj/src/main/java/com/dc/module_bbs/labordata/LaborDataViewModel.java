@@ -82,7 +82,7 @@ public class LaborDataViewModel extends AbsWebSocketViewModel<LaborDataResposito
             if (null != actualList) {
                 for (WokerDataBean.Actual actual : actualList) {
                     for (LaborDataItem ld : laborDataItems) {
-                        if (actual.worktype_id__count == ld.id) {
+                        if (actual.worktype_id == ld.id) {
                             ld.attendanceNumber = actual.worktype_id__count;
                             break;
                         }

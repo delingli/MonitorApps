@@ -44,9 +44,10 @@ public class MoneyUtils {
         return bb.divide(aa, 2, BigDecimal.ROUND_HALF_EVEN).doubleValue();
     }
 
-    public static long percentageInt(String base, String pct) {
-        BigDecimal aa = new BigDecimal(base);
-        BigDecimal bb = new BigDecimal(pct);
-        return bb.divide(aa, 0, BigDecimal.ROUND_HALF_UP).longValue();
+    public static int percentageInt(float base, float pct) {
+//        BigDecimal aa = new BigDecimal(base);
+//        BigDecimal bb = new BigDecimal(pct);
+        return (int) (pct / base * 100);
+//        return bb.divide(aa, 2, BigDecimal.ROUND_HALF_UP).longValue()*100;
     }
 }
