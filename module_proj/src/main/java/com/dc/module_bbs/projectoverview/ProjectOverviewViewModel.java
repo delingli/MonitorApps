@@ -21,9 +21,9 @@ public class ProjectOverviewViewModel extends AbsViewModel<ProjectOverviewRespos
 
     private ProjectOverviewItem conversionData(ProjectItemBean itemBean) {
         ProjectOverviewItem projectOverviewItem = new ProjectOverviewItem();
-        projectOverviewItem.landArea = MoneyUtils.percentagefor2(itemBean.getCovered_area()/100)+"";
+        projectOverviewItem.landArea = MoneyUtils.percentagefor2(itemBean.getCovered_area())+"";
 
-        projectOverviewItem.constructionArea = MoneyUtils.percentagefor2(itemBean.getConstruction_area()/100)+"";
+        projectOverviewItem.constructionArea = MoneyUtils.percentagefor2(itemBean.getConstruction_area())+"";
         ProjectOverviewItem.ConstructionUnit constructionUnit = new ProjectOverviewItem.ConstructionUnit();
         constructionUnit.company = itemBean.getEmployer();
         constructionUnit.contact = itemBean.getEmployer_contact();

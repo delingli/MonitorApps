@@ -88,7 +88,7 @@ public class HomeMainAdapter extends BaseRecyclerAdapter<IAbsHomeItem> implement
                 public void onItemClickListener(View v, int position) {
                     if (null != homeAreaAdapter.getList()) {
                         ProjectAreaHomeItem.ProjectAreaItems areaItem = homeAreaAdapter.getList().get(position);
-                        if (null != onAreaItemClickListener) {
+                        if (null != onAreaItemClickListener&&areaItem.click) {
                             onAreaItemClickListener.onAreaItemClick(areaItem.projectAdress);
                         }
                     }

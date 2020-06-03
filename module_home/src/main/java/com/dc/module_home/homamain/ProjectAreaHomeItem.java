@@ -9,6 +9,7 @@ public class ProjectAreaHomeItem extends AbsHomeItem {
         public String projectAdress;
         public int totalProjects;
         public int completedProjects;
+        public boolean click;
     }
 
 }

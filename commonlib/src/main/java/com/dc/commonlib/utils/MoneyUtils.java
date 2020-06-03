@@ -22,9 +22,10 @@ public class MoneyUtils {
 
     }
 
-    public static double percentagefor2(float prc) {
-        BigDecimal bg = new BigDecimal(prc);
-        double f1 = bg.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+    public static float percentagefor2(float prc) {
+        BigDecimal aa = new BigDecimal(prc);
+        BigDecimal bb = new BigDecimal(100);
+        float f1 = aa.divide(bb, 2, BigDecimal.ROUND_HALF_EVEN).floatValue();
         return f1;
     }
 

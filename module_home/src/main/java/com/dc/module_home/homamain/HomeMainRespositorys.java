@@ -252,6 +252,14 @@ public class HomeMainRespositorys extends BaseRespository {
                     areaItems1.completedProjects = homebean.region_projects.yinhu.get(1);
                     areaItems1.totalProjects = homebean.region_projects.yinhu.get(1)+homebean.region_projects.yinhu.get(0);
                     areaItems1.projectAdress = "银湖";
+                    areaItems1.click=true;
+                    llAreas.add(areaItems1);
+                }else {
+                    ProjectAreaHomeItem.ProjectAreaItems areaItems1 = new ProjectAreaHomeItem.ProjectAreaItems();
+                    areaItems1.completedProjects =0;
+                    areaItems1.totalProjects = 0;
+                    areaItems1.projectAdress = "银湖";
+                    areaItems1.click=false;
                     llAreas.add(areaItems1);
                 }
                 if (null != homebean.region_projects.xindeng) {
@@ -259,6 +267,15 @@ public class HomeMainRespositorys extends BaseRespository {
                     areaItems1.completedProjects = homebean.region_projects.xindeng.get(1);
                     areaItems1.totalProjects = homebean.region_projects.xindeng.get(1)+homebean.region_projects.xindeng.get(0);
                     areaItems1.projectAdress = "新登";
+                    areaItems1.click=true;
+
+                    llAreas.add(areaItems1);
+                }else {
+                    ProjectAreaHomeItem.ProjectAreaItems areaItems1 = new ProjectAreaHomeItem.ProjectAreaItems();
+                    areaItems1.completedProjects =0;
+                    areaItems1.totalProjects = 0;
+                    areaItems1.projectAdress = "新登";
+                    areaItems1.click=false;
                     llAreas.add(areaItems1);
                 }
                 if (null != homebean.region_projects.changkou) {
@@ -266,6 +283,15 @@ public class HomeMainRespositorys extends BaseRespository {
                     areaItems1.completedProjects = homebean.region_projects.changkou.get(1);
                     areaItems1.totalProjects = homebean.region_projects.changkou.get(1)+ homebean.region_projects.changkou.get(0);
                     areaItems1.projectAdress = "场口";
+                    areaItems1.click=true;
+
+                    llAreas.add(areaItems1);
+                }else {
+                    ProjectAreaHomeItem.ProjectAreaItems areaItems1 = new ProjectAreaHomeItem.ProjectAreaItems();
+                    areaItems1.completedProjects =0;
+                    areaItems1.totalProjects = 0;
+                    areaItems1.projectAdress = "场口";
+                    areaItems1.click=false;
                     llAreas.add(areaItems1);
                 }
 
@@ -274,6 +300,14 @@ public class HomeMainRespositorys extends BaseRespository {
                     areaItems1.completedProjects = homebean.region_projects.dongzhou.get(1);
                     areaItems1.totalProjects = homebean.region_projects.dongzhou.get(1)+ homebean.region_projects.dongzhou.get(0);
                     areaItems1.projectAdress = "东洲";
+                    areaItems1.click=true;
+                    llAreas.add(areaItems1);
+                }else {
+                    ProjectAreaHomeItem.ProjectAreaItems areaItems1 = new ProjectAreaHomeItem.ProjectAreaItems();
+                    areaItems1.completedProjects =0;
+                    areaItems1.totalProjects = 0;
+                    areaItems1.projectAdress = "东洲";
+                    areaItems1.click=false;
                     llAreas.add(areaItems1);
                 }
 
@@ -282,6 +316,14 @@ public class HomeMainRespositorys extends BaseRespository {
                     areaItems1.completedProjects = homebean.region_projects.jinqiao.get(1);
                     areaItems1.totalProjects = homebean.region_projects.jinqiao.get(1)+homebean.region_projects.jinqiao.get(0);
                     areaItems1.projectAdress = "金桥";
+                    areaItems1.click=true;
+                    llAreas.add(areaItems1);
+                }else {
+                    ProjectAreaHomeItem.ProjectAreaItems areaItems1 = new ProjectAreaHomeItem.ProjectAreaItems();
+                    areaItems1.completedProjects =0;
+                    areaItems1.totalProjects = 0;
+                    areaItems1.projectAdress = "金桥";
+                    areaItems1.click=false;
                     llAreas.add(areaItems1);
                 }
                 if (null != homebean.region_projects.lushan) {
@@ -289,6 +331,14 @@ public class HomeMainRespositorys extends BaseRespository {
                     areaItems1.completedProjects = homebean.region_projects.lushan.get(1);
                     areaItems1.totalProjects = homebean.region_projects.lushan.get(1)+homebean.region_projects.lushan.get(0);
                     areaItems1.projectAdress = "鹿山";
+                    areaItems1.click=true;
+                    llAreas.add(areaItems1);
+                }else {
+                    ProjectAreaHomeItem.ProjectAreaItems areaItems1 = new ProjectAreaHomeItem.ProjectAreaItems();
+                    areaItems1.completedProjects =0;
+                    areaItems1.totalProjects = 0;
+                    areaItems1.projectAdress = "鹿山";
+                    areaItems1.click=false;
                     llAreas.add(areaItems1);
                 }
                 ProjectAreaHomeItem areaHomeItem = new ProjectAreaHomeItem();
