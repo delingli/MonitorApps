@@ -97,6 +97,22 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        if (null != DisplayVideoPlayerManager.instance().getCurrentVideoPlayer()) {
+            DisplayVideoPlayerManager.instance().getCurrentVideoPlayer().onResume();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (null != DisplayVideoPlayerManager.instance().getCurrentVideoPlayer()) {
+            DisplayVideoPlayerManager.instance().getCurrentVideoPlayer().onStop();
+        }
+    }
+
+    @Override
     public void onBackPressed() {
         if (DisplayVideoPlayerManager.instance().onBackPressed()) {
             return;

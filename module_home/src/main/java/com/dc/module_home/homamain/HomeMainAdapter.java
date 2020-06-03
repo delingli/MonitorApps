@@ -130,8 +130,6 @@ public class HomeMainAdapter extends BaseRecyclerAdapter<IAbsHomeItem> implement
 
                     videodisplayview.startPreview(videomonitoringhomeitem.listBean);
                 }
-                int cameraType = videomonitoringhomeitem.listBean.getCameraType();
-
             }
             tv_title.setText(videomonitoringhomeitem.name);
         } else if (iAbsHomeItem instanceof ProjectOverviewHomeItem) {

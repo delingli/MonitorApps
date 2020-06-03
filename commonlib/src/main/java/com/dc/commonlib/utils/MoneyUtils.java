@@ -46,9 +46,10 @@ public class MoneyUtils {
     }
 
     public static int percentageInt(float base, float pct) {
-//        BigDecimal aa = new BigDecimal(base);
-//        BigDecimal bb = new BigDecimal(pct);
-        return (int) (pct / base * 100);
-//        return bb.divide(aa, 2, BigDecimal.ROUND_HALF_UP).longValue()*100;
+        float real = pct / base * 100;
+        if (real > 0 && real < 1) {
+            return 1;
+        }
+        return (int) real;
     }
 }

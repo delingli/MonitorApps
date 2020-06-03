@@ -225,17 +225,21 @@ public class ProjectSummaryActivity extends AbsLifecycleActivity<ProjectSummaryV
         pieChart.setEntryLabelTextSize(12f);
         ArrayList<PieEntry> pieEntries = new ArrayList<>();
 
+        List<Integer> colorList = new ArrayList<>();
         if (projectareaitem.invested != 0) {
             double percentage = MoneyUtils.percentage(projectareaitem.investment, projectareaitem.invested);
-
             pieEntries.add(new PieEntry((float) percentage, "已投资额"));
+            colorList.add(getResources().getColor(R.color.text_color_36b365));
+
         }
         PieDataSet pieDataSet = new PieDataSet(pieEntries, null);
         if (projectareaitem.Noinvestment != 0) {
             double percentage = MoneyUtils.percentage(projectareaitem.investment, projectareaitem.Noinvestment);
             pieEntries.add(new PieEntry((float) percentage, "未投资额"));
+            colorList.add(getResources().getColor(R.color.bg_color_cfdef9));
+
         }
-        pieDataSet.setColors(Color.parseColor("#36b365"), Color.parseColor("#cfdef9"));
+        pieDataSet.setColors(colorList);
         pieDataSet.setSliceSpace(1f);//设置每块饼之间的空隙
         pieDataSet.setSelectionShift(10f);//点击某个饼时拉长的宽度
         pieDataSet.setValueLinePart1Length(0.3f);

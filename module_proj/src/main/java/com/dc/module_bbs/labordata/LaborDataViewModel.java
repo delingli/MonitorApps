@@ -138,7 +138,6 @@ public class LaborDataViewModel extends AbsWebSocketViewModel<LaborDataResposito
                     for (LaborDataItem ld : laborDataItems) {
                         if (actual.team_id == ld.id) {
                             ld.attendanceNumber = actual.team_id__count;
-                            break;
                         }
 
                     }

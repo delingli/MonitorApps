@@ -330,7 +330,7 @@ public class VideoDisplayView extends RelativeLayout implements View.OnLongClick
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 mPlayerControlView.show();
-                return false;
+                return true;
             }
         });
 
@@ -902,9 +902,9 @@ public class VideoDisplayView extends RelativeLayout implements View.OnLongClick
     public boolean changeScreenMode(PlayerScreenMode screenMode) {
         boolean exitFull = false;
         Context context = getContext();
+        ViewGroup contentView = VideoPlayerUtils.scanForActivity(context)
+                .findViewById(android.R.id.content);
         if (context instanceof Activity) {
-            ViewGroup contentView = VideoPlayerUtils.scanForActivity(context)
-                    .findViewById(android.R.id.content);
             Activity activity = (Activity) context;
             if (screenMode == PlayerScreenMode.Full) {
                 //进入全屏
@@ -926,13 +926,11 @@ public class VideoDisplayView extends RelativeLayout implements View.OnLongClick
                 contentView.addView(mContainer, params);
                 mCurrScreenMode = PlayerScreenMode.Full;
                 //todo
-                startPreview(mCurrPreviewCamera); //tofo
                 exitFull = false;
             } else if (screenMode == PlayerScreenMode.Small) {
-//要进去小屏幕
+                    //要进去小屏幕
                 VideoPlayerUtils.showActionBar(context);
                 VideoPlayerUtils.scanForActivity(context).setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-                ViewGroup contentViews = VideoPlayerUtils.scanForActivity(context).findViewById(android.R.id.content);
                 if (speedControlMenu != null) {
                     speedControlMenu.hide();
                 }
@@ -945,15 +943,15 @@ public class VideoDisplayView extends RelativeLayout implements View.OnLongClick
 //                    mPlayerControlView.show();
                 }
                 //将视图移除
-                contentViews.removeView(mContainer);
+                contentView.removeView(mContainer);
                 //重新添加到当前视图
                 RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
                 this.addView(mContainer, params);
                 mCurrScreenMode = PlayerScreenMode.Small;
                 //todo
-                startPreview(mCurrPreviewCamera);
                 exitFull = true;
             }
+            startPreview(mCurrPreviewCamera); //tofo
 
         }
         return exitFull;

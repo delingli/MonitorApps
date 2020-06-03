@@ -109,19 +109,22 @@ public class ProjectShowAdapter extends BaseRecyclerAdapter<AbsProjectInfo> impl
         pieChart.setRotationAngle(0);
 
         ArrayList<PieEntry> pieEntries = new ArrayList<>();
+        List<Integer> colorList = new ArrayList<>();
         if (projectinvestmentinfo.noWorkInvestment != 0) {
             pieEntries.add(new PieEntry(
                     MoneyUtils.percentage(projectinvestmentinfo.investment, projectinvestmentinfo.noWorkInvestment)
                     , "未投资额"));
+            colorList.add(getContext().getResources().getColor(R.color.bg_color_cfdef9));
         }
         if (projectinvestmentinfo.invested != 0) {
-
             pieEntries.add(new PieEntry(MoneyUtils.percentage(projectinvestmentinfo.investment, projectinvestmentinfo.invested), "已投资额"));
+            colorList.add(getContext().getResources().getColor(R.color.text_color_36b365));
+
         }
 
 
         PieDataSet pieDataSet = new PieDataSet(pieEntries, null);
-        pieDataSet.setColors(Color.parseColor("#cfdef9"), Color.parseColor("#36b365"));
+        pieDataSet.setColors(colorList);
         pieDataSet.setSliceSpace(3f);//设置每块饼之间的空隙
         pieDataSet.setSelectionShift(10f);//点击某个饼时拉长的宽度
         pieDataSet.setSliceSpace(1f);//设置每块饼之间的空隙
