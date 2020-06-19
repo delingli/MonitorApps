@@ -2,7 +2,7 @@ package com.dc.baselib.http;
 
 /**
  * 全局配置，主要存储一些静态全局变量
- *
+ * <p>
  * Created by ZhangKe on 2017/12/5.
  */
 public interface Config {
@@ -15,7 +15,7 @@ public interface Config {
      * 测试环境地址
      */
     String DOMAIN_TEST = "zldtest.zlddata.cn";
-   // http://builder.dccnet.com.cn/
+    // http://builder.dccnet.com.cn/
     /**
      * 正式环境地址
      */
@@ -53,7 +53,6 @@ public interface Config {
     String UPLOAD_FILE_DOMAIN_BUILDER = "upload.zlddata.com";
 
 
-
     //HTML 更新域名
     /**
      * 测试环境 HTML 更新域名
@@ -63,7 +62,6 @@ public interface Config {
      * 正式环境 HTML 更新域名
      */
     String HTML_UPDATE_DOMAIN_BUILDER = "appupdate.zlddata.com";
-
 
 
     //上传 Log 文件地址

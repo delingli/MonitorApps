@@ -16,6 +16,7 @@ import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 
 public class ElectricNestApplication extends BaseApplication {
+
     //static 代码段可以防止内存泄露
     static {
         //设置全局的Header构建器
@@ -37,7 +38,6 @@ public class ElectricNestApplication extends BaseApplication {
             }
         });
     }
-
     @Override
     public void onCreate() {
         super.onCreate();
