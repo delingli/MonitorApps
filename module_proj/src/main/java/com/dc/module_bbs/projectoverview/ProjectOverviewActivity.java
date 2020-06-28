@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
@@ -29,6 +30,7 @@ public class ProjectOverviewActivity extends AbsLifecycleActivity<ProjectOvervie
     private TextView tv_design_units;
     public static String KEY_PROJECTITEMBEAN = "projectitembean";
     private ProjectItemBean mItemBean;
+    private ProjectOverviewItem projectOverviewItem;
 
     public static void startActivity(Context context, ProjectItemBean itemBean) {
         Intent intent = new Intent(context, ProjectOverviewActivity.class);
@@ -58,7 +60,7 @@ public class ProjectOverviewActivity extends AbsLifecycleActivity<ProjectOvervie
         tv_general_contractor_phone = findViewById(R.id.tv_general_contractor_phone);
         tv_supervision_unit = findViewById(R.id.tv_supervision_unit);
         tv_design_units = findViewById(R.id.tv_design_units);
-        ProjectOverviewItem projectOverviewItem = mViewModel.getProjectOverviewItem(mItemBean);
+        projectOverviewItem = mViewModel.getProjectOverviewItem(mItemBean);
         fillData(projectOverviewItem);
         tv_phone.setOnClickListener(this);
         tv_general_contractor_phone.setOnClickListener(this);
@@ -91,13 +93,19 @@ public class ProjectOverviewActivity extends AbsLifecycleActivity<ProjectOvervie
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.tv_phone) {
-            Intent myCallIntent = new Intent(Intent.ACTION_DIAL,
-                    Uri.parse("tel:" + tv_phone.getText().toString()));
-            startActivity(myCallIntent);
+            if (projectOverviewItem != null&& null!=projectOverviewItem.constructionunit&&projectOverviewItem.constructionunit.contactPhone!=null) {
+                Intent myCallIntent = new Intent(Intent.ACTION_DIAL,
+                        Uri.parse("tel:" + tv_phone.getText().toString()));
+                startActivity(myCallIntent);
+
+            }
         } else if (id == R.id.tv_general_contractor_phone) {
-            Intent myCallIntent = new Intent(Intent.ACTION_DIAL,
-                    Uri.parse("tel:" + tv_general_contractor_phone.getText().toString()));
-            startActivity(myCallIntent);
+            if (projectOverviewItem != null&& null!=projectOverviewItem.contractors&&projectOverviewItem.contractors.contactPhone!=null) {
+                Intent myCallIntent = new Intent(Intent.ACTION_DIAL,
+                        Uri.parse("tel:" + tv_general_contractor_phone.getText().toString()));
+                startActivity(myCallIntent);
+            }
+
         }
     }
 }

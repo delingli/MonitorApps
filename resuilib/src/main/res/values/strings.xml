@@ -191,6 +191,7 @@
     <string name="my_record">我的记录</string>
     <string name="zhiding">置顶</string>
     <string name="comment_count">条评论</string>
+    <string name="holder_line">-</string>
 
     <!--分享-->
     <string name="wechar">微信</string>
