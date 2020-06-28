@@ -13,6 +13,7 @@ import com.google.gson.reflect.TypeToken;
  */
 public class UserManager {
     private static final String USER_INFO = "user_info";//USER文件key
+    private static final String USER_ACCOUNT_INFO = "USER_account_INFO";//
 
     private UserManager() {
 
@@ -35,6 +36,32 @@ public class UserManager {
             }
 
         }
+    }
+
+    public void saveAccount(Context context, String account) {
+        if (null != account) {
+            try {
+                String miStr = base64.encryptBASE64(account);
+                SPUtils.saveData(context, USER_ACCOUNT_INFO, miStr);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+    public String getAccount(Context context) {
+        String str = SPUtils.getData(context, USER_ACCOUNT_INFO);
+        if (!TextUtils.isEmpty(str)) {
+            try {
+                String data = base64.decryptBASE64(str);//解密
+                return data;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+        return null;
     }
 
     public String getUserId() {

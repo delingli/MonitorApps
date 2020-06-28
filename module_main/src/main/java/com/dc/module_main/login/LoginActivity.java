@@ -21,6 +21,7 @@ import com.dc.baselib.baseEntiry.User;
 import com.dc.baselib.http.Environment;
 import com.dc.baselib.mvvm.AbsLifecycleActivity;
 import com.dc.baselib.utils.ToastUtils;
+import com.dc.baselib.utils.UserManager;
 import com.dc.commonlib.common.WSAPI;
 import com.dc.commonlib.utils.ArounterManager;
 import com.dc.commonlib.utils.GlideUtils;
@@ -69,12 +70,7 @@ public class LoginActivity extends AbsLifecycleActivity<LoginViewModel> implemen
         EditTextWatcher textWatcher = new EditTextWatcher();
         et_phone.addTextChangedListener(textWatcher);
         et_verification_code.addTextChangedListener(textWatcher);
-
-    }
-
-    @Override
-    protected void initListener() {
-        super.initListener();
+        String account = UserManager.getInstance().getAccount(LoginActivity.this);
         mCountDownButton.setNormalText(getResources().getString(R.string.gain_auth_code))
                 .setCountDownText("秒后重发")
                 .setCountDefaultColor(Color.parseColor("#3476f9"))
@@ -88,8 +84,15 @@ public class LoginActivity extends AbsLifecycleActivity<LoginViewModel> implemen
                         mCountDownButton.setEnabled(et_verification_code.getText().length() > 0);
                     }
                 }).setOnClickListener(this);
-        mCountDownButton.setEnabled(false);
+        if (!TextUtils.isEmpty(account)) {
+            et_phone.setText(account);
+            mCountDownButton.setEnabled(true);
+        }else {
+            mCountDownButton.setEnabled(false);
+        }
     }
+
+
 
 
     @Override
@@ -105,6 +108,7 @@ public class LoginActivity extends AbsLifecycleActivity<LoginViewModel> implemen
             public void onChanged(@Nullable User user) {
                 // todo 跳转
                 MainActivity.startActivity(LoginActivity.this);
+                UserManager.getInstance().saveAccount(LoginActivity.this, et_phone.getText().toString());
                 finish();
             }
         });

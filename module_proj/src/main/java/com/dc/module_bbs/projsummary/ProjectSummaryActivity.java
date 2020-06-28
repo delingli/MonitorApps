@@ -291,7 +291,7 @@ public class ProjectSummaryActivity extends AbsLifecycleActivity<ProjectSummaryV
         legend.setTextSize(12f);//设置图注的字体大小
         legend.setTextColor(Color.parseColor("#333333"));
         legend.setFormToTextSpace(15.0f);//设置图例到图注的距离
-
+        legend.setYOffset(15f);
         //x轴
         XAxis xAxis = doubleBarChar.getXAxis();
 //        xAxis.setCenterAxisLabels(true);//设置标签居中
@@ -351,7 +351,7 @@ public class ProjectSummaryActivity extends AbsLifecycleActivity<ProjectSummaryV
         float noWorkInvestment = projectAreaItem.prepare_investment;
         float construction_investment = projectAreaItem.construction_investment;
         YAxis axisLeft = doubleBarChar.getAxisLeft();
-        axisLeft.setAxisMaximum(prepare_project_cnt+construction_project_cnt);
+        axisLeft.setAxisMaximum(prepare_project_cnt+construction_project_cnt+5);
         ArrayList<BarEntry> barEntries2 = new ArrayList<>();
         barEntries2.add(new BarEntry(1, noWorkInvestment));
         barEntries2.add(new BarEntry(2, construction_investment));
