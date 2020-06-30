@@ -70,16 +70,33 @@ public class ProjectOverviewActivity extends AbsLifecycleActivity<ProjectOvervie
         if (null != projectOverviewItem) {
             tv_land_area.setText(projectOverviewItem.landArea);
             tv_construction_area.setText(projectOverviewItem.constructionArea);
-            tv_construction_unit.setText(projectOverviewItem.constructionunit.company);
-            tv_name.setText(projectOverviewItem.constructionunit.contact);
-            tv_phone.setText(projectOverviewItem.constructionunit.contactPhone);
+            if(!TextUtils.isEmpty(projectOverviewItem.constructionunit.company)){
+                tv_construction_unit.setText(projectOverviewItem.constructionunit.company);
+            }
+            if(!TextUtils.isEmpty(projectOverviewItem.constructionunit.contact)){
+                tv_name.setText(projectOverviewItem.constructionunit.contact);
 
-            tv_general_contractor.setText(projectOverviewItem.contractors.company);
-            tv_general_contractor_name.setText(projectOverviewItem.contractors.contact);
-            tv_general_contractor_phone.setText(projectOverviewItem.contractors.contactPhone);
+            }
+            if(!TextUtils.isEmpty(projectOverviewItem.constructionunit.contactPhone)){
+                tv_phone.setText(projectOverviewItem.constructionunit.contactPhone);
+            }
+            if (!TextUtils.isEmpty(projectOverviewItem.contractors.company)) {
+                tv_general_contractor.setText(projectOverviewItem.contractors.company);
 
-            tv_supervision_unit.setText(projectOverviewItem.supervisionunit.company);
-            tv_design_units.setText(projectOverviewItem.designunit.company);
+            }
+            if (!TextUtils.isEmpty(projectOverviewItem.contractors.contact)) {
+                tv_general_contractor_name.setText(projectOverviewItem.contractors.contact);
+            }
+            if (!TextUtils.isEmpty(projectOverviewItem.contractors.contactPhone)) {
+                tv_general_contractor_phone.setText(projectOverviewItem.contractors.contactPhone);
+
+            }
+            if (!TextUtils.isEmpty(projectOverviewItem.supervisionunit.company)) {
+                tv_supervision_unit.setText(projectOverviewItem.supervisionunit.company);
+            }
+            if (!TextUtils.isEmpty(projectOverviewItem.designunit.company)) {
+                tv_design_units.setText(projectOverviewItem.designunit.company);
+            }
 
         }
     }
@@ -93,14 +110,14 @@ public class ProjectOverviewActivity extends AbsLifecycleActivity<ProjectOvervie
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.tv_phone) {
-            if (projectOverviewItem != null&& null!=projectOverviewItem.constructionunit&&projectOverviewItem.constructionunit.contactPhone!=null) {
+            if (projectOverviewItem != null && null != projectOverviewItem.constructionunit && projectOverviewItem.constructionunit.contactPhone != null) {
                 Intent myCallIntent = new Intent(Intent.ACTION_DIAL,
                         Uri.parse("tel:" + tv_phone.getText().toString()));
                 startActivity(myCallIntent);
 
             }
         } else if (id == R.id.tv_general_contractor_phone) {
-            if (projectOverviewItem != null&& null!=projectOverviewItem.contractors&&projectOverviewItem.contractors.contactPhone!=null) {
+            if (projectOverviewItem != null && null != projectOverviewItem.contractors && projectOverviewItem.contractors.contactPhone != null) {
                 Intent myCallIntent = new Intent(Intent.ACTION_DIAL,
                         Uri.parse("tel:" + tv_general_contractor_phone.getText().toString()));
                 startActivity(myCallIntent);
